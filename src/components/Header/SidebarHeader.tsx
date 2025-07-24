@@ -8,6 +8,7 @@ import {
   IconUserBolt,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
+import { ModeToggle } from "@/components/Header/SwitchThemeToggle";
 
 
 export function SidebarHeader() {
@@ -55,11 +56,12 @@ export function SidebarHeader() {
                 <SidebarLink key={idx} link={link} />
               ))}
             </div>
+            <ModeToggle />
           </div>
           <div>
             <SidebarLink
               link={{
-                label: "Manu Arora",
+                label: "Juan Miguel Fernández Araya",
                 href: "#",
                 icon: (
                   <img
@@ -90,7 +92,7 @@ export const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-medium whitespace-pre text-black dark:text-white"
       >
-        Acet Labs
+        jfernandez.dev
       </motion.span>
     </a>
   );

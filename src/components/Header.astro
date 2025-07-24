@@ -1,5 +1,5 @@
 ---
-import {SidebarHeader} from '@/components/SidebarHeader';
+import {SidebarHeader} from '@/components/Header/SidebarHeader';
 ---
 <script is:inline>
 	const getThemePreference = () => {
@@ -19,4 +19,5 @@ import {SidebarHeader} from '@/components/SidebarHeader';
 		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 	}
 </script>
+
 <SidebarHeader client:load/>
