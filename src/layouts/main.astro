@@ -3,6 +3,11 @@ import '../styles/global.css';
 const { content } = Astro.props;
 import Header from '@/components/Header.astro';
 ---
+<script>
+
+
+
+</script>
 
 <html lang="en">
 	<head>
@@ -13,8 +18,8 @@ import Header from '@/components/Header.astro';
 	</head>
 	<body>
 		<Header/>
-		<div class="md:ml-[300px]">
+		<main class="md:ml-[300px] scroll-smooth snap-y snap-mandatory h-screen overflow-y-scroll">
 			<slot/>
-		</div>
+		</main>
 	</body>
 </html>

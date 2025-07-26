@@ -1,8 +1,7 @@
 
-import { Moon, Sun } from "lucide-react"
+
 import { useState, useEffect } from "react"
 import { SwitchTheme } from "@/components/ui/switch"
-import {Label} from "@/components/ui/label"
 
 export function ModeToggle() {
   const [theme, setThemeState] = useState<
@@ -30,9 +29,13 @@ export function ModeToggle() {
             setThemeState(checked ? "dark" : "theme-light")
           }}
            />
-          <Label htmlFor="theme-mode" onClick={() => {
+          <p
+            
+            className="cursor-pointer select-none font-semibold"
+            onClick={() => {
             setThemeState(theme === "dark" ? "theme-light" : "dark")
-          }}>{theme === "dark" ? "Dark mode" : "Light mode"}</Label>
+          }}>{theme === "dark" ? "Dark mode" : "Light mode"}
+          </p>
     </div>
         
   )
