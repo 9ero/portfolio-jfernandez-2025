@@ -3,15 +3,25 @@ import '../styles/global.css';
 // Component Imports
 import Layout from '@/layouts/main.astro';
 import Welcome from '@/components/main/welcome.astro';
+import Skills from '@/components/main/skills';
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 	<Layout content={{title: 'Home'}}>
-		<section class="h-screen snap-start">
+		<section id="welcome" class="h-screen snap-start">
 			<Welcome />
 		</section>
-		<div class="h-screen snap-start">
-			<p>Dummy content</p>
-		</div>
+		<section id="skills" class="h-screen snap-start">
+			<Skills client:only="react" />
+		</section>
+		<section id="projects" class="h-screen snap-start">
+			<p>Projects content</p>
+		</section>
+		<section id="about" class="h-screen snap-start">
+			<p>About content</p>
+		</section>
+		<section id="contact" class="h-screen snap-start">
+			<p>Contact content</p>
+		</section>
 	</Layout>

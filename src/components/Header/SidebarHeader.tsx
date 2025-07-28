@@ -2,10 +2,13 @@
 import  { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import {
-  IconArrowLeft,
+  
   IconBrandTabler,
   IconSettings,
-  IconUserBolt,
+  IconGalaxy,
+  IconUserCode,
+  IconPhoneCheck,
+  IconBrandGithub
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import { ModeToggle } from "@/components/Header/SwitchThemeToggle";
@@ -14,31 +17,38 @@ import { ModeToggle } from "@/components/Header/SwitchThemeToggle";
 export function SidebarHeader() {
   const links = [
     {
-      label: "Dashboard",
-      href: "#",
+      label: "Welcome",
+      href: "#welcome",
       icon: (
         <IconBrandTabler className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
-      label: "Profile",
-      href: "#",
+      label: "Skills",
+      href: "#skills",
       icon: (
-        <IconUserBolt className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <IconGalaxy className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
-      label: "Settings",
-      href: "#",
+      label: "Projects",
+      href: "#projects",
       icon: (
-        <IconSettings className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <IconBrandGithub className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
-      label: "Logout",
-      href: "#",
+      label: "About Me",
+      href: "#about",
       icon: (
-        <IconArrowLeft className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <IconUserCode className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
+    },
+    {
+      label: "Contact",
+      href: "#contact",
+      icon: (
+        <IconPhoneCheck className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
   ];
