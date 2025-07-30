@@ -162,10 +162,11 @@ export const SidebarLink = ({
   link: Links;
   className?: string;
 }) => {
-  const { open, animate } = useSidebar();
+  const { open, animate, setOpen } = useSidebar();
   return (
     <a
       href={link.href}
+      onClick={() => setOpen(false)}
       className={cn(
         "flex items-center justify-start gap-2  group/sidebar py-2",
         className

@@ -18,6 +18,7 @@ export const AnimatedTestimonials = ({
   testimonials: Testimonial[];
   autoplay?: boolean;
 }) => {
+  const [isHovering, setIsHovering] = useState(false);
   const [active, setActive] = useState(0);
 
   const handleNext = () => {
@@ -33,17 +34,21 @@ export const AnimatedTestimonials = ({
   };
 
   useEffect(() => {
-    if (autoplay) {
+    if (autoplay && !isHovering) { 
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, isHovering]);
 
   const randomRotateY = () => {
     return Math.floor(Math.random() * 21) - 10;
   };
   return (
-    <div className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
+    <div
+      className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
         <div>
           <div className="relative h-80 w-full">
@@ -85,7 +90,7 @@ export const AnimatedTestimonials = ({
                     width={500}
                     height={500}
                     draggable={false}
-                    className="h-full w-full rounded-3xl object-cover object-center"
+                    className="h-full w-full rounded-3xl object-cover object-center border-2 border-sky-300"
                   />
                 </motion.div>
               ))}

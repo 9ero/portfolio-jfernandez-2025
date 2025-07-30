@@ -5,14 +5,12 @@ import Layout from '@/layouts/main.astro';
 import Welcome from '@/components/main/welcome.astro';
 import Skills from '@/components/main/skills';
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
 ---
 	<Layout content={{title: 'Home'}}>
 		<section id="welcome" class="h-screen snap-start">
 			<Welcome />
 		</section>
-		<section id="skills" class="h-screen snap-start">
+		<section id="skills" class="h-screen snap-start flex flex-col items-center justify-center">
 			<Skills client:only="react" />
 		</section>
 		<section id="projects" class="h-screen snap-start">

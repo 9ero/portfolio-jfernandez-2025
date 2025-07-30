@@ -2,6 +2,7 @@
 
 import { Tabs } from "@/components/ui/tabs";
 import { ProficientSkills } from "@/components/main/skills/proficient";
+import { SecondarySkills } from "@/components/main/skills/explored";
 
 export default function skills() {
   const tabs = [
@@ -9,37 +10,36 @@ export default function skills() {
       title: "Proficient Tech Stack",
       value: "proficient",
       content: (
-        <div className="w-full  overflow-auto lg:overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold  bg-gradient-to-br border-3 bg-background scroll-y-auto">
-          <p>Proficient Tech Stack</p>
+        <Tab title={"Proficient Tech Stack"}>
           <ProficientSkills />
-        </div>
+        </Tab>
       ),
     },
     {
-      title: "Explored Technologies",
-      value: "explored",
+      title: "Familiar with",
+      value: "familiar",
       content: (
-        <div className="w-full  overflow-auto lg:overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold  bg-gradient-to-br border-3 bg-background">
-          <p>Explored Technologies</p>
-        </div>
+        <Tab title={"Also worked with"}>
+          <SecondarySkills />
+        </Tab>
       ),
     },
     {
       title: "Design & Media Tools",
       value: "desing",
       content: (
-        <div className="w-full  overflow-auto lg:overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold  bg-gradient-to-br border-3 bg-background">
+        <Tab title={"Design & Media Tools"}>
           <p>Design & Media Tools</p>
-        </div>
+        </Tab>
       ),
     },
     {
       title: "Soft Skills",
       value: "soft",
       content: (
-        <div className="w-full  overflow-auto lg:overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold  bg-gradient-to-br border-3 bg-background">
+        <Tab title={"Soft Skills"}>
           <p>Soft Skills</p>
-        </div>
+        </Tab>
       ),
     },
   ];
@@ -50,3 +50,12 @@ export default function skills() {
     </div>
   );
 }
+
+const Tab = ({ title, children }: { title: string; children: React.ReactNode }) => {
+  return (
+    <div className="w-full  overflow-auto lg:overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold  bg-gradient-to-br border-3 dark:border-2 border-sky-300 bg-background">
+      <p>{title}</p>
+      {children}
+    </div>
+  );
+};
