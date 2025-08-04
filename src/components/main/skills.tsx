@@ -3,6 +3,8 @@
 import { Tabs } from "@/components/ui/tabs";
 import { ProficientSkills } from "@/components/main/skills/proficient";
 import { SecondarySkills } from "@/components/main/skills/explored";
+import { VisualSkills } from "@/components/main/skills/visual";
+import { SoftSkills } from "@/components/main/skills/soft";
 
 export default function skills() {
   const tabs = [
@@ -29,7 +31,7 @@ export default function skills() {
       value: "desing",
       content: (
         <Tab title={"Design & Media Tools"}>
-          <p>Design & Media Tools</p>
+          <VisualSkills />
         </Tab>
       ),
     },
@@ -38,7 +40,7 @@ export default function skills() {
       value: "soft",
       content: (
         <Tab title={"Soft Skills"}>
-          <p>Soft Skills</p>
+          <SoftSkills />
         </Tab>
       ),
     },
