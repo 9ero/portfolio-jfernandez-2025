@@ -44,10 +44,4 @@ export const soft = [
           "I regularly identify and automate repetitive or manual tasks, like improving container workflows or standardizing Git repositories across the company. I balance innovation with practicality: I reuse existing tools when possible, and create new ones when needed.",
         link: null
       },
-      {
-        title: "Feedback",
-        description:
-          "I welcome constructive feedback and reflect on it logically before acting. I believe growth comes from thoughtful iteration and perspective.",
-        link: null
-      }
 ];
