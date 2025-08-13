@@ -18,6 +18,8 @@ import { useOutsideClick } from "@/hooks/use-outside-click";
 interface CarouselProps {
   items: React.ReactNode[];
   initialScroll?: number;
+  autoScroll?: boolean;
+  autoScrollSpeed?: number;
 }
 
 type Card = {
@@ -45,12 +47,19 @@ export const CarouselContext = createContext<{
   currentIndex: 0,
 });
 
-export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
+export const Carousel = ({ 
+  items, 
+  initialScroll = 0, 
+  autoScroll = true, 
+  autoScrollSpeed = 33 
+}: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMoving, setIsMoving] = useState(false);
+  const autoScrollRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRightRef = useRef(true);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (carouselRef.current) {
@@ -58,6 +67,63 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
       checkScrollability();
     }
   }, [initialScroll]);
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!autoScroll) return;
+
+    const startAutoScroll = () => {
+      autoScrollRef.current = setInterval(() => {
+        if (!carouselRef.current) return;
+
+        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+        const maxScroll = scrollWidth - clientWidth;
+
+        // Only auto-scroll if there's content to scroll
+        if (maxScroll <= 0) return;
+
+        if (isScrollingRightRef.current) {
+          // Moving right
+          if (scrollLeft >= maxScroll - 2) {
+            // Reached the end, start moving left
+            isScrollingRightRef.current = false;
+          } else {
+            carouselRef.current.scrollBy({ left: 1, behavior: "auto" });
+          }
+        } else {
+          // Moving left
+          if (scrollLeft <= 2) {
+            // Reached the beginning, start moving right
+            isScrollingRightRef.current = true;
+          } else {
+            carouselRef.current.scrollBy({ left: -1, behavior: "auto" });
+          }
+        }
+      }, autoScrollSpeed);
+    };
+
+    startAutoScroll();
+
+    return () => {
+      if (autoScrollRef.current) {
+        clearInterval(autoScrollRef.current);
+      }
+    };
+  }, [autoScroll, autoScrollSpeed]);
+
+  // Pause auto-scroll on hover
+  const handleMouseEnter = () => {
+    if (autoScrollRef.current) {
+      clearInterval(autoScrollRef.current);
+      autoScrollRef.current = null;
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (autoScroll) {
+      resumeAutoScroll();
+    }
+  };
 
   const checkScrollability = () => {
     if (carouselRef.current) {
@@ -67,16 +133,98 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     }
   };
 
-  const scrollLeft = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -400, behavior: "smooth" });
+  const isMobile = () => {
+    return window && window.innerWidth < 768;
+  };
+
+  // Helper function to resume auto-scroll
+  const resumeAutoScroll = () => {
+    if (autoScroll && !autoScrollRef.current) {
+      autoScrollRef.current = setInterval(() => {
+        if (!carouselRef.current) return;
+
+        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+        const maxScroll = scrollWidth - clientWidth;
+
+        // Only auto-scroll if there's content to scroll
+        if (maxScroll <= 0) return;
+
+        if (isScrollingRightRef.current) {
+          if (scrollLeft >= maxScroll - 2) {
+            isScrollingRightRef.current = false;
+          } else {
+            carouselRef.current.scrollBy({ left: 1, behavior: "auto" });
+          }
+        } else {
+          if (scrollLeft <= 2) {
+            isScrollingRightRef.current = true;
+          } else {
+            carouselRef.current.scrollBy({ left: -1, behavior: "auto" });
+          }
+        }
+      }, autoScrollSpeed);
     }
   };
 
+  // Helper function to resume auto-scroll in a specific direction
+  const resumeAutoScrollInDirection = (direction: 'left' | 'right') => {
+    if (autoScroll && !autoScrollRef.current) {
+      // Set the direction based on the button clicked
+      isScrollingRightRef.current = direction === 'right';
+      
+      autoScrollRef.current = setInterval(() => {
+        if (!carouselRef.current) return;
+
+        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+        const maxScroll = scrollWidth - clientWidth;
+
+        // Only auto-scroll if there's content to scroll
+        if (maxScroll <= 0) return;
+
+        if (isScrollingRightRef.current) {
+          if (scrollLeft >= maxScroll - 2) {
+            isScrollingRightRef.current = false;
+          } else {
+            carouselRef.current.scrollBy({ left: 1, behavior: "auto" });
+          }
+        } else {
+          if (scrollLeft <= 2) {
+            isScrollingRightRef.current = true;
+          } else {
+            carouselRef.current.scrollBy({ left: -1, behavior: "auto" });
+          }
+        }
+      }, autoScrollSpeed);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      // Pause auto-scroll when using manual controls
+      if (autoScrollRef.current) {
+        clearInterval(autoScrollRef.current);
+        autoScrollRef.current = null;
+      }
+      
+      carouselRef.current.scrollBy({ left: -400, behavior: "smooth" });
+      
+      // Resume auto-scroll in the left direction after a delay
+      setTimeout(() => resumeAutoScrollInDirection('left'), 250);
+    }
+  };
 
   const scrollRight = () => {
     if (carouselRef.current) {
+      // Pause auto-scroll when using manual controls
+      if (autoScrollRef.current) {
+        clearInterval(autoScrollRef.current);
+        autoScrollRef.current = null;
+      }
+      
       carouselRef.current.scrollBy({ left: 400, behavior: "smooth" });
+      
+      // Resume auto-scroll in the right direction after a delay
+      setTimeout(() => resumeAutoScrollInDirection('right'), 3000);
     }
   };
 
@@ -93,10 +241,6 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     }
   };
 
-  const isMobile = () => {
-    return window && window.innerWidth < 768;
-  };
-
   return (
     <CarouselContext.Provider
       value={{ onCardClose: handleCardClose, currentIndex }}
@@ -106,41 +250,49 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-10 [scrollbar-width:none] "
           ref={carouselRef}
           onScroll={checkScrollability}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <div
             className={cn(
               "absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l",
             )}
           ></div>
-
           <div
-            className={cn(
-              "flex flex-row justify-start gap-4 pl-4",
-              "mx-auto max-w-7xl", // remove max-w-4xl if you want the carousel to span the full width of its container
-            )}
-          >
-            {items.map((item, index) => (
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 20,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    duration: 0.5,
-                    delay: 0.2 * index,
-                    ease: "easeOut",
-                  },
-                }}
-                key={"card" + index}
-                className="rounded-3xl last:pr-[5%] md:last:pr-[33%]"
+                className={cn(
+                  "flex flex-row justify-start gap-4 pl-4",
+                  "max-w-7xl ml-[30vw]"
+                )}
               >
-                {item}
-              </motion.div>
-            ))}
-          </div>
+                {items.map((item, index) => (
+                  <motion.div
+                    initial={{
+                      opacity: 0,
+                      y: 20,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 0.5,
+                        delay: 0.2 * index,
+                        ease: "easeOut",
+                      },
+                    }}
+                    key={"card" + index}
+                    className={cn(
+                      "rounded-3xl hover:scale-105 transition-transform duration-300 border-2 border-sky-500 hover:drop-shadow-xl hover:drop-shadow-sky-500",
+                      hoveredIndex !== null && hoveredIndex !== index
+                        ? "filter grayscale"
+                        : ""
+                    )}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
+                    {item}
+                  </motion.div>
+                ))}
+              </div>
         </div>
         <div className="mr-10 flex justify-end gap-2">
           <button
@@ -174,7 +326,7 @@ export const Card = ({
 }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { onCardClose, currentIndex } = useContext(CarouselContext);
+  const { onCardClose } = useContext(CarouselContext);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {

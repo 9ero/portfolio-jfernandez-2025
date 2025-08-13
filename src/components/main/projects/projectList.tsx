@@ -10,9 +10,13 @@ export function ProjectList() {
   return (
     <div className="w-full h-screen flex flex-col items-start justify-center">
       <h2 className="max-w-7xl pl-5 pt-5 text-4xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 ">
-        Get to know your iSad.
+        My Projects
       </h2>
-      <Carousel items={cards} />
+      <Carousel 
+        items={cards} 
+        autoScroll={true} 
+        autoScrollSpeed={15} 
+      />
     </div>
   );
 }
@@ -51,8 +55,8 @@ const DummyContent = () => {
 
 const data = [
   {
-    category: "Artificial Intelligence",
-    title: "You can do more with AI.",
+    category: "React",
+    title: "This portfolio",
     src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: <DummyContent />,
   },
