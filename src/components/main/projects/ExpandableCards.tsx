@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { IconBrandAstro, IconBrandGithub, IconBrandJavascript, IconBrandTailwind, IconExternalLink } from "@tabler/icons-react";
+import { IconBrandAstro, IconBrandGithub, IconBrandJavascript, IconBrandTailwind, IconChevronLeft, IconChevronRight, IconExternalLink } from "@tabler/icons-react";
 
 export function ExpandableCards() {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
@@ -11,6 +11,81 @@ export function ExpandableCards() {
   );
   const ref = useRef<HTMLDivElement>(null);
   const id = useId();
+
+  function ImageCarousel({ images, title, id }: { images: string[], title: string, id: string }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isPaused, setIsPaused] = useState(false);
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+      }, isPaused ? undefined : 5000);
+  
+      return () => clearInterval(interval);
+    }, [images.length, currentIndex]);
+  
+    const goToNext = () => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    };
+  
+    const goToPrevious = () => {
+      setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    };
+
+    const handleMouseEnter = () => {
+        setIsPaused(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsPaused(false);
+    };
+  
+    return (
+      <div className="relative w-full h-80 lg:h-80 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentIndex}
+            src={images[currentIndex]}
+            alt={`${title} - Image ${currentIndex + 1}`}
+            className="w-full h-full object-cover object-top"
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
+        </AnimatePresence>
+        
+        {/* Indicadores */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === currentIndex ? 'bg-white scale-125' : 'bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+  
+        {/* Botones de navegación */}
+        <button
+          onClick={goToPrevious}
+          className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all duration-300"
+        >
+          <IconChevronLeft size={20} />
+        </button>
+        <button
+          onClick={goToNext}
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all duration-300"
+        >
+          <IconChevronRight size={20} />
+        </button>
+      </div>
+    );
+  }
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -71,15 +146,19 @@ export function ExpandableCards() {
               ref={ref}
               className="w-full max-w-[500px]  h-full md:h-fit md:max-h-[90%] sm:border-2 sm:border-sky-300 flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
             >
-              <motion.div layoutId={`image-${active.title}-${id}`}>
-                <img
-                  width={200}
-                  height={200}
-                  src={active.src}
-                  alt={active.title}
-                  className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top "
-                />
-              </motion.div>
+                <motion.div layoutId={`image-${active.title}-${id}`}>
+                    {Array.isArray(active.src) ? (
+                        <ImageCarousel images={active.src} title={active.title} id={id} />
+                    ) : (
+                        <img
+                        width={200}
+                        height={200}
+                        src={active.src}
+                        alt={active.title}
+                        className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
+                        />
+                    )}
+                </motion.div>
 
               <div>
                 <div className="flex justify-between items-start p-4">
@@ -149,15 +228,25 @@ export function ExpandableCards() {
             className="p-4 flex flex-col md:flex-row justify-between items-center hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
           >
             <div className="flex gap-4 flex-col md:flex-row ">
-              <motion.div layoutId={`image-${card.title}-${id}`}>
+            <motion.div layoutId={`image-${card.title}-${id}`}>
+            {Array.isArray(card.src) ? (
                 <img
-                  width={100}
-                  height={100}
-                  src={card.src}
-                  alt={card.title}
-                  className="h-40 w-40 md:h-14 md:w-14 rounded-lg object-cover object-top"
+                width={100}
+                height={100}
+                src={card.src[0]} // Muestra la primera imagen en la lista
+                alt={card.title}
+                className="h-40 w-40 md:h-14 md:w-14 rounded-lg object-cover object-top"
                 />
-              </motion.div>
+            ) : (
+                <img
+                width={100}
+                height={100}
+                src={card.src}
+                alt={card.title}
+                className="h-40 w-40 md:h-14 md:w-14 rounded-lg object-cover object-top"
+                />
+            )}
+            </motion.div>
               <div className="">
                 <motion.h3
                   layoutId={`title-${card.title}-${id}`}
@@ -224,7 +313,11 @@ const cards = [
     description:" Astro & React ",
     Icon: <IconBrandJavascript size={20} />,
     title: "This Portfolio Website",
-    src: "aws-wpp.webp",
+    src: [
+        "aws-wpp.webp",
+        "react-wpp.webp", 
+        "tailwind-wpp.webp",
+      ],
     codeLink: "https://github.com/9ero/portfolio-jfernandez-2025",
     ctaText: "Show",
     ctaLink: "#",
