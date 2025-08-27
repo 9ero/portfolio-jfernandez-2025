@@ -4,7 +4,7 @@ import '../styles/global.css';
 import Layout from '@/layouts/main.astro';
 import Welcome from '@/components/main/welcome.astro';
 import Skills from '@/components/main/skills';
-import { ProjectList } from '@/components/main/projects/projectList';
+import ProjectList from '@/components/main/projects/projectList.astro';
 
 ---
 	<Layout content={{title: 'Home'}}>
@@ -15,7 +15,7 @@ import { ProjectList } from '@/components/main/projects/projectList';
 			<Skills client:only="react" />
 		</section>
 		<section id="projects" class="h-screen snap-start">
-			<ProjectList client:only="react" />
+			<ProjectList />
 		</section>
 		<section id="about" class="h-screen snap-start">
 			<p>About content</p>
