@@ -15,6 +15,7 @@ export function ExpandableCards() {
   function ImageCarousel({ images, title, id }: { images: string[], title: string, id: string }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
   
     useEffect(() => {
       const interval = setInterval(() => {
@@ -39,6 +40,11 @@ export function ExpandableCards() {
     const handleMouseLeave = () => {
         setIsPaused(false);
     };
+
+    const handleMouseClick = () => {
+        setIsPaused(true);
+        setIsExpanded(!isExpanded);
+    };
   
     return (
       <div className="relative w-full h-80 lg:h-80 overflow-hidden">
@@ -47,13 +53,14 @@ export function ExpandableCards() {
             key={currentIndex}
             src={images[currentIndex]}
             alt={`${title} - Image ${currentIndex + 1}`}
-            className="w-full h-full object-cover object-top"
+            className={`   ${isExpanded ? 'max-h-screen max-w-screen fixed left-50 top-0 translate-x-[50%] z-[300]' : 'w-full lg:h-80 object-cover object-top'}`}
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onClick={handleMouseClick}
           />
         </AnimatePresence>
         
