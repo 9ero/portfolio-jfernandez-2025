@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { IconBrandAstro, IconBrandGithub, IconBrandJavascript, IconBrandTailwind, IconChevronLeft, IconChevronRight, IconExternalLink } from "@tabler/icons-react";
+import { IconBrandAstro, IconBrandGithub, IconBrandJavascript, IconBrandReact, IconBrandTailwind, IconBrandVite, IconChevronLeft, IconChevronRight, IconExternalLink } from "@tabler/icons-react";
 
 export function ExpandableCards() {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
@@ -333,7 +333,7 @@ const cards = [
         return (
           <ul className="grid grid-cols-3 w-max">
             <li className={styles}> <IconBrandAstro size={20} /> Astro</li>
-            <li className={styles}> <IconBrandJavascript size={20} /> React</li>
+            <li className={styles}> <IconBrandReact size={20} /> React</li>
             <li className={styles}> <IconBrandTailwind size={20} /> Tailwind CSS</li>
           </ul>
         );
@@ -357,6 +357,48 @@ const cards = [
         </ul>
         
         </>
+      );
+    },
+  },
+  {
+    description:"A responsive and bilingual website",
+    Icon: <IconBrandJavascript size={20} />,
+    title: "Mabaagroexport",
+    src: [
+        "aws-wpp.webp",
+        "react-wpp.webp", 
+        "tailwind-wpp.webp",
+      ],
+    codeLink: "https://github.com/9ero/maba-app",
+    ctaText: "Show",
+    ctaLink: "https://mabaagroexport.vercel.app/",
+    techStack: () => {
+        const styles = "flex text-neutral-400 dark:text-neutral-200 items-center gap-1 drop-shadow-md drop-shadow-orange-300 dark:drop-shadow-sky-300"
+        return (
+          <ul className="grid grid-cols-2 gap-2 w-max">
+            <li className={styles}> <IconBrandReact size={20} /> React</li>
+            <li className={styles}> <IconBrandVite size={20} /> ViteJS</li>
+          </ul>
+        );
+      },
+    content: () => {
+      return (
+        <>
+      <p className="text-md font-bold">
+        Official corporate website for MABA Agroexport showcasing agricultural export products and commercial contact management.
+      </p>
+      <p>
+      Features:
+      </p>
+      <ul className="list-decimal list-inside">
+      <li>Multilingual Support: Spanish/English language switching</li>
+      <li>Interactive Product Gallery: Dynamic showcase of agricultural products</li>
+      <li>Responsive Design: Fully adaptable to all devices and screen sizes</li>
+      <li>SEO Optimized: Integrated meta tags and search engine optimization</li>
+      <li>Modern UI: Clean and professional corporate design</li>
+      <li>Contact Management: Streamlined commercial contact system</li>
+      </ul>
+      </>
       );
     },
   },

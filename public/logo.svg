@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="127.17465mm"
+   height="95.890076mm"
+   viewBox="0 0 127.17465 95.890076"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-33.9566,-119.32708)">
+    <!-- Monitor -->
+    <rect
+       x="37.834198"
+       y="123.20467"
+       width="119.41946"
+       height="66.982483"
+       rx="10.662452"
+       stroke-width="7.7552"
+       id="rect1"
+       style="fill:none;stroke:#00a6f4;stroke-opacity:1" />
+    <!-- Peana -->
+    <path
+       d="m 97.5439,192.77624 v 17.80018 m -25.589885,0.76313 h 51.179765"
+       stroke-width="7.7552"
+       stroke-linecap="round"
+       id="path1"
+       style="stroke:#00a6f4;stroke-opacity:1" />
+    <!-- Símbolo </> -->
+    <path
+       d="m 85.744767,144.22631 -12.794942,10.57618 12.794942,10.57618 m 21.898303,-21.02159 12.79495,10.57618 -13.05648,10.44541 m -6.74957,-23.30473 -7.222271,24.67248"
+       stroke-width="5.81639"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path2"
+       style="display:inline;fill:none;stroke:#00a6f4;stroke-width:5.816;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>
