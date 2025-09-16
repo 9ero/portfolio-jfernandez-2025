@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { IconBrandAstro, IconBrandGithub, IconBrandJavascript, IconBrandReact, IconBrandTailwind, IconBrandVite, IconChevronLeft, IconChevronRight, IconExternalLink } from "@tabler/icons-react";
+import { IconBrandAstro, IconBrandGithub, IconBrandJavascript, IconBrandTailwind, IconChevronLeft, IconChevronRight, IconExternalLink, IconBrandReact, IconBrandAws, IconBrandDjango, IconBrandNextjs, IconBrandVite, IconBrandDocker, IconBrandPython} from "@tabler/icons-react";
 
 export function ExpandableCards() {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
@@ -34,15 +34,17 @@ export function ExpandableCards() {
     };
 
     const handleMouseEnter = () => {
+      if (isExpanded) return setIsPaused(true);
         setIsPaused(true);
     };
 
     const handleMouseLeave = () => {
+      if (isExpanded) return setIsPaused(true);
         setIsPaused(false);
     };
 
     const handleMouseClick = () => {
-        setIsPaused(true);
+        setIsPaused(!isPaused);
         setIsExpanded(!isExpanded);
     };
   
@@ -53,10 +55,10 @@ export function ExpandableCards() {
             key={currentIndex}
             src={images[currentIndex]}
             alt={`${title} - Image ${currentIndex + 1}`}
-            className={`   ${isExpanded ? 'max-h-screen max-w-screen fixed left-50 top-0 translate-x-[50%] z-[300]' : 'w-full lg:h-80 object-cover object-top'}`}
-            initial={{ opacity: 0, x: 100 }}
+            className={`${isExpanded ? 'max-h-screen max-w-screen fixed left-0 top-0 translate-y-[50%] sm:translate-y-0 translate-x-0 sm:translate-x-[-8%]   lg:translate-x-1/2 z-[200]' : 'w-full lg:h-80 object-cover object-top'}`}
+            initial={{ opacity: 0.3, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
+            exit={{ opacity: 0.3, x: -100 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -143,7 +145,7 @@ export function ExpandableCards() {
                   duration: 0.05,
                 },
               }}
-              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
+              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6 z-[300]"
               onClick={() => setActive(null)}
             >
               <CloseIcon />
@@ -151,7 +153,7 @@ export function ExpandableCards() {
             <motion.div
               layoutId={`card-${active.title}-${id}`}
               ref={ref}
-              className="w-full max-w-[500px]  h-full md:h-fit md:max-h-[90%] sm:border-2 sm:border-sky-300 flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
+              className="w-full max-w-xl  h-full md:h-fit md:max-h-[90%] sm:border-2 sm:border-sky-300 flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
             >
                 <motion.div layoutId={`image-${active.title}-${id}`}>
                     {Array.isArray(active.src) ? (
@@ -287,6 +289,7 @@ export const CloseIcon = () => {
     <motion.svg
       initial={{
         opacity: 0,
+        zIndex: 400,
       }}
       animate={{
         opacity: 1,
@@ -317,11 +320,11 @@ export const CloseIcon = () => {
 
 const cards = [
   {
-    description:" Astro & React ",
+    description:"Made with Astro & React ",
     Icon: <IconBrandJavascript size={20} />,
     title: "This Portfolio Website",
     src: [
-        "aws-wpp.webp",
+        "portfolio.webp",
         "react-wpp.webp", 
         "tailwind-wpp.webp",
       ],
@@ -329,7 +332,7 @@ const cards = [
     ctaText: "Show",
     ctaLink: "#",
     techStack: () => {
-        const styles = "flex text-neutral-400 dark:text-neutral-200 items-center gap-1 drop-shadow-md drop-shadow-orange-300 dark:drop-shadow-sky-300"
+        const styles = "flex dark:text-neutral-200 items-center gap-1  drop-shadow-md drop-shadow-sky-600 dark:drop-shadow-sky-300"
         return (
           <ul className="grid grid-cols-3 w-max">
             <li className={styles}> <IconBrandAstro size={20} /> Astro</li>
@@ -403,91 +406,91 @@ const cards = [
     },
   },
   {
-    description: "Babbu Maan",
-    title: "Mitran Di Chhatri",
-    src: "https://assets.aceternity.com/demos/babbu-maan.jpeg",
-    ctaText: "Play",
-    ctaLink: "https://ui.aceternity.com/templates",
+    description:"React Django & with Django REST Framework",
+    Icon: <><IconBrandJavascript size={20} /><IconBrandPython size={20} /></>,
+    title: "EQ Tickets",
+    src: [
+        "portfolio.webp",
+        "react-wpp.webp", 
+        "tailwind-wpp.webp",
+      ],
+    ctaText: "Show",
+    ctaLink: "https://eqtickets.net",
+    techStack: () => {
+      const styles = "flex dark:text-neutral-200 items-center gap-1  drop-shadow-md drop-shadow-sky-600 dark:drop-shadow-sky-300"
+      return (
+        <ul className="grid grid-cols-3 w-max gap-3">
+          <li className={styles}> <IconBrandNextjs size={20} /> Next.js</li>
+          <li className={styles}> <IconBrandTailwind size={20} /> Tailwind CSS</li>
+          <li className={styles}> <IconBrandDjango size={20} /> Django</li>
+          <li className={styles}> <IconBrandPython size={20} /> Django REST Framework</li>
+          <li className={styles}> <IconBrandDocker size={20} /> Docker</li>
+          <li className={styles}> <IconBrandAws size={20} /> AWS</li>
+        </ul>
+      );
+    },
     content: () => {
       return (
-        <p>
-          Babu Maan, a legendary Punjabi singer, is renowned for his soulful
-          voice and profound lyrics that resonate deeply with his audience. Born
-          in the village of Khant Maanpur in Punjab, India, he has become a
-          cultural icon in the Punjabi music industry. <br /> <br /> His songs
-          often reflect the struggles and triumphs of everyday life, capturing
-          the essence of Punjabi culture and traditions. With a career spanning
-          over two decades, Babu Maan has released numerous hit albums and
-          singles that have garnered him a massive fan following both in India
-          and abroad.
+        <>
+        <p className="text-md font-bold">
+          EQ Tickets is a comprehensive application consisting of two main components: a Django backend with Django REST Framework and a Next.js frontend with Tailwind CSS, Shadcn, and Aceternity UI components.
         </p>
+        <p>
+        Features:
+        </p>
+        <ul className="list-decimal list-inside">
+          <li>Employee Request Management: Organized handling of employee requests and applications from affiliated companies</li>
+          <li>Procurement Lists: Complete control and management of purchasing lists</li>
+          <li>Multi-Entity Management: Companies, departments, users, tickets, and shopping lists</li>
+          <li>Dark/Light Theme: Full compatibility with both dark and light modes</li>
+          <li>Responsive Design: Fully adaptable to all devices and screen sizes</li>
+          <li>Modern UI: Clean interface built with Shadcn and Aceternity UI components</li>
+        </ul>
+        </>
       );
     },
   },
 
   {
-    description: "Metallica",
-    title: "For Whom The Bell Tolls",
-    src: "https://assets.aceternity.com/demos/metallica.jpeg",
-    ctaText: "Play",
-    ctaLink: "https://ui.aceternity.com/templates",
+    description:"Made with Next.js",
+    Icon: <IconBrandJavascript size={20} />,
+    title: "My old portfolio",
+    src: [
+        "portfolio.webp",
+        "react-wpp.webp", 
+        "tailwind-wpp.webp",
+      ],
+    codeLink: "https://github.com/9ero/juan-portfolio",
+    ctaText: "Show",
+    ctaLink: "https://juan-fernandez-portfolio.vercel.app/",
+    techStack: () => {
+        const styles = "flex dark:text-neutral-200 items-center gap-1  drop-shadow-md drop-shadow-sky-600 dark:drop-shadow-sky-300"
+        return (
+          <ul className="grid grid-cols-3 w-max">
+            <li className={styles}> <IconBrandNextjs size={20} /> Next.js</li>
+            <li className={styles}> <IconBrandReact size={20} /> React</li>
+          </ul>
+        );
+      },
     content: () => {
       return (
-        <p>
-          Metallica, an iconic American heavy metal band, is renowned for their
-          powerful sound and intense performances that resonate deeply with
-          their audience. Formed in Los Angeles, California, they have become a
-          cultural icon in the heavy metal music industry. <br /> <br /> Their
-          songs often reflect themes of aggression, social issues, and personal
-          struggles, capturing the essence of the heavy metal genre. With a
-          career spanning over four decades, Metallica has released numerous hit
-          albums and singles that have garnered them a massive fan following
-          both in the United States and abroad.
+        <>
+        <p className="text-md font-bold">
+          This was my first portfolio where I presented my projects. Built with Next.js and deployed on Vercel.
         </p>
-      );
-    },
-  },
-  {
-    description: "Led Zeppelin",
-    title: "Stairway To Heaven",
-    src: "https://assets.aceternity.com/demos/led-zeppelin.jpeg",
-    ctaText: "Play",
-    ctaLink: "https://ui.aceternity.com/templates",
-    codeLink: "https://ui.aceternity.com/templates",
-    content: () => {
-      return (
         <p>
-          Led Zeppelin, a legendary British rock band, is renowned for their
-          innovative sound and profound impact on the music industry. Formed in
-          London in 1968, they have become a cultural icon in the rock music
-          world. <br /> <br /> Their songs often reflect a blend of blues, hard
-          rock, and folk music, capturing the essence of the 1970s rock era.
-          With a career spanning over a decade, Led Zeppelin has released
-          numerous hit albums and singles that have garnered them a massive fan
-          following both in the United Kingdom and abroad.
+        Features:
         </p>
-      );
-    },
-  },
-  {
-    description: "Mustafa Zahid",
-    title: "Toh Phir Aao",
-    src: "https://assets.aceternity.com/demos/toh-phir-aao.jpeg",
-    ctaText: "Play",
-    ctaLink: "https://ui.aceternity.com/templates",
-    content: () => {
-      return (
-        <p>
-          &quot;Aawarapan&quot;, a Bollywood movie starring Emraan Hashmi, is
-          renowned for its intense storyline and powerful performances. Directed
-          by Mohit Suri, the film has become a significant work in the Indian
-          film industry. <br /> <br /> The movie explores themes of love,
-          redemption, and sacrifice, capturing the essence of human emotions and
-          relationships. With a gripping narrative and memorable music,
-          &quot;Aawarapan&quot; has garnered a massive fan following both in
-          India and abroad, solidifying Emraan Hashmi&apos;s status as a
-          versatile actor.
-        </p>
+        <ul className="list-decimal list-inside">
+        <li>Modern Design: Clean and professional interface showcasing my work</li>
+        <li>Responsive: Fully adaptable to all devices and screen sizes</li>
+        <li>Project Showcase: Organized presentation of my development projects</li>
+        <li>Next.js Framework: Built with React and Next.js for optimal performance</li>
+        <li>Vercel Deployment: Hosted on Vercel for fast and reliable access</li>
+        <li>Professional Layout: Structured design highlighting my skills and experience</li>
+        </ul>
+        
+        </>
       );
     },
   },
