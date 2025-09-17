@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { IconBrandAstro, IconBrandGithub, IconBrandJavascript, IconBrandTailwind, IconChevronLeft, IconChevronRight, IconExternalLink, IconBrandReact, IconBrandAws, IconBrandDjango, IconBrandNextjs, IconBrandVite, IconBrandDocker, IconBrandPython} from "@tabler/icons-react";
+import { IconBrandAstro, IconBrandGithub, IconBrandJavascript, IconBrandTailwind, IconChevronLeft, IconChevronRight, IconExternalLink, IconBrandReact, IconBrandAws, IconBrandDjango, IconBrandNextjs, IconBrandVite, IconBrandDocker, IconBrandPython, IconBrandSass} from "@tabler/icons-react";
 
 export function ExpandableCards() {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
@@ -43,9 +43,16 @@ export function ExpandableCards() {
         setIsPaused(false);
     };
 
-    const handleMouseClick = () => {
-        setIsPaused(!isPaused);
-        setIsExpanded(!isExpanded);
+    const handleMouseClick = (e: React.MouseEvent<HTMLImageElement> | React.TouchEvent<HTMLImageElement>) => {
+        e.preventDefault();
+        if (isExpanded) {
+            setIsPaused(false);
+            setIsExpanded(false);
+        } else {
+            setIsPaused(true);
+            setIsExpanded(true);
+        }
+        
     };
   
     return (
@@ -55,14 +62,15 @@ export function ExpandableCards() {
             key={currentIndex}
             src={images[currentIndex]}
             alt={`${title} - Image ${currentIndex + 1}`}
-            className={`${isExpanded ? 'max-h-screen max-w-screen fixed left-0 top-0 translate-y-[50%] sm:translate-y-0 translate-x-0 sm:translate-x-[-8%]   lg:translate-x-1/2 z-[200]' : 'w-full lg:h-80 object-cover object-top'}`}
+            className={`${isExpanded ? 'max-h-screen max-w-screen fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200]' : 'w-full lg:h-80 object-cover object-top'}`}
             initial={{ opacity: 0.3, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0.3, x: -100 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={handleMouseClick}
+            onTouchEnd={e => handleMouseClick(e)}
+            onClick={e => handleMouseClick(e)}
           />
         </AnimatePresence>
         
@@ -153,7 +161,7 @@ export function ExpandableCards() {
             <motion.div
               layoutId={`card-${active.title}-${id}`}
               ref={ref}
-              className="w-full max-w-xl  h-full md:h-fit md:max-h-[90%] sm:border-2 sm:border-sky-300 flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
+              className="w-full max-w-3xl  h-full  md:max-h-fit sm:border-2 sm:border-sky-300 flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-auto md:overflow-hidden"
             >
                 <motion.div layoutId={`image-${active.title}-${id}`}>
                     {Array.isArray(active.src) ? (
@@ -212,7 +220,7 @@ export function ExpandableCards() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-neutral-600 text-xs md:text-sm lg:text-base h-40 md:h-50 pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-300  [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
+                    className="text-neutral-600 text-sm lg:text-base h-full max-h-md pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-300  [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
                   >
                     {active.techStack && typeof active.techStack === "function"
                       ? active.techStack()
@@ -228,7 +236,7 @@ export function ExpandableCards() {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="max-w-2xl mx-auto w-full gap-4  max-h-full overflow-auto md:p-10 lg:rounded-xl lg:border-2 lg:border-sky-300">
+      <ul className="max-w-2xl mx-auto w-full gap-4  max-h-full overflow-hidden md:p-10 lg:rounded-xl lg:border-2 lg:border-sky-300">
         {cards.map((card, index) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
@@ -236,7 +244,7 @@ export function ExpandableCards() {
             onClick={() => setActive(card)}
             className="p-4 flex flex-col md:flex-row justify-between items-center hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
           >
-            <div className="flex gap-4 flex-col md:flex-row ">
+            <div className="flex items-center gap-4 flex-col md:flex-row ">
             <motion.div layoutId={`image-${card.title}-${id}`}>
             {Array.isArray(card.src) ? (
                 <img
@@ -317,22 +325,24 @@ export const CloseIcon = () => {
     </motion.svg>
   );
 };
-
+const styles = "flex dark:text-neutral-200 items-center gap-1  drop-shadow-md drop-shadow-sky-600 dark:drop-shadow-sky-300"
 const cards = [
   {
     description:"Made with Astro & React ",
     Icon: <IconBrandJavascript size={20} />,
     title: "This Portfolio Website",
     src: [
-        "portfolio.webp",
-        "react-wpp.webp", 
-        "tailwind-wpp.webp",
-      ],
+      "this/p2-mac-1.webp",
+      "this/p2-mobile-1.webp",
+      "this/p2-mac-2.webp", 
+      "this/p2-mobile-2.webp",
+      "this/p2-mac-3.webp",
+      "this/p2-mobile-3.webp",
+    ],
     codeLink: "https://github.com/9ero/portfolio-jfernandez-2025",
     ctaText: "Show",
     ctaLink: "#",
     techStack: () => {
-        const styles = "flex dark:text-neutral-200 items-center gap-1  drop-shadow-md drop-shadow-sky-600 dark:drop-shadow-sky-300"
         return (
           <ul className="grid grid-cols-3 w-max">
             <li className={styles}> <IconBrandAstro size={20} /> Astro</li>
@@ -363,61 +373,24 @@ const cards = [
       );
     },
   },
+  
   {
-    description:"A responsive and bilingual website",
-    Icon: <IconBrandJavascript size={20} />,
-    title: "Mabaagroexport",
-    src: [
-        "aws-wpp.webp",
-        "react-wpp.webp", 
-        "tailwind-wpp.webp",
-      ],
-    codeLink: "https://github.com/9ero/maba-app",
-    ctaText: "Show",
-    ctaLink: "https://mabaagroexport.vercel.app/",
-    techStack: () => {
-        const styles = "flex text-neutral-400 dark:text-neutral-200 items-center gap-1 drop-shadow-md drop-shadow-orange-300 dark:drop-shadow-sky-300"
-        return (
-          <ul className="grid grid-cols-2 gap-2 w-max">
-            <li className={styles}> <IconBrandReact size={20} /> React</li>
-            <li className={styles}> <IconBrandVite size={20} /> ViteJS</li>
-          </ul>
-        );
-      },
-    content: () => {
-      return (
-        <>
-      <p className="text-md font-bold">
-        Official corporate website for MABA Agroexport showcasing agricultural export products and commercial contact management.
-      </p>
-      <p>
-      Features:
-      </p>
-      <ul className="list-decimal list-inside">
-      <li>Multilingual Support: Spanish/English language switching</li>
-      <li>Interactive Product Gallery: Dynamic showcase of agricultural products</li>
-      <li>Responsive Design: Fully adaptable to all devices and screen sizes</li>
-      <li>SEO Optimized: Integrated meta tags and search engine optimization</li>
-      <li>Modern UI: Clean and professional corporate design</li>
-      <li>Contact Management: Streamlined commercial contact system</li>
-      </ul>
-      </>
-      );
-    },
-  },
-  {
-    description:"React Django & with Django REST Framework",
+    description:"Next.js & Django with Django REST Framework",
     Icon: <><IconBrandJavascript size={20} /><IconBrandPython size={20} /></>,
     title: "EQ Tickets",
     src: [
-        "portfolio.webp",
-        "react-wpp.webp", 
-        "tailwind-wpp.webp",
+        "eqtickets/et-mac-1.webp",
+        "eqtickets/et-mac-2.webp",
+        "eqtickets/et-mobile-1.webp",
+        "eqtickets/et-mac-3.webp",
+        "eqtickets/et-mac-4.webp",
+        "eqtickets/et-mobile-2.webp",
+        "eqtickets/et-mac-5.webp",
+        "eqtickets/et-mobile-3.webp",
       ],
     ctaText: "Show",
     ctaLink: "https://eqtickets.net",
     techStack: () => {
-      const styles = "flex dark:text-neutral-200 items-center gap-1  drop-shadow-md drop-shadow-sky-600 dark:drop-shadow-sky-300"
       return (
         <ul className="grid grid-cols-3 w-max gap-3">
           <li className={styles}> <IconBrandNextjs size={20} /> Next.js</li>
@@ -450,25 +423,70 @@ const cards = [
       );
     },
   },
-
+  {
+    description:"A responsive and bilingual website",
+    Icon: <IconBrandJavascript size={20} />,
+    title: "Mabaagroexport",
+    src: [
+        "maba/mb-mac-1.webp",
+        "maba/mb-mobile-1.webp",
+        "maba/mb-mac-2.webp", 
+        "maba/mb-mac-3.webp",
+      ],
+    codeLink: "https://github.com/9ero/maba-app",
+    ctaText: "Show",
+    ctaLink: "https://mabaagroexport.vercel.app/",
+    techStack: () => {
+        return (
+          <ul className="grid grid-cols-3 gap-3">
+            <li className={styles}> <IconBrandReact size={20} /> React</li>
+            <li className={styles}> <IconBrandVite size={20} /> ViteJS</li>
+            <li className={styles}> <IconBrandSass size={20} /> SASS</li>
+          </ul>
+        );
+      },
+    content: () => {
+      return (
+        <>
+      <p className="text-md font-bold">
+        Official corporate website for MABA Agroexport showcasing agricultural export products and commercial contact management.
+      </p>
+      <p>
+      Features:
+      </p>
+      <ul className="list-decimal list-inside">
+      <li>Multilingual Support: Spanish/English language switching</li>
+      <li>Interactive Product Gallery: Dynamic showcase of agricultural products</li>
+      <li>Responsive Design: Fully adaptable to all devices and screen sizes</li>
+      <li>SEO Optimized: Integrated meta tags and search engine optimization</li>
+      <li>Modern UI: Clean and professional corporate design</li>
+      <li>Contact Management: Streamlined commercial contact system</li>
+      </ul>
+      </>
+      );
+    },
+  },
   {
     description:"Made with Next.js",
     Icon: <IconBrandJavascript size={20} />,
     title: "My old portfolio",
     src: [
-        "portfolio.webp",
-        "react-wpp.webp", 
-        "tailwind-wpp.webp",
+        "old/op-mac-1.webp",
+        "old/op-mobile-1.webp",
+        "old/op-mac-2.webp",
+        "old/op-mobile-2.webp", 
+        "old/op-mac-3.webp",
+        
       ],
     codeLink: "https://github.com/9ero/juan-portfolio",
     ctaText: "Show",
     ctaLink: "https://juan-fernandez-portfolio.vercel.app/",
     techStack: () => {
-        const styles = "flex dark:text-neutral-200 items-center gap-1  drop-shadow-md drop-shadow-sky-600 dark:drop-shadow-sky-300"
         return (
-          <ul className="grid grid-cols-3 w-max">
+          <ul className="grid grid-cols-3 gap-3">
             <li className={styles}> <IconBrandNextjs size={20} /> Next.js</li>
             <li className={styles}> <IconBrandReact size={20} /> React</li>
+            <li className={styles}> <IconBrandTailwind size={20} /> Tailwind CSS</li>
           </ul>
         );
       },
