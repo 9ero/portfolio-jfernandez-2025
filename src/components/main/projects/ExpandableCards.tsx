@@ -385,8 +385,7 @@ const cards = [
         "eqtickets/et-mac-3.webp",
         "eqtickets/et-mac-4.webp",
         "eqtickets/et-mobile-2.webp",
-        "eqtickets/et-mac-5.webp",
-        "eqtickets/et-mobile-3.webp",
+        "eqtickets/et-mac-5.webp"
       ],
     ctaText: "Show",
     ctaLink: "https://eqtickets.net",
