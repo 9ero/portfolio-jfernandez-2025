@@ -62,7 +62,7 @@ export function ExpandableCards() {
             key={currentIndex}
             src={images[currentIndex]}
             alt={`${title} - Image ${currentIndex + 1}`}
-            className={`${isExpanded ? 'max-h-screen max-w-screen fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200]' : 'w-full lg:h-80 object-cover object-top'}`}
+            className={`${isExpanded ? 'max-h-screen max-w-screen fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200] hover:cursor-zoom-out' : 'w-full lg:h-80 object-cover object-top hover:cursor-zoom-in hover:scale-105 transition-all duration-300'}`}
             initial={{ opacity: 0.3, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0.3, x: -100 }}
@@ -172,7 +172,7 @@ export function ExpandableCards() {
                         height={200}
                         src={active.src}
                         alt={active.title}
-                        className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
+                        className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top "
                         />
                     )}
                 </motion.div>
@@ -236,7 +236,7 @@ export function ExpandableCards() {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="max-w-2xl mx-auto w-full gap-4  max-h-full overflow-hidden md:p-10 lg:rounded-xl lg:border-2 lg:border-sky-300">
+      <ul className="max-w-2xl mx-auto w-full gap-4 overflow-auto  max-h-full  md:p-10 lg:rounded-xl lg:border-2 lg:border-sky-300">
         {cards.map((card, index) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
@@ -375,7 +375,7 @@ const cards = [
   },
   
   {
-    description:"Next.js & Django with Django REST Framework",
+    description:"Next.js & Django",
     Icon: <><IconBrandJavascript size={20} /><IconBrandPython size={20} /></>,
     title: "EQ Tickets",
     src: [
