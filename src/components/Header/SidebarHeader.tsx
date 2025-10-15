@@ -4,7 +4,6 @@ import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import {
   
   IconBrandTabler,
-  IconSettings,
   IconGalaxy,
   IconUserCode,
   IconPhoneCheck,
@@ -72,11 +71,11 @@ export function SidebarHeader() {
             <SidebarLink
               link={{
                 label: "Juan Miguel Fernández Araya",
-                href: "#",
+                href: "/",
                 icon: (
                   <img
-                    src="https://assets.aceternity.com/manu.png"
-                    className="h-7 w-7 shrink-0 rounded-full"
+                    src="about/JuanPhoto.png"
+                    className="h-7 w-7 shrink-0 rounded-full bg-neutral-200 dark:bg-neutral-800"
                     width={50}
                     height={50}
                     alt="Avatar"
@@ -93,7 +92,7 @@ export function SidebarHeader() {
 export const Logo = () => {
   return (
     <a
-      href="#"
+      href="/"
       className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
     >
        <img src="/logo.svg" alt="Logo" className="h-5 w-6 shrink-0" />
@@ -102,7 +101,7 @@ export const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-medium whitespace-pre text-black dark:text-white"
       >
-        jfernandez.dev
+        jfernandezdev.com
       </motion.span>
     </a>
   );

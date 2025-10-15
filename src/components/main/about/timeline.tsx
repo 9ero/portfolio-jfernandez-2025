@@ -5,40 +5,40 @@ import { ImgZoomHelper } from "@/components/ui/img-zoom-helper";
 const images ={
   past: [
     {
-      src: "https://assets.aceternity.com/templates/startup-1.webp",
-      alt: "startup template"
+      src: "about/past1.webp",
+      alt: "the kid in the computer with his dogs"
     },
     {
-      src: "https://assets.aceternity.com/templates/startup-2.webp",
-      alt: "startup template"
+      src: "about/past2.webp",
+      alt: "the kid in the computer"
     },
-    {
-      src: "https://assets.aceternity.com/templates/startup-3.webp",
-      alt: "startup template"
-    },
-    {
-      src: "https://assets.aceternity.com/templates/startup-4.webp",
-      alt: "startup template"
-    }
   ],
   present: [
     {
-      src: "https://assets.aceternity.com/pro/hero-sections.png",
-      alt: "hero template"
+      src: "about/present2.webp",
+      alt: "the man in the computer"
     },
     {
-      src: "https://assets.aceternity.com/features-section.png",
-      alt: "feature template"
+      src: "about/present1.webp",
+      alt: "the man dominating technologies"
     },
+    {
+      src: "about/present3.webp",
+      alt: "two men testing a mobile app"
+    }
   ],
   future: [
     {
-      src: "https://assets.aceternity.com/pro/bento-grids.png",
-      alt: "bento template"
+      src: "about/future1.webp",
+      alt: "the man thinking"
     },
     {
-      src: "https://assets.aceternity.com/cards.png",
-      alt: "cards template"
+      src: "about/future2.webp",
+      alt: "the main with de cyber girl"
+    },
+    {
+      src: "about/future3.webp",
+      alt: "the man presenting the stadistics"
     }
   ]
 }

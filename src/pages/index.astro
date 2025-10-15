@@ -6,7 +6,7 @@ import Welcome from '@/components/main/welcome.astro';
 import Skills from '@/components/main/skills';
 import ProjectList from '@/components/main/projects/projectList.astro';
 import {AboutTimeline} from '@/components/main/about/timeline';
-
+import Contact from '@/components/main/contact/contact.astro';
 ---
 	<Layout content={{title: 'Home'}}>
 		<section id="welcome" class="h-screen snap-start">
@@ -22,6 +22,6 @@ import {AboutTimeline} from '@/components/main/about/timeline';
 			<AboutTimeline client:only="react" />
 		</section>
 		<section id="contact" class="h-screen snap-start">
-			<p>Contact content</p>
+			<Contact />
 		</section>
 	</Layout>
