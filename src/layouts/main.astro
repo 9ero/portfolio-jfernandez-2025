@@ -2,19 +2,47 @@
 import '../styles/global.css';
 const { content } = Astro.props;
 import Header from '@/components/Header.astro';
+const siteTitle = content?.title || "Juan Miguel Fernández - Full Stack Developer";
+const siteDescription = content?.description || "Personal portfolio of Juan Miguel Fernández Araya. Full Stack Developer specialized in React, Django, and Docker. Discover my projects and skills.";
+const siteUrl = "https://jfernandezdev.com"; 
+const siteImage = `${siteUrl}/portfolio.webp`;
+const author = "Juan Miguel Fernández Araya";
 ---
-<script>
 
-
-
-</script>
-
-<html lang="en">
+<html lang="es">
 	<head>
+		<!-- Meta Tags Básicos -->
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- SEO -->
+		<title>{siteTitle}</title>
+		<meta name="description" content={siteDescription} />
+		<meta name="author" content={author} />
+		<meta name="keywords" content="Full Stack Developer, React, Django, Docker, Portfolio, Web Development, Frontend, Backend, Astro, TypeScript" />
+		<link rel="canonical" href={siteUrl} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={siteUrl} />
+		<meta property="og:title" content={siteTitle} />
+		<meta property="og:description" content={siteDescription} />
+		<meta property="og:image" content={siteImage} />
+		<meta property="og:site_name" content={author} />
+		<meta property="og:locale" content="es_ES" />
+		
+		<!-- Favicon -->
 		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
-		<title>{content.title}</title>
+		<link rel="apple-touch-icon" href="/logo.svg" />
+		
+		<!-- Theme Color -->
+		<meta name="theme-color" content="#0ea5e9" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0c4a6e" media="(prefers-color-scheme: dark)" />
+		
+		<!-- Preconnect para mejor performance -->
+		<link rel="preconnect" href="https://api.emailjs.com" />
+		<link rel="preconnect" href="https://challenges.cloudflare.com" />
 	</head>
 	<body>
 		<Header/>
