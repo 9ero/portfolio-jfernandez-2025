@@ -40,5 +40,10 @@ All `EMAILJS_*` and `TURNSTILE_SECRET_KEY` are server-only (no `PUBLIC_` prefix)
 - Turnstile token is verified server-side via `challenges.cloudflare.com/turnstile/v0/siteverify` before any email is sent.
 - `public/old/` and `public/this/` contain project screenshot assets used by the expandable cards — they are intentionally there.
 
+## SEO / Rendering Gotchas
+- `index.astro` passes `content={{ title: 'Home' }}` — the `<title>` and `og:title` render as "Home". Tracked in ROADMAP.
+- `Skills` and `AboutTimeline` use `client:only="react"` — they produce no server-side HTML. Bots and crawlers see those sections as empty. Static content should move to Astro; only interactivity stays as islands.
+- `og:locale` is `es_ES` but most UI copy is in English — inconsistency tracked in ROADMAP.
+
 ## Known Issues / Active Work
 See `ROADMAP.md` for the full list of pending improvements.
