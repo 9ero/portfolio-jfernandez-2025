@@ -13,15 +13,9 @@ import {Form,FormField, FormItem, FormLabel, FormControl, FormMessage, FormDescr
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import emailjs from "@emailjs/browser";
 import { Turnstile } from "@marsidev/react-turnstile";
 
-
-
 const cloudflareSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
-const EMAILJS_SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID; 
-const EMAILJS_TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID; 
-const EMAILJS_PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY; 
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -50,39 +44,35 @@ export default function ContactForm() {
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
-    if(!token){
+    if (!token) {
       setSubmitStatus("error");
+      setIsSubmitting(false);
       return;
     }
 
     try {
-      // Parámetros que se enviarán al template de EmailJS
-      const templateParams = {
-        fullname: `${values.firstname} ${values.lastname}`,
-        email: values.email,
-        message: values.message,
-      };
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstname: values.firstname,
+          lastname: values.lastname,
+          email: values.email,
+          message: values.message,
+          turnstileToken: token,
+        }),
+      });
 
-      const response = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      );
-
-      if(response.status === 200){
+      if (response.ok) {
         setSubmitStatus("success");
-      }else{
+        form.reset();
+      } else {
         setSubmitStatus("error");
       }
-      form.reset(); // Limpia el formulario después de enviar
-      
-      // Resetea el mensaje de éxito después de 5 segundos
+
       setTimeout(() => setSubmitStatus("idle"), 5000);
-    } catch (error) {
+    } catch {
       setSubmitStatus("error");
-      
-      // Resetea el mensaje de error después de 5 segundos
       setTimeout(() => setSubmitStatus("idle"), 5000);
     } finally {
       setIsSubmitting(false);
