@@ -74,7 +74,7 @@ export function SidebarHeader() {
                 href: "/",
                 icon: (
                   <img
-                    src="about/JuanPhoto.png"
+                    src="/about/JuanPhoto.webp"
                     className="h-7 w-7 shrink-0 rounded-full bg-neutral-200 dark:bg-neutral-800"
                     width={50}
                     height={50}
