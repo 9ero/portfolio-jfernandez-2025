@@ -1,0 +1,63 @@
+import {
+  IconBrandJavascript,
+  IconBrandTypescript,
+  IconBrandReact,
+  IconBrandReactNative,
+  IconBrandNextjs,
+  IconBrandAstro,
+  IconBrandVite,
+  IconBrandTailwind,
+  IconBrandSass,
+  IconBrandPython,
+  IconBrandDjango,
+  IconBrandKotlin,
+  IconBrandAndroid,
+  IconBrandAws,
+  IconBrandDocker,
+  IconBrandVercel,
+  IconDatabase,
+  IconCloudUpload,
+  IconDeviceMobile,
+  IconBarcode,
+  IconCast,
+  IconWorld,
+  IconMicrophone,
+  IconMusic,
+  IconVideo,
+  IconFileSpreadsheet,
+} from "@tabler/icons-react";
+import type { TechIconKey } from "@/data/types";
+
+const registry: Record<TechIconKey, React.ComponentType<{ size?: number }>> = {
+  javascript: IconBrandJavascript,
+  typescript: IconBrandTypescript,
+  react: IconBrandReact,
+  "react-native": IconBrandReactNative,
+  nextjs: IconBrandNextjs,
+  astro: IconBrandAstro,
+  vite: IconBrandVite,
+  tailwind: IconBrandTailwind,
+  sass: IconBrandSass,
+  python: IconBrandPython,
+  django: IconBrandDjango,
+  kotlin: IconBrandKotlin,
+  android: IconBrandAndroid,
+  aws: IconBrandAws,
+  docker: IconBrandDocker,
+  vercel: IconBrandVercel,
+  database: IconDatabase,
+  cloud: IconCloudUpload,
+  mobile: IconDeviceMobile,
+  barcode: IconBarcode,
+  cast: IconCast,
+  world: IconWorld,
+  microphone: IconMicrophone,
+  music: IconMusic,
+  video: IconVideo,
+  subtitles: IconFileSpreadsheet,
+};
+
+export function TechIcon({ name, size = 20 }: { name: TechIconKey; size?: number }) {
+  const Icon = registry[name];
+  return <Icon size={size} />;
+}

@@ -3,7 +3,10 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { IconBrandGithub, IconBrandJavascript, IconBrandTailwind, IconChevronLeft, IconChevronRight, IconExternalLink, IconBrandReact, IconBrandAws, IconBrandDjango, IconBrandNextjs, IconBrandVite, IconBrandDocker, IconBrandPython, IconBrandSass, IconBrandReactNative, IconBrandKotlin, IconBrandTypescript, IconBrandAndroid, IconCast, IconDatabase, IconDeviceMobile, IconWorld, IconBrandVercel, IconMicrophone, IconMusic, IconVideo, IconFileSpreadsheet, IconCloudUpload, IconBarcode} from "@tabler/icons-react";
+import { IconBrandGithub, IconChevronLeft, IconChevronRight, IconExternalLink } from "@tabler/icons-react";
+import { projects } from "@/data";
+import { t } from "@/lib/t";
+import { TechIcon } from "./techIcons";
 
 type CardStatus = { label: string; tone: "green" | "amber" };
 
@@ -368,350 +371,47 @@ export const CloseIcon = () => {
   );
 };
 const styles = "flex dark:text-neutral-200 items-center gap-1  drop-shadow-md drop-shadow-sky-600 dark:drop-shadow-sky-300"
-type Card = {
-  description: string;
-  Icon: React.ReactNode;
-  title: string;
-  src: string[];
-  status?: CardStatus;
-  ctaText: string;
-  ctaLink?: string;
-  codeLink?: string;
-  techStack: () => React.ReactNode;
-  content: () => React.ReactNode;
-};
 
-const cards: Card[] = [
-  {
-    description: "React Native offline-first POS",
-    Icon: <IconBrandReactNative size={20} />,
-    title: "Antuan POS",
-    status: { label: "Beta", tone: "green" },
-    src: ["antuan/placeholder-1.webp"],
-    codeLink: "https://github.com/9ero/Antuan-POS",
-    ctaText: "Show",
-    techStack: () => {
-      return (
-        <ul className="grid grid-cols-3 w-max gap-3">
-          <li className={styles}> <IconBrandReactNative size={20} /> React Native</li>
-          <li className={styles}> <IconDeviceMobile size={20} /> Expo</li>
-          <li className={styles}> <IconBrandTypescript size={20} /> TypeScript</li>
-          <li className={styles}> <IconDatabase size={20} /> SQLite</li>
-          <li className={styles}> <IconCloudUpload size={20} /> Turso</li>
-          <li className={styles}> <IconBarcode size={20} /> Barcode</li>
-        </ul>
-      );
-    },
-    content: () => {
-      return (
-        <>
-        <p className="text-md font-bold">
-          Antuan POS is an offline-first mobile point of sale for small stores: it runs 100% without a connection on a phone at the counter and uses the cloud only as backup. Now in beta at a real store, with the official launch days away.
-        </p>
-        <p>
-        Features:
-        </p>
-        <ul className="list-decimal list-inside">
-        <li>Barcode Scanning: camera-based scanner as the primary selling flow</li>
-        <li>Smart Cart: quantity control, stock validation and overselling prevention</li>
-        <li>PIN Checkout: every sale is attributed to a user via reusable PINs</li>
-        <li>Inventory: receptions, shortages and full stock-movement history</li>
-        <li>Cash Closing: period reports, rankings and Excel (.xlsx) export</li>
-        <li>Cloud Backup: real-time event push to Turso (SQLite in the cloud)</li>
-        </ul>
-        </>
-      );
-    },
-  },
-  {
-    description: "Enterprise portal — Next.js & Python",
-    Icon: <><IconBrandJavascript size={20} /><IconBrandPython size={20} /></>,
-    title: "Ecoquintas Hub",
-    src: ["hub/placeholder-1.webp"],
-    ctaText: "Show",
-    techStack: () => {
-      return (
-        <ul className="grid grid-cols-3 w-max gap-3">
-          <li className={styles}> <IconBrandNextjs size={20} /> Next.js 15</li>
-          <li className={styles}> <IconBrandReact size={20} /> React 19</li>
-          <li className={styles}> <IconBrandTypescript size={20} /> TypeScript</li>
-          <li className={styles}> <IconBrandTailwind size={20} /> Tailwind CSS</li>
-          <li className={styles}> <IconBrandAws size={20} /> AWS Cognito</li>
-          <li className={styles}> <IconBrandPython size={20} /> Python API</li>
-        </ul>
-      );
-    },
-    content: () => {
-      return (
-        <>
-        <p className="text-md font-bold">
-          Client portal for Grupo Ecoquintas where clients and partners consult account statements, financial projections and income. I built the whole system: the Next.js frontend and 100% of the Python backend.
-        </p>
-        <p>
-        Features:
-        </p>
-        <ul className="list-decimal list-inside">
-        <li>Secure Auth: AWS Cognito + NextAuth with automatic JWT refresh</li>
-        <li>Financial Dashboards: advanced AG Grid tables and Recharts visualizations</li>
-        <li>PDF Generation: downloadable statements built with jsPDF / pdf-lib</li>
-        <li>Modern UI: shadcn/ui components, dark/light theme, fully responsive</li>
-        <li>Part of my wider role at the company: 2nd contributor to the core system (222 commits) and to the Airflow payment-automation pipeline (86 commits)</li>
-        </ul>
-        </>
-      );
-    },
-  },
-  {
-    description: "Cast to Fire TV — Kotlin & WebRTC",
-    Icon: <IconBrandKotlin size={20} />,
-    title: "FireLink",
-    status: { label: "In development", tone: "amber" },
-    src: ["firelink/placeholder-1.webp"],
-    codeLink: "https://github.com/9ero/FireLink",
-    ctaText: "Show",
-    techStack: () => {
-      return (
-        <ul className="grid grid-cols-3 w-max gap-3">
-          <li className={styles}> <IconBrandKotlin size={20} /> Kotlin</li>
-          <li className={styles}> <IconBrandAndroid size={20} /> Fire TV / Android TV</li>
-          <li className={styles}> <IconCast size={20} /> WebRTC</li>
-        </ul>
-      );
-    },
-    content: () => {
-      return (
-        <>
-        <p className="text-md font-bold">
-          FireLink turns a Fire TV or Android TV into a wireless screen receiver: any desktop browser can cast a tab or the whole screen over WebRTC — no extension, no Chromecast required.
-        </p>
-        <p>
-        Features:
-        </p>
-        <ul className="list-decimal list-inside">
-        <li>Embedded Server: the TV serves its own control page over HTTPS/WSS</li>
-        <li>Browser Casting: getDisplayMedia capture from Chrome, Brave or Edge</li>
-        <li>Network Discovery: announces itself via mDNS, SSDP and DIAL</li>
-        <li>Zero Install on Desktop: everything runs from the browser</li>
-        <li>Distributed as an APK, installable via ADB</li>
-        </ul>
-        </>
-      );
-    },
-  },
-  {
-    description: "Travel booking platform",
-    Icon: <IconBrandTypescript size={20} />,
-    title: "WhereToGoCR",
-    status: { label: "In development · 90%", tone: "amber" },
-    src: ["wheretogo/placeholder-1.webp"],
-    ctaText: "Show",
-    ctaLink: "https://wheretogocr.com",
-    techStack: () => {
-      return (
-        <ul className="grid grid-cols-3 w-max gap-3">
-          <li className={styles}> <IconBrandNextjs size={20} /> Next.js 16</li>
-          <li className={styles}> <IconBrandTypescript size={20} /> TypeScript</li>
-          <li className={styles}> <IconBrandTailwind size={20} /> Tailwind CSS</li>
-          <li className={styles}> <IconDatabase size={20} /> Turso + Drizzle</li>
-          <li className={styles}> <IconWorld size={20} /> i18n ES/EN</li>
-          <li className={styles}> <IconBrandVercel size={20} /> Vercel</li>
-        </ul>
-      );
-    },
-    content: () => {
-      return (
-        <>
-        <p className="text-md font-bold">
-          Tourism experiences platform built for Pura Vida Bros: travelers explore tours, lodging and services in Costa Rica, build an itinerary with a multi-item cart and send personalized trip requests through a guided wizard.
-        </p>
-        <p>
-        Features:
-        </p>
-        <ul className="list-decimal list-inside">
-        <li>Trip Wizard: guided multi-step flow that turns a cart into a custom trip request</li>
-        <li>Multilingual: native locale routing with full Spanish/English support</li>
-        <li>Modern Data Layer: Turso (libSQL) with Drizzle ORM</li>
-        <li>Admin Panel: JWT-authenticated management of tours and requests</li>
-        <li>Robust Forms: React Hook Form + Zod validation, transactional email via Resend</li>
-        </ul>
-        </>
-      );
-    },
-  },
-  {
-    description: "AI karaoke generator",
-    Icon: <IconBrandPython size={20} />,
-    title: "KaraHero AI",
-    status: { label: "In development · 60%", tone: "amber" },
-    src: ["karahero/placeholder-1.webp"],
-    ctaText: "Show",
-    techStack: () => {
-      return (
-        <ul className="grid grid-cols-3 w-max gap-3">
-          <li className={styles}> <IconBrandPython size={20} /> Python</li>
-          <li className={styles}> <IconMicrophone size={20} /> AI Transcription</li>
-          <li className={styles}> <IconBrandReact size={20} /> React Editor</li>
-          <li className={styles}> <IconMusic size={20} /> Demucs</li>
-          <li className={styles}> <IconVideo size={20} /> ffmpeg</li>
-          <li className={styles}> <IconFileSpreadsheet size={20} /> .lrc / .srt</li>
-        </ul>
-      );
-    },
-    content: () => {
-      return (
-        <>
-        <p className="text-md font-bold">
-          KaraHero AI generates word-by-word synced karaoke from any audio or video file using AI transcription and forced alignment, with an interactive web editor to refine the result.
-        </p>
-        <p>
-        Features:
-        </p>
-        <ul className="list-decimal list-inside">
-        <li>Word-level Sync: AssemblyAI or local Whisper transcription with per-word timestamps</li>
-        <li>Vocal Separation: optional Demucs stem splitting for clean instrumentals</li>
-        <li>Forced Alignment: paste the real lyrics and realign them with CTC alignment</li>
-        <li>Web Editor: FastAPI + React + wavesurfer.js for manual fine-tuning</li>
-        <li>Video Render: MP4 output with colors, gradients and audio visualizer via ffmpeg</li>
-        </ul>
-        </>
-      );
-    },
-  },
-  {
-    description:"Next.js & Django",
-    Icon: <><IconBrandJavascript size={20} /><IconBrandPython size={20} /></>,
-    title: "EQ Tickets",
-    src: [
-        "eqtickets/et-mac-1.webp",
-        "eqtickets/et-mac-2.webp",
-        "eqtickets/et-mobile-1.webp",
-        "eqtickets/et-mac-3.webp",
-        "eqtickets/et-mac-4.webp",
-        "eqtickets/et-mobile-2.webp",
-        "eqtickets/et-mac-5.webp"
-      ],
-    ctaText: "Show",
-    ctaLink: "https://eqtickets.net",
-    techStack: () => {
-      return (
-        <ul className="grid grid-cols-3 w-max gap-3">
-          <li className={styles}> <IconBrandNextjs size={20} /> Next.js</li>
-          <li className={styles}> <IconBrandTailwind size={20} /> Tailwind CSS</li>
-          <li className={styles}> <IconBrandDjango size={20} /> Django</li>
-          <li className={styles}> <IconBrandPython size={20} /> Django REST Framework</li>
-          <li className={styles}> <IconBrandDocker size={20} /> Docker</li>
-          <li className={styles}> <IconBrandAws size={20} /> AWS</li>
-        </ul>
-      );
-    },
-    content: () => {
-      return (
-        <>
-        <p className="text-md font-bold">
-          EQ Tickets is a comprehensive application consisting of two main components: a Django backend with Django REST Framework and a Next.js frontend with Tailwind CSS, Shadcn, and Aceternity UI components.
-        </p>
-        <p>
-        Features:
-        </p>
-        <ul className="list-decimal list-inside">
-          <li>Employee Request Management: Organized handling of employee requests and applications from affiliated companies</li>
-          <li>Procurement Lists: Complete control and management of purchasing lists</li>
-          <li>Multi-Entity Management: Companies, departments, users, tickets, and shopping lists</li>
-          <li>Dark/Light Theme: Full compatibility with both dark and light modes</li>
-          <li>Responsive Design: Fully adaptable to all devices and screen sizes</li>
-          <li>Modern UI: Clean interface built with Shadcn and Aceternity UI components</li>
-        </ul>
-        </>
-      );
-    },
-  },
-  {
-    description:"A responsive and bilingual website",
-    Icon: <IconBrandJavascript size={20} />,
-    title: "Mabaagroexport",
-    src: [
-        "maba/mb-mac-1.webp",
-        "maba/mb-mobile-1.webp",
-        "maba/mb-mac-2.webp", 
-        "maba/mb-mac-3.webp",
-      ],
-    codeLink: "https://github.com/9ero/maba-app",
-    ctaText: "Show",
-    ctaLink: "https://mabaagroexport.vercel.app/",
-    techStack: () => {
-        return (
-          <ul className="grid grid-cols-3 gap-3">
-            <li className={styles}> <IconBrandReact size={20} /> React</li>
-            <li className={styles}> <IconBrandVite size={20} /> ViteJS</li>
-            <li className={styles}> <IconBrandSass size={20} /> SASS</li>
-          </ul>
-        );
-      },
-    content: () => {
-      return (
-        <>
-      <p className="text-md font-bold">
-        Official corporate website for MABA Agroexport showcasing agricultural export products and commercial contact management.
-      </p>
-      <p>
-      Features:
-      </p>
-      <ul className="list-decimal list-inside">
-      <li>Multilingual Support: Spanish/English language switching</li>
-      <li>Interactive Product Gallery: Dynamic showcase of agricultural products</li>
-      <li>Responsive Design: Fully adaptable to all devices and screen sizes</li>
-      <li>SEO Optimized: Integrated meta tags and search engine optimization</li>
-      <li>Modern UI: Clean and professional corporate design</li>
-      <li>Contact Management: Streamlined commercial contact system</li>
+const cards = projects.map((project) => ({
+  title: project.title,
+  description: t(project.shortDescription),
+  Icon: (
+    <>
+      {project.icons.map((key) => (
+        <TechIcon key={key} name={key} />
+      ))}
+    </>
+  ),
+  status: project.status
+    ? { label: t(project.status.label), tone: project.status.tone }
+    : undefined,
+  src: project.images,
+  ctaText: "Show",
+  ctaLink: project.links.live,
+  codeLink: project.links.code,
+  techStack: () => {
+    return (
+      <ul className="grid grid-cols-3 w-max gap-3">
+        {project.tech.map((tech) => (
+          <li key={tech.label} className={styles}>
+            {" "}
+            <TechIcon name={tech.icon} /> {tech.label}
+          </li>
+        ))}
       </ul>
-      </>
-      );
-    },
+    );
   },
-  {
-    description:"Made with Next.js",
-    Icon: <IconBrandJavascript size={20} />,
-    title: "My old portfolio",
-    src: [
-        "old/op-mac-1.webp",
-        "old/op-mobile-1.webp",
-        "old/op-mac-2.webp",
-        "old/op-mobile-2.webp", 
-        "old/op-mac-3.webp",
-        
-      ],
-    codeLink: "https://github.com/9ero/juan-portfolio",
-    ctaText: "Show",
-    ctaLink: "https://juan-fernandez-portfolio.vercel.app/",
-    techStack: () => {
-        return (
-          <ul className="grid grid-cols-3 gap-3">
-            <li className={styles}> <IconBrandNextjs size={20} /> Next.js</li>
-            <li className={styles}> <IconBrandReact size={20} /> React</li>
-            <li className={styles}> <IconBrandTailwind size={20} /> Tailwind CSS</li>
-          </ul>
-        );
-      },
-    content: () => {
-      return (
-        <>
-        <p className="text-md font-bold">
-          This was my first portfolio where I presented my projects. Built with Next.js and deployed on Vercel.
-        </p>
-        <p>
-        Features:
-        </p>
+  content: () => {
+    return (
+      <>
+        <p className="text-md font-bold">{t(project.summary)}</p>
+        <p>Features:</p>
         <ul className="list-decimal list-inside">
-        <li>Modern Design: Clean and professional interface showcasing my work</li>
-        <li>Responsive: Fully adaptable to all devices and screen sizes</li>
-        <li>Project Showcase: Organized presentation of my development projects</li>
-        <li>Next.js Framework: Built with React and Next.js for optimal performance</li>
-        <li>Vercel Deployment: Hosted on Vercel for fast and reliable access</li>
-        <li>Professional Layout: Structured design highlighting my skills and experience</li>
+          {project.features.map((feature, index) => (
+            <li key={index}>{t(feature)}</li>
+          ))}
         </ul>
-        
-        </>
-      );
-    },
+      </>
+    );
   },
-];
+}));
