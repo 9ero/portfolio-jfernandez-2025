@@ -18,6 +18,12 @@ pnpm-debug.log*
 .env
 .env.production
 
+# vercel build output
+.vercel/
+
+# personal documents (CV lives in the private job-hunter repo)
+/*.pdf
+
 # macOS-specific files
 .DS_Store
 
