@@ -11,6 +11,7 @@ import {
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import { ModeToggle } from "@/components/Header/SwitchThemeToggle";
+import { profile } from "@/data";
 
 
 export function SidebarHeader() {
@@ -70,11 +71,11 @@ export function SidebarHeader() {
           <div>
             <SidebarLink
               link={{
-                label: "Juan Miguel Fernández Araya",
+                label: profile.name,
                 href: "/",
                 icon: (
                   <img
-                    src="/about/JuanPhoto.webp"
+                    src={profile.avatar}
                     className="h-7 w-7 shrink-0 rounded-full bg-neutral-200 dark:bg-neutral-800"
                     width={50}
                     height={50}
