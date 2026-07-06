@@ -28,7 +28,7 @@ export default function skills() {
     },
     {
       title: "Design & Media Tools",
-      value: "desing",
+      value: "design",
       content: (
         <Tab title={"Design & Media Tools"}>
           <VisualSkills />

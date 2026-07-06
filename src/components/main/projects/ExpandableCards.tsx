@@ -18,12 +18,13 @@ export function ExpandableCards() {
     const [isExpanded, setIsExpanded] = useState(false);
   
     useEffect(() => {
+      if (isPaused) return;
       const interval = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % images.length);
-      }, isPaused ? undefined : 5000);
-  
+      }, 5000);
+
       return () => clearInterval(interval);
-    }, [images.length, currentIndex]);
+    }, [images.length, isPaused]);
   
     const goToNext = () => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -80,6 +81,7 @@ export function ExpandableCards() {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
+              aria-label={`Go to image ${index + 1}`}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex ? 'bg-white scale-125' : 'bg-white/50'
               }`}
@@ -90,12 +92,14 @@ export function ExpandableCards() {
         {/* Botones de navegación */}
         <button
           onClick={goToPrevious}
+          aria-label="Previous image"
           className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all duration-300"
         >
           <IconChevronLeft size={20} />
         </button>
         <button
           onClick={goToNext}
+          aria-label="Next image"
           className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all duration-300"
         >
           <IconChevronRight size={20} />

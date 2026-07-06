@@ -16,6 +16,10 @@ export const POST: APIRoute = async ({ request }) => {
 
   // Verify Cloudflare Turnstile server-side
   const turnstileSecret = import.meta.env.TURNSTILE_SECRET_KEY;
+  if (!turnstileSecret) {
+    console.error("[contact] TURNSTILE_SECRET_KEY is not set");
+    return json({ error: "Server misconfigured" }, 500);
+  }
   const verifyRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -27,13 +31,31 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   // Send email via EmailJS REST API (credentials never leave the server)
+  const serviceId = import.meta.env.EMAILJS_SERVICE_ID;
+  const templateId = import.meta.env.EMAILJS_TEMPLATE_ID;
+  const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
+  if (!serviceId || !templateId || !publicKey) {
+    console.error("[contact] EMAILJS_* env vars missing", {
+      serviceId: !!serviceId,
+      templateId: !!templateId,
+      publicKey: !!publicKey,
+    });
+    return json({ error: "Server misconfigured" }, 500);
+  }
+
   const emailRes = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      service_id: import.meta.env.EMAILJS_SERVICE_ID,
-      template_id: import.meta.env.EMAILJS_TEMPLATE_ID,
-      user_id: import.meta.env.EMAILJS_PUBLIC_KEY,
+      service_id: serviceId,
+      template_id: templateId,
+      user_id: publicKey,
+      // EmailJS blocks server-side calls with the public key alone unless
+      // "Allow EmailJS API for non-browser applications" is enabled; the
+      // private key (accessToken) bypasses that restriction.
+      ...(import.meta.env.EMAILJS_PRIVATE_KEY
+        ? { accessToken: import.meta.env.EMAILJS_PRIVATE_KEY }
+        : {}),
       template_params: {
         fullname: `${firstname} ${lastname}`,
         email,
@@ -43,6 +65,7 @@ export const POST: APIRoute = async ({ request }) => {
   });
 
   if (!emailRes.ok) {
+    console.error("[contact] EmailJS request failed", emailRes.status, await emailRes.text());
     return json({ error: "Failed to send email" }, 500);
   }
 
