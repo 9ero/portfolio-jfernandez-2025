@@ -7,8 +7,10 @@ import Skills from '@/components/main/skills';
 import ProjectList from '@/components/main/projects/projectList.astro';
 import {AboutTimeline} from '@/components/main/about/timeline';
 import Contact from '@/components/main/contact/contact.astro';
+import { ModeController } from '@/components/mode/ModeController';
 ---
 	<Layout content={{title: 'Home'}}>
+		<ModeController client:load />
 		<section id="welcome" class="h-screen snap-start">
 			<Welcome />
 		</section>

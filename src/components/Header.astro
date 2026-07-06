@@ -10,7 +10,7 @@ import {SidebarHeader} from '@/components/Header/SidebarHeader';
 	};
 	const isDark = getThemePreference() === 'dark';
 	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
- 
+
 	if (typeof localStorage !== 'undefined') {
 		const observer = new MutationObserver(() => {
 			const isDark = document.documentElement.classList.contains('dark');
@@ -18,6 +18,12 @@ import {SidebarHeader} from '@/components/Header/SidebarHeader';
 		});
 		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 	}
+
+	// Apply saved portfolio mode immediately to avoid flash
+	const savedMode = localStorage.getItem('portfolio-mode');
+	if (savedMode) document.documentElement.setAttribute('data-mode', savedMode);
 </script>
 
-<SidebarHeader client:load/>
+<div id="sidebar-container">
+	<SidebarHeader client:load/>
+</div>

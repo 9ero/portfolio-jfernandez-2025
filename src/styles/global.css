@@ -124,7 +124,18 @@
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
 }
- 
+
 .no-visible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* 3D mode: classic sections become inert (Portfolio3D covers them via z-index) */
+[data-mode="3d"] main > section {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 3D mode: hide the classic sidebar header (pre-hydration flash guard) */
+[data-mode="3d"] #sidebar-container {
   display: none;
 }
