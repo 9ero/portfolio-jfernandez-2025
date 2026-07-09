@@ -40,10 +40,11 @@ All `EMAILJS_*` and `TURNSTILE_SECRET_KEY` are server-only (no `PUBLIC_` prefix)
 - Turnstile token is verified server-side via `challenges.cloudflare.com/turnstile/v0/siteverify` before any email is sent.
 - `public/old/` and `public/this/` contain project screenshot assets used by the expandable cards — they are intentionally there.
 
-## SEO / Rendering Gotchas
-- `index.astro` passes `content={{ title: 'Home' }}` — the `<title>` and `og:title` render as "Home". Tracked in ROADMAP.
-- `Skills` and `AboutTimeline` use `client:only="react"` — they produce no server-side HTML. Bots and crawlers see those sections as empty. Static content should move to Astro; only interactivity stays as islands.
-- `og:locale` is `es_ES` but most UI copy is in English — inconsistency tracked in ROADMAP.
+## SEO / Rendering Notes
+- All islands use `client:visible` (NOT `client:only`) so content is server-rendered and crawlable. If you add a React island, keep it SSR-safe (browser APIs only inside effects) and prefer `client:visible`.
+- The hero summary in `welcome.astro` is static Astro with a CSS reveal animation — do not reintroduce `TextGenerateEffect` there (it hid the text from crawlers).
+- `main.astro` carries the SEO surface: title/description defaults, JSON-LD `Person`, `og:locale` `en_US`, `og-cover.webp` (1200×630). Site copy is English; Spanish lives in the bilingual data layer (`src/data`, served via `/career.json`).
+- Content source of truth: the job-hunter repo's `profile/positioning.md`. Keep `src/data` consistent with it (headline, Technical Lead role, project ordering by value).
 
 ## Known Issues / Active Work
 See `ROADMAP.md` for the full list of pending improvements.

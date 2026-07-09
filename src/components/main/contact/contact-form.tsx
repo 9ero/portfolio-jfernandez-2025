@@ -14,8 +14,15 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Turnstile } from "@marsidev/react-turnstile";
+import { profile, type Social } from "@/data";
 
 const cloudflareSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+const socialIcons: Record<Social["platform"], React.ReactNode> = {
+  github: <IconBrandGithub className="h-5 w-5 text-neutral-800 dark:text-neutral-300" />,
+  linkedin: <IconBrandLinkedin className="h-5 w-5 text-neutral-800 dark:text-neutral-300" />,
+  figma: <IconBrandFigma className="h-5 w-5 text-neutral-800 dark:text-neutral-300" />,
+};
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -180,39 +187,20 @@ export default function ContactForm() {
         <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
 
         <div className="flex gap-2">
-          <button
-            className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626]"
-            type="button"
-            onClick={() => window.open("https://github.com/9ero", "_blank")}
-          >
-            <IconBrandGithub className="h-5 w-5 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">
-              9ero
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626]"
-            type="button"
-            onClick={() => window.open("https://www.linkedin.com/in/juanmiguelfernandeza/", "_blank")}
-          >
-            <IconBrandLinkedin className="h-5 w-5 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">
-              juanmiguelfernandeza
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626]"
-            type="button"
-            onClick={() => window.open("https://www.figma.com/@midjuan", "_blank")}
-          >
-            <IconBrandFigma className="h-5 w-5 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">
-              midjuan
-            </span>
-            <BottomGradient />
-          </button>
+          {profile.socials.map((social) => (
+            <button
+              key={social.platform}
+              className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626]"
+              type="button"
+              onClick={() => window.open(social.url, "_blank", "noopener,noreferrer")}
+            >
+              {socialIcons[social.platform]}
+              <span className="text-sm text-neutral-700 dark:text-neutral-300">
+                {social.label}
+              </span>
+              <BottomGradient />
+            </button>
+          ))}
         </div>
       </form>
       </Form>
