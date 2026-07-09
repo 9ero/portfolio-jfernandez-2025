@@ -2,30 +2,56 @@ import type { Skill, SoftSkill } from "./types";
 
 export const proficientSkills: Skill[] = [
   {
-    name: "Flask",
-    designation: {
-      en: "Backend APIs and web apps with jQuery and AJAX",
-      es: "APIs backend y apps web con jQuery y AJAX",
-    },
-    blurb: {
-      en: "Flask is the core technology I work with daily in a professional environment. I build APIs and server-side applications, often integrating them with jQuery via AJAX to create dynamic user interfaces.",
-      es: "Flask es la tecnología central con la que trabajo a diario en un entorno profesional. Construyo APIs y aplicaciones del lado del servidor, integrándolas a menudo con jQuery vía AJAX para crear interfaces dinámicas.",
-    },
-    image: "/flask-wpp.webp",
-    keywords: ["Flask", "Python", "REST API", "jQuery", "AJAX", "backend"],
-  },
-  {
     name: "AWS",
     designation: {
-      en: "Infrastructure management with EC2, S3 and Docker",
-      es: "Gestión de infraestructura con EC2, S3 y Docker",
+      en: "Production operations: EC2, RDS Aurora, S3, SES, SSM",
+      es: "Operación en producción: EC2, RDS Aurora, S3, SES, SSM",
     },
     blurb: {
-      en: "AWS is part of my daily workflow. I manage and deploy systems using EC2, S3 and CloudWatch. From configuring SSL certificates to managing Dockerized backends, AWS supports most of our infrastructure.",
-      es: "AWS es parte de mi flujo de trabajo diario. Administro y despliego sistemas usando EC2, S3 y CloudWatch. Desde configurar certificados SSL hasta gestionar backends dockerizados, AWS sostiene la mayor parte de nuestra infraestructura.",
+      en: "AWS sustains the infrastructure I operate daily: EC2 accessed through SSM Session Manager (no exposed SSH), a production MySQL database migrated to RDS Aurora, S3, CloudWatch, and SES configured with custom MAIL FROM, DMARC and SPF for an email architecture of ~100k messages per month.",
+      es: "AWS sostiene la infraestructura que opero a diario: EC2 con acceso por SSM Session Manager (sin SSH expuesto), una base de datos de producción migrada a RDS Aurora, S3, CloudWatch y SES configurado con MAIL FROM personalizado, DMARC y SPF para una arquitectura de correo de ~100k mensajes al mes.",
     },
     image: "/aws-wpp.webp",
-    keywords: ["AWS", "EC2", "S3", "CloudWatch", "Graviton", "cloud", "DevOps"],
+    keywords: ["AWS", "EC2", "RDS Aurora", "S3", "SES", "SSM", "CloudWatch", "IAM", "cloud", "DevOps"],
+  },
+  {
+    name: "Docker",
+    designation: {
+      en: "Dev/prod environments and self-hosted operations",
+      es: "Entornos dev/prod y operación self-hosted",
+    },
+    blurb: {
+      en: "Docker is the foundation of the systems I operate in production: separate dev/prod Compose environments for a business-critical system, and a self-hosted tool stack (Plane, Outline, Twenty CRM, Airflow, N8n) running behind Nginx with Cloudflare origin certificates.",
+      es: "Docker es la base de los sistemas que opero en producción: entornos Compose dev/prod separados para un sistema crítico de negocio, y un stack de herramientas self-hosted (Plane, Outline, Twenty CRM, Airflow, N8n) corriendo tras Nginx con certificados de origen de Cloudflare.",
+    },
+    image: "/docker-wpp.webp",
+    keywords: ["Docker", "Docker Compose", "Nginx", "self-hosted", "containers", "CI/CD"],
+  },
+  {
+    name: "Flask",
+    designation: {
+      en: "Production backends behind Gunicorn/Nginx",
+      es: "Backends en producción tras Gunicorn/Nginx",
+    },
+    blurb: {
+      en: "Flask is the core of the business-critical system I maintain and am restructuring: REST APIs, Jinja2 templates, and the stabilization work that moved it from a development server to Gunicorn/Nginx with frozen, reproducible dependencies.",
+      es: "Flask es el núcleo del sistema crítico que mantengo y reestructuro: APIs REST, plantillas Jinja2 y el trabajo de estabilización que lo llevó de un servidor de desarrollo a Gunicorn/Nginx con dependencias congeladas y reproducibles.",
+    },
+    image: "/flask-wpp.webp",
+    keywords: ["Flask", "Python", "REST API", "Gunicorn", "Jinja2", "legacy", "backend"],
+  },
+  {
+    name: "AI Integration",
+    designation: {
+      en: "AI features built for production, not demos",
+      es: "Funciones de IA para producción, no demos",
+    },
+    blurb: {
+      en: "AI models used as application features: speech transcription (AssemblyAI, Whisper), vocal separation (Demucs), CPU forced alignment, and custom MCP servers in TypeScript. Local inference (Ollama) and cloud inference (RunPod, Replicate) evaluated with explicit cost and hardware-viability criteria.",
+      es: "Modelos de IA usados como funciones de la aplicación: transcripción de voz (AssemblyAI, Whisper), separación vocal (Demucs), alineación forzada en CPU y servidores MCP propios en TypeScript. Inferencia local (Ollama) y en la nube (RunPod, Replicate) evaluada con criterios explícitos de costo y viabilidad de hardware.",
+    },
+    image: "/ai-wpp.webp",
+    keywords: ["AI integration", "AssemblyAI", "Whisper", "Demucs", "forced alignment", "Ollama", "RunPod", "MCP", "inference costs"],
   },
   {
     name: "React",
@@ -52,19 +78,6 @@ export const proficientSkills: Skill[] = [
     },
     image: "/django-wpp.webp",
     keywords: ["Django", "Django REST Framework", "PostgreSQL", "Redis", "Nginx", "Gunicorn"],
-  },
-  {
-    name: "Docker",
-    designation: {
-      en: "Multi-service apps with Docker Compose",
-      es: "Apps multi-servicio con Docker Compose",
-    },
-    blurb: {
-      en: "Docker has become an essential part of my workflow. I use it to containerize applications, ensuring consistent environments for development, testing, and deployment across teams.",
-      es: "Docker se ha vuelto una parte esencial de mi flujo de trabajo. Lo uso para contenerizar aplicaciones, garantizando entornos consistentes para desarrollo, pruebas y despliegue en todo el equipo.",
-    },
-    image: "/docker-wpp.webp",
-    keywords: ["Docker", "Docker Compose", "containers", "CI/CD"],
   },
   {
     name: "Tailwind CSS",

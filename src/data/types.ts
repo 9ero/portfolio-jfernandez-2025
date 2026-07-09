@@ -116,11 +116,16 @@ export type ExperienceEntry = {
 export type Education = {
   degree: Localized;
   institution: string;
+  /** Graduation year (degree issued). */
+  graduated?: string;
 };
 
 export type Certification = {
   name: string;
   issuer: string;
+  /** ISO date of issuance. */
+  date?: string;
+  credentialId?: string;
 };
 
 export type TimelinePhaseImage = {

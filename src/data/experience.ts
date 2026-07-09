@@ -9,8 +9,8 @@ export const experience: ExperienceEntry[] = [
   {
     company: "Grupo Ecoquintas",
     role: {
-      en: "Full Stack Developer",
-      es: "Desarrollador Full Stack",
+      en: "Technical Lead",
+      es: "Líder Técnico",
     },
     location: {
       en: "Costa Rica (Hybrid)",
@@ -20,28 +20,40 @@ export const experience: ExperienceEntry[] = [
     end: null,
     achievements: [
       {
-        en: "Develop and maintain business-critical systems using Flask, Django, React and Next.js",
-        es: "Desarrollo y mantenimiento de sistemas empresariales críticos utilizando Flask, Django, React y Next.js",
+        en: "Promoted to Technical Lead (June 2026): most of the company's infrastructure decisions have been proposed and implemented by him; the other developers regularly request his guidance for orientation and planning",
+        es: "Ascenso a Líder Técnico (junio 2026): la mayoría de las decisiones de infraestructura de la empresa han sido propuestas e implementadas por él; los otros desarrolladores solicitan su orientación y planificación con frecuencia",
       },
       {
-        en: "Resolved 200+ critical bugs, improving system stability and reliability",
-        es: "Resolución de más de 200 errores críticos, mejorando la estabilidad y confiabilidad de los sistemas",
+        en: "Sole owner of infrastructure, DevOps and data operations in a small development team at a non-software company",
+        es: "Único responsable de infraestructura, DevOps y operación de datos en un equipo pequeño de desarrollo, dentro de una empresa que no es de software",
       },
       {
-        en: "Designed and implemented Apache Airflow DAGs to sync data between internal systems and HubSpot CRM",
-        es: "Diseño e implementación de DAGs en Apache Airflow para sincronización de datos entre sistemas internos y HubSpot CRM",
+        en: "Stabilized the company's business-critical legacy system: replaced the development server with Gunicorn/Nginx, split a single Docker Compose into separate dev/prod environments (removing a recurring cause of production downtime) and froze unpinned dependencies",
+        es: "Estabilización del sistema legacy crítico de la empresa: reemplazo del servidor de desarrollo por Gunicorn/Nginx, separación de un único Docker Compose en entornos dev/prod (eliminando una causa recurrente de caídas en producción) y congelamiento de dependencias sin fijar",
       },
       {
-        en: "Led the development of a client-facing platform for account statements and financial projections",
-        es: "Lideré el desarrollo de una plataforma orientada al cliente para visualización de estados de cuenta y proyecciones",
+        en: "Migrated the production MySQL 8 database to AWS RDS Aurora, resolving character-encoding issues (utf8mb4) during the process",
+        es: "Migración de la base de datos de producción MySQL 8 a AWS RDS Aurora, resolviendo problemas de codificación de caracteres (utf8mb4) en el proceso",
       },
       {
-        en: "Deployed production applications on AWS using Docker and ARM (Graviton) architectures",
-        es: "Despliegue de aplicaciones en producción sobre AWS utilizando Docker y arquitecturas ARM (Graviton)",
+        en: "Designed the company's email-marketing architecture (~100k emails/month) with HubSpot, Amazon SES (custom MAIL FROM, DMARC, SPF) and N8n/Airflow automation",
+        es: "Diseño de la arquitectura de email marketing de la empresa (~100k correos/mes) con HubSpot, Amazon SES (MAIL FROM personalizado, DMARC, SPF) y automatización con N8n/Airflow",
       },
       {
-        en: "Provided technical mentorship and supported architecture decisions within the team",
-        es: "Mentoría técnica y apoyo en decisiones de arquitectura dentro del equipo",
+        en: "Deployed and operates the company's self-hosted tool stack (Plane, Outline, Twenty CRM, Airflow, N8n) with Docker, Nginx, Cloudflare origin certificates and Microsoft Entra ID single sign-on (multi-tenant OAuth)",
+        es: "Despliegue y operación del stack de herramientas self-hosted de la empresa (Plane, Outline, Twenty CRM, Airflow, N8n) con Docker, Nginx, certificados de origen de Cloudflare y single sign-on con Microsoft Entra ID (OAuth multi-tenant)",
+      },
+      {
+        en: "Investigated and remediated a real security incident (malicious GitHub Actions workflow injected through a compromised access token), then hardened access: broad-scope tokens revoked and EC2 access moved from exposed SSH to AWS SSM Session Manager",
+        es: "Investigación y remediación de un incidente de seguridad real (workflow malicioso de GitHub Actions inyectado mediante un token comprometido) y endurecimiento posterior: revocación de tokens de alcance amplio y acceso a EC2 por AWS SSM Session Manager en lugar de SSH expuesto",
+      },
+      {
+        en: "Led the development of a client-facing platform for account statements and financial projections, authoring 100% of the Python backend",
+        es: "Liderazgo del desarrollo de una plataforma para clientes con estados de cuenta y proyecciones financieras, con autoría del 100% del backend en Python",
+      },
+      {
+        en: "Resolved 200+ critical bugs and built Apache Airflow DAGs that keep internal systems in sync with HubSpot CRM",
+        es: "Resolución de más de 200 errores críticos y construcción de DAGs de Apache Airflow que mantienen los sistemas internos sincronizados con HubSpot CRM",
       },
     ],
   },
@@ -112,17 +124,21 @@ export const education: Education[] = [
       es: "Bachillerato en Informática y Tecnología Multimedia",
     },
     institution: "Universidad de Costa Rica (UCR)",
+    graduated: "2024",
   },
 ];
 
 export const certifications: Certification[] = [
   {
     name: "Linux Essentials",
-    issuer: "Cisco Networking Academy",
+    issuer: "NDG / Cisco Networking Academy",
+    date: "2022-07-14",
   },
   {
     name: "Leadership Development Experience",
-    issuer: "AIESEC",
+    issuer: "AIESEC Global Talent (Curitiba)",
+    date: "2022-12-05",
+    credentialId: "6367504",
   },
 ];
 
@@ -143,8 +159,8 @@ export const timeline: TimelinePhase[] = [
     id: "present",
     title: { en: "Present", es: "Presente" },
     body: {
-      en: "I’m a full stack developer with hands-on experience building dynamic web applications using React, Flask, Django, and Next.js. Throughout my career, I’ve designed and implemented complete end-to-end solutions, handling both backend logic and frontend interfaces. I’ve successfully deployed applications on AWS (ARM Graviton infrastructure) and Vercel, following best practices in continuous integration and deployment. My work also involves using technologies like Docker, Git, Tailwind, shadcn/ui, and Aceternity UI to streamline workflows and craft modern, responsive interfaces. I’m currently part of a development team at a real estate company, where I build, maintain, and enhance internal systems and custom web platforms. Additionally, I’ve developed e-commerce solutions and small video games, broadening my range as a developer.",
-      es: "Soy un desarrollador full stack con experiencia práctica construyendo aplicaciones web dinámicas con React, Flask, Django y Next.js. A lo largo de mi carrera he diseñado e implementado soluciones completas de punta a punta, manejando tanto la lógica de backend como las interfaces de frontend. He desplegado aplicaciones en AWS (infraestructura ARM Graviton) y Vercel, siguiendo buenas prácticas de integración y despliegue continuos. Mi trabajo también involucra tecnologías como Docker, Git, Tailwind, shadcn/ui y Aceternity UI para agilizar flujos y crear interfaces modernas y responsivas. Actualmente formo parte del equipo de desarrollo de una empresa inmobiliaria, donde construyo, mantengo y mejoro sistemas internos y plataformas web a medida. Además, he desarrollado soluciones de e-commerce y pequeños videojuegos, ampliando mi rango como desarrollador.",
+      en: "Today my work is broader than writing code: I am the primary technical owner of a company's systems — infrastructure, DevOps and data operations — promoted to Technical Lead in June 2026. I have migrated a production database to AWS RDS Aurora, stabilized a business-critical legacy system (from a development server to Gunicorn/Nginx with separate dev/prod environments), designed an email architecture that sends ~100k messages per month, operated a self-hosted tool stack with single sign-on, and responded to a real security incident. In parallel, I build systems where AI is a production feature — a karaoke generator with word-level sync, custom MCP servers in TypeScript — with explicit cost and reliability criteria. What a company gets from my work is not just an app: it is a complete solution that runs, stays up and protects its data.",
+      es: "Hoy mi trabajo es más amplio que escribir código: soy el principal responsable técnico de los sistemas de una empresa — infraestructura, DevOps y operación de datos — con ascenso a Líder Técnico en junio de 2026. He migrado una base de datos de producción a AWS RDS Aurora, estabilizado un sistema legacy crítico (de un servidor de desarrollo a Gunicorn/Nginx con entornos dev/prod separados), diseñado una arquitectura de correo que envía ~100k mensajes al mes, operado un stack de herramientas self-hosted con single sign-on y respondido a un incidente de seguridad real. En paralelo construyo sistemas donde la IA es una función de producción — un generador de karaoke con sincronización por palabra, servidores MCP propios en TypeScript — con criterios explícitos de costo y confiabilidad. Lo que una empresa obtiene de mi trabajo no es solo una app: es una solución completa que funciona, se mantiene en pie y protege sus datos.",
     },
     images: [
       { src: "about/present2.webp", alt: "the man in the computer" },
@@ -156,8 +172,8 @@ export const timeline: TimelinePhase[] = [
     id: "future",
     title: { en: "Future", es: "Futuro" },
     body: {
-      en: "Looking ahead, I aspire to join a company that encourages growth and continuous learning, where I can collaborate on challenging projects and learn from experienced professionals. My goal is to keep expanding my knowledge as a software engineer, delving deeper into emerging areas such as data science and machine learning. I’m particularly interested in environments that value innovation, mentorship, and teamwork—places where I can both contribute my skills and evolve through new technologies and experiences.",
-      es: "Mirando hacia adelante, aspiro a unirme a una empresa que fomente el crecimiento y el aprendizaje continuo, donde pueda colaborar en proyectos desafiantes y aprender de profesionales con experiencia. Mi meta es seguir expandiendo mi conocimiento como ingeniero de software, profundizando en áreas emergentes como la ciencia de datos y el machine learning. Me interesan especialmente los entornos que valoran la innovación, la mentoría y el trabajo en equipo: lugares donde pueda aportar mis habilidades y evolucionar con nuevas tecnologías y experiencias.",
+      en: "The direction is clear: to go deeper in platform engineering on AWS and production AI integration as my main vertical, and to keep being honest about the stage I am at — about two years of formal experience, with identified gaps (testing culture, peer code review) that I am closing through a documented plan. I am building complete solutions for companies in my region while remaining open to remote teams with senior engineers and a code-review culture, where every project makes me measurably better. The goal is not to accumulate technologies: it is to deliver systems that keep working when nobody is watching.",
+      es: "El rumbo es claro: profundizar en platform engineering sobre AWS e integración de IA en producción como vertical principal, y mantener la honestidad sobre la etapa en que estoy — alrededor de dos años de experiencia formal, con brechas identificadas (cultura de testing, revisión de código entre pares) que cierro con un plan documentado. Construyo soluciones completas para empresas de mi región, abierto también a equipos remotos con ingenieros senior y cultura de code review, donde cada proyecto me haga mediblemente mejor. La meta no es acumular tecnologías: es entregar sistemas que sigan funcionando cuando nadie los está viendo.",
     },
     images: [
       { src: "about/future1.webp", alt: "the man thinking" },
