@@ -8,18 +8,21 @@ import ProjectList from '@/components/main/projects/projectList.astro';
 import {AboutTimeline} from '@/components/main/about/timeline';
 import Contact from '@/components/main/contact/contact.astro';
 ---
-	<Layout content={{title: 'Juan Miguel Fernández Araya – Full Stack Developer'}}>
+	<Layout content={{
+		title: 'Juan Miguel Fernández — Infrastructure & Full Stack Engineer · AI Integration',
+		description: 'Systems and infrastructure generalist with full stack development and production AI integration: AWS, Docker, Python and TypeScript/React. Technical Lead. Complete solutions that run, stay up and protect your data.',
+	}}>
 		<section id="welcome" class="h-screen snap-start">
 			<Welcome />
 		</section>
 		<section id="skills" class="h-screen snap-start flex flex-col items-center justify-center">
-			<Skills client:only="react" />
+			<Skills client:visible />
 		</section>
 		<section id="projects" class="h-screen snap-start">
 			<ProjectList />
 		</section>
 		<section id="about" class="h-screen snap-start">
-			<AboutTimeline client:only="react" />
+			<AboutTimeline client:visible />
 		</section>
 		<section id="contact" class="h-screen snap-start">
 			<Contact />
