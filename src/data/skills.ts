@@ -217,47 +217,48 @@ export const designSkills: Skill[] = [
   },
 ];
 
+// Strengths with evidence (positioning.md §4) — not generic adjectives.
 export const softSkills: SoftSkill[] = [
+  {
+    title: { en: "Prioritization in legacy systems", es: "Priorización en sistemas legacy" },
+    description: {
+      en: "Stabilize before beautifying. Facing a business-critical legacy system, the first moves were a production server, frozen dependencies and separate environments — not a rewrite or a UI refresh. Stability buys the time everything else needs.",
+      es: "Estabilizar antes de embellecer. Frente a un sistema legacy crítico, lo primero fue un servidor de producción, dependencias congeladas y entornos separados — no una reescritura ni un cambio de interfaz. La estabilidad compra el tiempo que todo lo demás necesita.",
+    },
+  },
+  {
+    title: { en: "Breadth with real depth", es: "Amplitud con profundidad real" },
+    description: {
+      en: "Covering infrastructure, backend, frontend and AI doesn't mean staying on the surface: utf8mb4 encoding inside a production database migration, multi-tenant OAuth on Azure, forced alignment running on CPU. The details show where the understanding actually reaches.",
+      es: "Cubrir infraestructura, backend, frontend e IA no significa quedarse en la superficie: la codificación utf8mb4 dentro de una migración de base de datos de producción, OAuth multi-tenant en Azure, alineación forzada corriendo en CPU. Los detalles muestran hasta dónde llega realmente la comprensión.",
+    },
+  },
+  {
+    title: { en: "Security instinct", es: "Instinto de seguridad" },
+    description: {
+      en: "When a real incident hit (a compromised token injecting a malicious CI workflow), the response was containment plus permanent hardening — broad tokens revoked, exposed SSH replaced with SSM. Discomfort with half-measures is part of the toolkit.",
+      es: "Ante un incidente real (un token comprometido inyectando un workflow malicioso de CI), la respuesta fue contención más endurecimiento permanente — tokens amplios revocados, SSH expuesto reemplazado por SSM. La incomodidad con las soluciones a medias es parte del criterio.",
+    },
+  },
+  {
+    title: { en: "Understand before implementing", es: "Comprender antes de implementar" },
+    description: {
+      en: "Deliberate learning and documentation as a thinking tool: problems get written down as problem → decision → result before code changes. Local inference, managed services or a new library earn their place with explicit cost and viability criteria, not hype.",
+      es: "Aprendizaje deliberado y documentación como herramienta de pensamiento: los problemas se escriben como problema → decisión → resultado antes de cambiar código. La inferencia local, un servicio gestionado o una librería nueva se ganan su lugar con criterios explícitos de costo y viabilidad, no por moda.",
+    },
+  },
   {
     title: { en: "Communication", es: "Comunicación" },
     description: {
-      en: "I adapt my technical explanations to the audience's level of understanding, whether they're developers or business stakeholders. I've successfully presented full projects I've built solo and enjoy sharing progress clearly and confidently.",
-      es: "Adapto mis explicaciones técnicas al nivel de la audiencia, sean desarrolladores o perfiles de negocio. He presentado con éxito proyectos completos construidos por mí y disfruto comunicar avances con claridad y confianza.",
+      en: "Technical explanations adapted to the audience — developers, non-technical management or clients. Complete projects built solo have been presented and defended end to end, in plain language first and technical detail as backup.",
+      es: "Explicaciones técnicas adaptadas a la audiencia — desarrolladores, jefaturas no técnicas o clientes. Proyectos completos construidos en solitario se han presentado y defendido de punta a punta, primero en lenguaje llano y con el detalle técnico como respaldo.",
     },
   },
   {
-    title: { en: "Problem Solving", es: "Resolución de problemas" },
+    title: { en: "Technical leadership", es: "Liderazgo técnico" },
     description: {
-      en: "I approach complex problems with structured thinking and practical implementation. For example, I designed a custom queuing system using Flask, daemons, and Airflow to sync internal data with HubSpot, ensuring reliability and traceability.",
-      es: "Abordo problemas complejos con pensamiento estructurado e implementación práctica. Por ejemplo, diseñé un sistema de colas a medida con Flask, demonios y Airflow para sincronizar datos internos con HubSpot, garantizando confiabilidad y trazabilidad.",
-    },
-  },
-  {
-    title: { en: "Autonomy", es: "Autonomía" },
-    description: {
-      en: "I'm comfortable making independent decisions, especially when they improve efficiency or remove blockers—while always prioritizing data safety and clarity of purpose.",
-      es: "Me siento cómodo tomando decisiones independientes, sobre todo cuando mejoran la eficiencia o eliminan bloqueos, siempre priorizando la seguridad de los datos y la claridad del objetivo.",
-    },
-  },
-  {
-    title: { en: "Adaptability", es: "Adaptabilidad" },
-    description: {
-      en: "I stay positive in the face of changing requirements, and proactively learn new tools or libraries when the situation demands it.",
-      es: "Mantengo una actitud positiva ante requisitos cambiantes y aprendo proactivamente nuevas herramientas o librerías cuando la situación lo exige.",
-    },
-  },
-  {
-    title: { en: "Team Collaboration", es: "Trabajo en equipo" },
-    description: {
-      en: "I've worked closely with designers and QA professionals, and I value adapting to each teammate's working style to optimize collaboration. Though I'm fullstack, I especially enjoy frontend development.",
-      es: "He trabajado de cerca con diseñadores y profesionales de QA, y valoro adaptarme al estilo de trabajo de cada compañero para optimizar la colaboración. Aunque soy fullstack, disfruto especialmente el frontend.",
-    },
-  },
-  {
-    title: { en: "Initiative & Innovation", es: "Iniciativa e innovación" },
-    description: {
-      en: "I regularly identify and automate repetitive or manual tasks, like improving container workflows or standardizing Git repositories across the company. I balance innovation with practicality: I reuse existing tools when possible, and create new ones when needed.",
-      es: "Identifico y automatizo con regularidad tareas repetitivas o manuales, como mejorar flujos de contenedores o estandarizar los repositorios Git de la empresa. Equilibrio innovación con practicidad: reutilizo herramientas existentes cuando es posible y creo nuevas cuando hace falta.",
+      en: "Promoted to Technical Lead (2026) after most infrastructure decisions had been proposed and implemented from this seat: new working practices taught to the team — like the documented production deployment process — and ongoing guidance and planning support for the other developers.",
+      es: "Ascenso a Líder Técnico (2026) tras proponer e implementar la mayoría de las decisiones de infraestructura: nuevas formas de trabajo enseñadas al equipo — como el proceso documentado de despliegue en producción — y orientación y planificación continuas para los demás desarrolladores.",
     },
   },
 ];

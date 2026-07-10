@@ -11,7 +11,13 @@ interface TimelineEntry {
   content: React.ReactNode;
 }
 
-export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
+interface TimelineProps {
+  data: TimelineEntry[];
+  heading: string;
+  intro: string;
+}
+
+export const Timeline = ({ data, heading, intro }: TimelineProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -38,14 +44,14 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     >
       <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
         <h1 className="text-4xl mb-4  font-bold max-w-4xl">
-        About me
+        {heading}
         </h1>
         <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row justify-start items-center pt-10 md:gap-10">
-        <img src="/about/JuanPhoto.webp" alt="me" className="max-w-[350px] max-h-[350px] rounded-full bg-neutral-200 dark:bg-background p-2"/>
+        <img src="/about/JuanPhoto.webp" alt="Juan Miguel Fernández" className="max-w-[350px] max-h-[350px] rounded-full bg-neutral-200 dark:bg-background p-2"/>
         <p className="text-neutral-700 dark:text-neutral-300 text-xl  max-w-sm">
-          I’m a passionate full stack developer driven by curiosity, learning, and innovation. My journey began at a young age, fueled by the fascination of creating and understanding how things work. Over time, I’ve grown into a versatile engineer capable of building complete web solutions from the ground up. I value collaboration, growth, and the opportunity to tackle meaningful challenges—always seeking to combine creativity, technical precision, and continuous learning to become a better developer every day.
+          {intro}
         </p>
-        
+
         </div>
       </div>
 

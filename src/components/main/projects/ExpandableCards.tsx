@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+import { ParallaxScroll } from "@/components/ui/parallax-scroll";
 import { IconBrandGithub, IconChevronLeft, IconChevronRight, IconExternalLink } from "@tabler/icons-react";
 import { projects } from "@/data";
 import { t } from "@/lib/t";
@@ -273,8 +274,8 @@ export function ExpandableCards({ locale = "en" }: { locale?: Locale }) {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="max-w-2xl mx-auto w-full gap-4 overflow-auto  max-h-full  md:p-10 lg:rounded-xl lg:border-2 lg:border-sky-300">
-        {cards.map((card, index) => (
+      <ParallaxScroll
+        items={cards.map((card) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
             key={`card-${card.title}-${id}`}
@@ -287,55 +288,69 @@ export function ExpandableCards({ locale = "en" }: { locale?: Locale }) {
                 setActive(card);
               }
             }}
-            className="p-4 flex flex-col md:flex-row justify-between items-center hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
+            className="flex flex-col rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-sky-400 dark:hover:border-sky-300 transition-colors cursor-pointer"
           >
-            <div className="flex items-center gap-4 flex-col md:flex-row ">
             <motion.div layoutId={`image-${card.title}-${id}`}>
-            {Array.isArray(card.src) ? (
-                <img
-                width={100}
-                height={100}
-                src={card.src[0]} // Muestra la primera imagen en la lista
+              <img
+                width={400}
+                height={128}
+                src={Array.isArray(card.src) ? card.src[0] : card.src}
                 alt={card.title}
-                className="h-40 w-40 md:h-14 md:w-14 rounded-lg object-cover object-top"
-                />
-            ) : (
-                <img
-                width={100}
-                height={100}
-                src={card.src}
-                alt={card.title}
-                className="h-40 w-40 md:h-14 md:w-14 rounded-lg object-cover object-top"
-                />
-            )}
+                className="h-32 w-full object-cover object-top"
+              />
             </motion.div>
-              <div className="">
-                <div className="flex items-center gap-2 justify-center md:justify-start flex-wrap">
-                  <motion.h3
-                    layoutId={`title-${card.title}-${id}`}
-                    className="font-medium text-neutral-800 dark:text-neutral-200 text-center md:text-left"
-                  >
-                    {card.title}
-                  </motion.h3>
-                  <StatusBadge status={card.status} />
-                </div>
-                <motion.p
-                  layoutId={`description-${card.description}-${id}`}
-                  className="text-neutral-600 dark:text-neutral-400 justify-center md:justify-start flex items-center gap-2"
+            <div className="flex flex-col gap-1 p-3 grow">
+              <div className="flex items-center gap-2 flex-wrap">
+                <motion.h3
+                  layoutId={`title-${card.title}-${id}`}
+                  className="font-medium text-neutral-800 dark:text-neutral-200"
                 >
-                  {card.Icon} {card.description} 
-                </motion.p>
+                  {card.title}
+                </motion.h3>
+                <StatusBadge status={card.status} />
               </div>
+              <motion.p
+                layoutId={`description-${card.description}-${id}`}
+                className="text-sm text-neutral-600 dark:text-neutral-400 flex items-center gap-2 flex-wrap"
+              >
+                {card.Icon} {card.description}
+              </motion.p>
             </div>
-            <motion.button
-              layoutId={`button-${card.title}-${id}`}
-              className="px-4 py-2 text-sm rounded-full font-bold bg-gray-100 hover:bg-sky-500 hover:text-white text-black mt-4 md:mt-0"
-            >
-              {card.ctaText}
-            </motion.button>
+            <div className="flex items-center flex-wrap gap-2 p-3 pt-0">
+              <motion.button
+                layoutId={`button-${card.title}-${id}`}
+                className="px-4 py-1.5 text-sm rounded-full font-bold bg-gray-100 hover:bg-sky-500 hover:text-white text-black"
+              >
+                {card.ctaText}
+              </motion.button>
+              {card.codeLink && (
+                <a
+                  href={card.codeLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  aria-label={`${card.title} — GitHub`}
+                  className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-full font-semibold border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 hover:border-sky-400 hover:text-sky-500 dark:hover:text-sky-300 transition-colors"
+                >
+                  <IconBrandGithub size={16} /> GitHub
+                </a>
+              )}
+              {card.ctaLink && (
+                <a
+                  href={card.ctaLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  aria-label={`${card.title} — ${ui.projects.live[locale]}`}
+                  className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-full font-semibold border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 hover:border-sky-400 hover:text-sky-500 dark:hover:text-sky-300 transition-colors"
+                >
+                  <IconExternalLink size={16} /> {ui.projects.live[locale]}
+                </a>
+              )}
+            </div>
           </motion.div>
         ))}
-      </ul>
+      />
     </>
   );
 }
@@ -409,12 +424,38 @@ const buildCards = (locale: Locale) =>
       return (
         <>
           <p className="text-md font-bold">{t(project.summary, locale)}</p>
-          <p>{ui.projects.features[locale]}</p>
-          <ul className="list-decimal list-inside">
-            {project.features.map((feature, index) => (
-              <li key={index}>{t(feature, locale)}</li>
-            ))}
-          </ul>
+          {project.caseStudy && (
+            <div className="flex flex-col gap-2">
+              <p>
+                <span className="font-bold text-sky-600 dark:text-sky-300">
+                  {ui.projects.problem[locale]}.
+                </span>{" "}
+                {t(project.caseStudy.problem, locale)}
+              </p>
+              <p>
+                <span className="font-bold text-sky-600 dark:text-sky-300">
+                  {ui.projects.decision[locale]}.
+                </span>{" "}
+                {t(project.caseStudy.decision, locale)}
+              </p>
+              <p>
+                <span className="font-bold text-sky-600 dark:text-sky-300">
+                  {ui.projects.result[locale]}.
+                </span>{" "}
+                {t(project.caseStudy.result, locale)}
+              </p>
+            </div>
+          )}
+          {project.features.length > 0 && (
+            <>
+              <p>{ui.projects.features[locale]}</p>
+              <ul className="list-decimal list-inside">
+                {project.features.map((feature, index) => (
+                  <li key={index}>{t(feature, locale)}</li>
+                ))}
+              </ul>
+            </>
+          )}
         </>
       );
     },

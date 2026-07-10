@@ -27,15 +27,25 @@ export const ui = {
     soft: { en: "Soft Skills", es: "Habilidades blandas" },
   },
   projects: {
-    heading: { en: "My Projects", es: "Mis proyectos" },
+    heading: { en: "Projects & Case Studies", es: "Proyectos y casos de estudio" },
+    subtitle: {
+      en: "Problem → decision → result. AI here means production systems — inference costs, failure handling, data privacy — not demos.",
+      es: "Problema → decisión → resultado. Aquí la IA significa sistemas en producción — costos de inferencia, manejo de fallos, privacidad de datos — no demos.",
+    },
     show: { en: "Show", es: "Ver" },
     live: { en: "Live", es: "En vivo" },
     code: { en: "Code", es: "Código" },
     features: { en: "Features:", es: "Características:" },
+    problem: { en: "Problem", es: "Problema" },
+    decision: { en: "Decision", es: "Decisión" },
+    result: { en: "Result", es: "Resultado" },
     openSource: {
       en: "This site is open source — view it on GitHub",
       es: "Este sitio es open source — míralo en GitHub",
     },
+  },
+  about: {
+    heading: { en: "About me", es: "Sobre mí" },
   },
   contact: {
     title: { en: "Contact Me", es: "Contacto" },
