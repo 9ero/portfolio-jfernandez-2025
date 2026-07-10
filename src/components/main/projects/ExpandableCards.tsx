@@ -6,6 +6,8 @@ import { useOutsideClick } from "@/hooks/use-outside-click";
 import { IconBrandGithub, IconChevronLeft, IconChevronRight, IconExternalLink } from "@tabler/icons-react";
 import { projects } from "@/data";
 import { t } from "@/lib/t";
+import { ui } from "@/lib/ui";
+import type { Locale } from "@/data/types";
 import { TechIcon } from "./techIcons";
 
 type CardStatus = { label: string; tone: "green" | "amber" };
@@ -28,8 +30,9 @@ const StatusBadge = ({ status }: { status?: CardStatus }) => {
   );
 };
 
-export function ExpandableCards() {
-  const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
+export function ExpandableCards({ locale = "en" }: { locale?: Locale }) {
+  const cards = buildCards(locale);
+  const [active, setActive] = useState<Card | boolean | null>(
     null
   );
   const ref = useRef<HTMLDivElement>(null);
@@ -232,7 +235,7 @@ export function ExpandableCards() {
                       rel="noopener noreferrer"
                       className="px-4 py-3 text-sm rounded-full font-bold bg-sky-500 text-white flex gap-1"
                     >
-                      <IconExternalLink size={20} /> Live
+                      <IconExternalLink size={20} /> {ui.projects.live[locale]}
                     </motion.a>
                   )}
                   {active.codeLink && (
@@ -243,7 +246,7 @@ export function ExpandableCards() {
                       rel="noopener noreferrer"
                       className="px-4 py-3 text-sm rounded-full font-bold bg-sky-500 text-white flex gap-1"
                     >
-                      <IconBrandGithub size={20} /> Code
+                      <IconBrandGithub size={20} /> {ui.projects.code[locale]}
                     </motion.a>
                   )}
                   </div>
@@ -372,46 +375,49 @@ export const CloseIcon = () => {
 };
 const styles = "flex dark:text-neutral-200 items-center gap-1  drop-shadow-md drop-shadow-sky-600 dark:drop-shadow-sky-300"
 
-const cards = projects.map((project) => ({
-  title: project.title,
-  description: t(project.shortDescription),
-  Icon: (
-    <>
-      {project.icons.map((key) => (
-        <TechIcon key={key} name={key} />
-      ))}
-    </>
-  ),
-  status: project.status
-    ? { label: t(project.status.label), tone: project.status.tone }
-    : undefined,
-  src: project.images,
-  ctaText: "Show",
-  ctaLink: project.links.live,
-  codeLink: project.links.code,
-  techStack: () => {
-    return (
-      <ul className="grid grid-cols-3 w-max gap-3">
-        {project.tech.map((tech) => (
-          <li key={tech.label} className={styles}>
-            {" "}
-            <TechIcon name={tech.icon} /> {tech.label}
-          </li>
-        ))}
-      </ul>
-    );
-  },
-  content: () => {
-    return (
+const buildCards = (locale: Locale) =>
+  projects.map((project) => ({
+    title: project.title,
+    description: t(project.shortDescription, locale),
+    Icon: (
       <>
-        <p className="text-md font-bold">{t(project.summary)}</p>
-        <p>Features:</p>
-        <ul className="list-decimal list-inside">
-          {project.features.map((feature, index) => (
-            <li key={index}>{t(feature)}</li>
+        {project.icons.map((key) => (
+          <TechIcon key={key} name={key} />
+        ))}
+      </>
+    ),
+    status: project.status
+      ? { label: t(project.status.label, locale), tone: project.status.tone }
+      : undefined,
+    src: project.images,
+    ctaText: ui.projects.show[locale],
+    ctaLink: project.links.live,
+    codeLink: project.links.code,
+    techStack: () => {
+      return (
+        <ul className="grid grid-cols-3 w-max gap-3">
+          {project.tech.map((tech) => (
+            <li key={tech.label} className={styles}>
+              {" "}
+              <TechIcon name={tech.icon} /> {tech.label}
+            </li>
           ))}
         </ul>
-      </>
-    );
-  },
-}));
+      );
+    },
+    content: () => {
+      return (
+        <>
+          <p className="text-md font-bold">{t(project.summary, locale)}</p>
+          <p>{ui.projects.features[locale]}</p>
+          <ul className="list-decimal list-inside">
+            {project.features.map((feature, index) => (
+              <li key={index}>{t(feature, locale)}</li>
+            ))}
+          </ul>
+        </>
+      );
+    },
+  }));
+
+type Card = ReturnType<typeof buildCards>[number];

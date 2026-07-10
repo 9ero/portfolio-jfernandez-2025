@@ -1,17 +1,21 @@
 ---
 import { Spotlight } from "@/components/ui/spotlight-new";
 import { profile } from "@/data";
-const summaryLines = profile.summary.en.split("\n");
+import { ui } from "@/lib/ui";
+import type { Locale } from "@/data/types";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const summaryLines = profile.summary[locale].split("\n");
 ---
 
 <div class="h-full w-full sm:rounded-l-md flex items-center md:justify-center bg-gradient-to-b from-zinc-950 to-sky-500 dark:bg-none dark:from-none dark:to-none dark:bg-background antialiased bg-grid-white/[0.02] relative overflow-hidden">
   <Spotlight client:visible />
   <div class="p-4 max-w-7xl mx-auto relative z-10 w-full pt-20 md:pt-0 text-center">
     <h1 class="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-lime-200 to-green-400 dark:from-sky-50 dark:to-sky-300 bg-opacity-50">
-      Hello <br /> I'm {profile.shortName}
+      {ui.hero.hello[locale]} <br /> {ui.hero.iAm[locale]} {profile.shortName}
     </h1>
     <p class="hero-line mt-6 text-xl md:text-2xl font-semibold text-neutral-100 dark:text-sky-200" style="animation-delay: 0.15s">
-      {profile.headline.en}
+      {profile.headline[locale]}
     </p>
     <div class="mt-4 max-w-3xl mx-auto space-y-1">
       {summaryLines.map((line, i) => (
@@ -25,14 +29,14 @@ const summaryLines = profile.summary.en.split("\n");
         href="#contact"
         class="rounded-md bg-sky-500 hover:bg-sky-400 text-white font-semibold px-6 py-3 transition-colors"
       >
-        Contact me
+        {ui.hero.contactMe[locale]}
       </a>
       <a
-        href={profile.cv.en}
+        href={profile.cv[locale]}
         download
         class="rounded-md border border-sky-300/60 text-sky-100 dark:text-sky-200 hover:bg-sky-500/20 font-semibold px-6 py-3 transition-colors"
       >
-        Download CV
+        {ui.hero.downloadCV[locale]}
       </a>
     </div>
   </div>

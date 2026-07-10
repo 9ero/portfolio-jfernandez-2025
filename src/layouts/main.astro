@@ -3,9 +3,35 @@ import '../styles/global.css';
 const { content } = Astro.props;
 import Header from '@/components/Header.astro';
 import { profile, education } from '@/data';
-const siteTitle = content?.title || "Juan Miguel Fernández — Infrastructure & Full Stack Engineer · AI Integration";
-const siteDescription = content?.description || "Systems and infrastructure generalist with full stack development and production AI integration: AWS, Docker, Python and TypeScript/React. Technical Lead. Complete solutions that run, stay up and protect your data.";
+import type { Locale } from '@/data/types';
+
+const locale: Locale = content?.locale ?? 'en';
 const siteUrl = "https://jfernandezdev.com";
+const localeUrl = { en: `${siteUrl}/`, es: `${siteUrl}/es/` };
+const ogLocale = { en: 'en_US', es: 'es_CR' }[locale];
+const ogLocaleAlt = { en: 'es_CR', es: 'en_US' }[locale];
+
+const defaults = {
+	en: {
+		title: "Juan Miguel Fernández — Infrastructure & Full Stack Engineer · AI Integration",
+		description:
+			"Systems and infrastructure generalist with full stack development and production AI integration: AWS, Docker, Python and TypeScript/React. Technical Lead. Complete solutions that run, stay up and protect your data.",
+		jobTitle: "Infrastructure & Full Stack Engineer",
+		keywords:
+			"Infrastructure Engineer, Platform Engineering, DevOps, Full Stack Engineer, AI Integration, AWS, RDS Aurora, Docker, Python, Flask, TypeScript, React, Next.js, MCP servers, Costa Rica, Remote",
+	},
+	es: {
+		title: "Juan Miguel Fernández — Ingeniero de Infraestructura y Full Stack · Integración de IA",
+		description:
+			"Generalista de sistemas e infraestructura con desarrollo full stack e integración de IA en producción: AWS, Docker, Python y TypeScript/React. Líder Técnico. Soluciones completas que funcionan, se mantienen en pie y protegen tus datos.",
+		jobTitle: "Ingeniero de Infraestructura y Full Stack",
+		keywords:
+			"Ingeniero de Infraestructura, Platform Engineering, DevOps, Ingeniero Full Stack, Integración de IA, AWS, RDS Aurora, Docker, Python, Flask, TypeScript, React, Next.js, servidores MCP, Costa Rica, Remoto, Zona Norte",
+	},
+}[locale];
+
+const siteTitle = content?.title || defaults.title;
+const siteDescription = content?.description || defaults.description;
 const siteImage = `${siteUrl}/og-cover.webp`;
 const author = profile.name;
 
@@ -13,10 +39,10 @@ const personSchema = {
 	"@context": "https://schema.org",
 	"@type": "Person",
 	name: profile.name,
-	url: siteUrl,
+	url: localeUrl[locale],
 	email: `mailto:${profile.email}`,
 	image: `${siteUrl}${profile.avatar}`,
-	jobTitle: "Infrastructure & Full Stack Engineer",
+	jobTitle: defaults.jobTitle,
 	worksFor: {
 		"@type": "Organization",
 		name: "Grupo Ecoquintas",
@@ -46,7 +72,7 @@ const personSchema = {
 };
 ---
 
-<html lang="en">
+<html lang={locale}>
 	<head>
 		<!-- Meta Tags Básicos -->
 		<meta charset="utf-8" />
@@ -57,21 +83,24 @@ const personSchema = {
 		<title>{siteTitle}</title>
 		<meta name="description" content={siteDescription} />
 		<meta name="author" content={author} />
-		<meta name="keywords" content="Infrastructure Engineer, Platform Engineering, DevOps, Full Stack Engineer, AI Integration, AWS, RDS Aurora, Docker, Python, Flask, TypeScript, React, Next.js, MCP servers, Costa Rica, Remote" />
-		<link rel="canonical" href={siteUrl} />
+		<meta name="keywords" content={defaults.keywords} />
+		<link rel="canonical" href={localeUrl[locale]} />
+		<link rel="alternate" hreflang="en" href={localeUrl.en} />
+		<link rel="alternate" hreflang="es" href={localeUrl.es} />
+		<link rel="alternate" hreflang="x-default" href={localeUrl.en} />
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={siteUrl} />
+		<meta property="og:url" content={localeUrl[locale]} />
 		<meta property="og:title" content={siteTitle} />
 		<meta property="og:description" content={siteDescription} />
 		<meta property="og:image" content={siteImage} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Juan Miguel Fernández — Infrastructure & Full Stack Engineer · AI Integration" />
+		<meta property="og:image:alt" content={siteTitle} />
 		<meta property="og:site_name" content={author} />
-		<meta property="og:locale" content="en_US" />
-		<meta property="og:locale:alternate" content="es_CR" />
+		<meta property="og:locale" content={ogLocale} />
+		<meta property="og:locale:alternate" content={ogLocaleAlt} />
 
 		<!-- Twitter / X -->
 		<meta name="twitter:card" content="summary_large_image" />
@@ -95,7 +124,7 @@ const personSchema = {
 		<link rel="preconnect" href="https://challenges.cloudflare.com" />
 	</head>
 	<body>
-		<Header/>
+		<Header locale={locale}/>
 		<main class="md:ml-[300px] scroll-smooth snap-y snap-mandatory h-screen overflow-y-scroll">
 			<slot/>
 		</main>

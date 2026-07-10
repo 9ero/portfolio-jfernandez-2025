@@ -43,7 +43,8 @@ All `EMAILJS_*` and `TURNSTILE_SECRET_KEY` are server-only (no `PUBLIC_` prefix)
 ## SEO / Rendering Notes
 - All islands use `client:visible` (NOT `client:only`) so content is server-rendered and crawlable. If you add a React island, keep it SSR-safe (browser APIs only inside effects) and prefer `client:visible`.
 - The hero summary in `welcome.astro` is static Astro with a CSS reveal animation — do not reintroduce `TextGenerateEffect` there (it hid the text from crawlers).
-- `main.astro` carries the SEO surface: title/description defaults, JSON-LD `Person`, `og:locale` `en_US`, `og-cover.webp` (1200×630). Site copy is English; Spanish lives in the bilingual data layer (`src/data`, served via `/career.json`).
+- **i18n routing**: `/` is English, `/es/` is Spanish. Both routes render `src/components/home-page.astro` with a `locale` prop that threads through every component; UI chrome strings live in `src/lib/ui.ts`, content strings in `src/data` (`Localized` type). Each route emits its own `lang`, canonical, `og:locale` and `hreflang` alternates (see `main.astro`); `public/sitemap.xml` lists both URLs. When adding UI text, add both languages in `ui.ts` — never hardcode.
+- `main.astro` carries the SEO surface: per-locale title/description/keywords defaults, JSON-LD `Person`, `og-cover.webp` (1200×630).
 - Content source of truth: the job-hunter repo's `profile/positioning.md`. Keep `src/data` consistent with it (headline, Technical Lead role, project ordering by value).
 
 ## Known Issues / Active Work

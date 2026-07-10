@@ -14,7 +14,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Turnstile } from "@marsidev/react-turnstile";
-import { profile, type Social } from "@/data";
+import { profile, type Social, type Locale } from "@/data";
+import { ui } from "@/lib/ui";
 
 const cloudflareSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
@@ -24,16 +25,17 @@ const socialIcons: Record<Social["platform"], React.ReactNode> = {
   figma: <IconBrandFigma className="h-5 w-5 text-neutral-800 dark:text-neutral-300" />,
 };
 
-export default function ContactForm() {
+export default function ContactForm({ locale = "en" }: { locale?: Locale }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [token, setToken] = useState<string | null>(null);
+  const c = ui.contact;
 
   const formSchema = z.object({
-    firstname: z.string().min(3, "3 characters minimum").max(30),
-    lastname: z.string().min(4, "4 characters minimum").max(30),
-    email: z.string().email("Invalid email"),
-    message: z.string().min(10, "10 characters minimum").max(1500, "1500 characters maximum"),
+    firstname: z.string().min(3, c.vMinChars(3)[locale]).max(30),
+    lastname: z.string().min(4, c.vMinChars(4)[locale]).max(30),
+    email: z.string().email(c.vEmail[locale]),
+    message: z.string().min(10, c.vMinChars(10)[locale]).max(1500, c.vMaxChars(1500)[locale]),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -91,10 +93,10 @@ export default function ContactForm() {
   return (
     <div className="shadow-input mx-auto w-full max-w-xl rounded-none bg-background lg:border-2 border-sky-500 dark:border-sky-300 p-4 lg:rounded-2xl md:p-8 dark:bg-black">
       <h2 className="text-4xl font-bold text-neutral-800 dark:text-neutral-200">
-        Contact Me
+        {c.title[locale]}
       </h2>
       <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
-        Get in touch with me
+        {c.subtitle[locale]}
       </p>
       <Form {...form}>
       <form className="my-8" onSubmit={form.handleSubmit(onSubmit)}>
@@ -104,7 +106,7 @@ export default function ContactForm() {
             name="firstname"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>First name</FormLabel>
+                <FormLabel>{c.firstName[locale]}</FormLabel>
                 <FormControl>
                   <Input {...field} id="firstname" placeholder="Tyler" type="text" />
                 </FormControl>
@@ -119,7 +121,7 @@ export default function ContactForm() {
             name="lastname"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Last name</FormLabel>
+                <FormLabel>{c.lastName[locale]}</FormLabel>
                 <FormControl> 
                   <Input {...field} id="lastname" placeholder="Durden" type="text" />
                 </FormControl>
@@ -134,7 +136,7 @@ export default function ContactForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email Address</FormLabel>
+                <FormLabel>{c.email[locale]}</FormLabel>
                 <FormControl>
                     <Input {...field} id="email" placeholder="projectmayhem@fc.com" type="email" />
             </FormControl>
@@ -148,9 +150,9 @@ export default function ContactForm() {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Message</FormLabel>
+                <FormLabel>{c.message[locale]}</FormLabel>
                 <FormControl>
-                  <Textarea {...field} className="mb-4" id="message" placeholder="Your message..." />
+                  <Textarea {...field} className="mb-4" id="message" placeholder={c.messagePlaceholder[locale]} />
                 </FormControl>
                 <FormMessage/>
               </FormItem>
@@ -168,19 +170,19 @@ export default function ContactForm() {
           type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Sending..." : "Send"}
+          {isSubmitting ? c.sending[locale] : c.send[locale]}
           <BottomGradient />
         </button>
 
         {/* Mensajes de estado */}
         {submitStatus === "success" && (
           <p className="mt-4 text-center text-sm text-green-600 dark:text-green-400">
-            ✅ Message sent successfully! I'll respond soon.
+            {c.success[locale]}
           </p>
         )}
         {submitStatus === "error" && (
           <p className="mt-4 text-center text-sm text-red-600 dark:text-red-400">
-            ❌ Error sending message. Please try again.
+            {c.error[locale]}
           </p>
         )}
 

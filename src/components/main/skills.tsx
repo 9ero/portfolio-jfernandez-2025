@@ -5,42 +5,44 @@ import { ProficientSkills } from "@/components/main/skills/proficient";
 import { SecondarySkills } from "@/components/main/skills/explored";
 import { VisualSkills } from "@/components/main/skills/visual";
 import { SoftSkills } from "@/components/main/skills/soft";
+import { ui } from "@/lib/ui";
+import type { Locale } from "@/data/types";
 
-export default function skills() {
+export default function skills({ locale = "en" }: { locale?: Locale }) {
   const tabs = [
     {
-      title: "Proficient Tech Stack",
+      title: ui.skills.proficient[locale],
       value: "proficient",
       content: (
-        <Tab title={"Proficient Tech Stack"}>
-          <ProficientSkills />
+        <Tab title={ui.skills.proficient[locale]}>
+          <ProficientSkills locale={locale} />
         </Tab>
       ),
     },
     {
-      title: "Familiar with",
+      title: ui.skills.familiarTab[locale],
       value: "familiar",
       content: (
-        <Tab title={"Also worked with"}>
-          <SecondarySkills />
+        <Tab title={ui.skills.familiarTitle[locale]}>
+          <SecondarySkills locale={locale} />
         </Tab>
       ),
     },
     {
-      title: "Design & Media Tools",
+      title: ui.skills.design[locale],
       value: "design",
       content: (
-        <Tab title={"Design & Media Tools"}>
-          <VisualSkills />
+        <Tab title={ui.skills.design[locale]}>
+          <VisualSkills locale={locale} />
         </Tab>
       ),
     },
     {
-      title: "Soft Skills",
+      title: ui.skills.soft[locale],
       value: "soft",
       content: (
-        <Tab title={"Soft Skills"}>
-          <SoftSkills />
+        <Tab title={ui.skills.soft[locale]}>
+          <SoftSkills locale={locale} />
         </Tab>
       ),
     },
