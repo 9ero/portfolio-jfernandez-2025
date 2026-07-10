@@ -151,8 +151,8 @@ export const timeline: TimelinePhase[] = [
       es: "Desde los 13 años, asombrado por cómo se diseñaban los elementos en la web, aprendí por mi cuenta a crear páginas con HTML y CSS puros, y más tarde construí algunas aplicaciones simples con Visual Basic. Desde ese momento, y a lo largo de mis años universitarios, descubrí mi pasión por crear aplicaciones útiles y entretenidas: por un lado, la posibilidad de crear aplicaciones funcionales para mí mismo y, por otro, dar vida a mis proyectos de videojuegos y aplicaciones móviles.",
     },
     images: [
-      { src: "about/past1.webp", alt: "the kid in the computer with his dogs" },
-      { src: "about/past2.webp", alt: "the kid in the computer" },
+      { src: "/about/past1.webp", alt: "the kid in the computer with his dogs" },
+      { src: "/about/past2.webp", alt: "the kid in the computer" },
     ],
   },
   {
@@ -163,9 +163,9 @@ export const timeline: TimelinePhase[] = [
       es: "Hoy mi trabajo es más amplio que escribir código: soy el principal responsable técnico de los sistemas de una empresa — infraestructura, DevOps y operación de datos — con ascenso a Líder Técnico en junio de 2026. He migrado una base de datos de producción a AWS RDS Aurora, estabilizado un sistema legacy crítico (de un servidor de desarrollo a Gunicorn/Nginx con entornos dev/prod separados), diseñado una arquitectura de correo que envía ~100k mensajes al mes, operado un stack de herramientas self-hosted con single sign-on y respondido a un incidente de seguridad real. En paralelo construyo sistemas donde la IA es una función de producción — un generador de karaoke con sincronización por palabra, servidores MCP propios en TypeScript — con criterios explícitos de costo y confiabilidad. Lo que una empresa obtiene de mi trabajo no es solo una app: es una solución completa que funciona, se mantiene en pie y protege sus datos.",
     },
     images: [
-      { src: "about/present2.webp", alt: "the man in the computer" },
-      { src: "about/present1.webp", alt: "the man dominating technologies" },
-      { src: "about/present3.webp", alt: "two men testing a mobile app" },
+      { src: "/about/present2.webp", alt: "the man in the computer" },
+      { src: "/about/present1.webp", alt: "the man dominating technologies" },
+      { src: "/about/present3.webp", alt: "two men testing a mobile app" },
     ],
   },
   {
@@ -176,9 +176,9 @@ export const timeline: TimelinePhase[] = [
       es: "El rumbo es claro: profundizar en platform engineering sobre AWS e integración de IA en producción como vertical principal, y mantener la honestidad sobre la etapa en que estoy — alrededor de dos años de experiencia formal, con brechas identificadas (cultura de testing, revisión de código entre pares) que cierro con un plan documentado. Construyo soluciones completas para empresas de mi región, abierto también a equipos remotos con ingenieros senior y cultura de code review, donde cada proyecto me haga mediblemente mejor. La meta no es acumular tecnologías: es entregar sistemas que sigan funcionando cuando nadie los está viendo.",
     },
     images: [
-      { src: "about/future1.webp", alt: "the man thinking" },
-      { src: "about/future2.webp", alt: "the man with the cyber girl" },
-      { src: "about/future3.webp", alt: "the man presenting the statistics" },
+      { src: "/about/future1.webp", alt: "the man thinking" },
+      { src: "/about/future2.webp", alt: "the man with the cyber girl" },
+      { src: "/about/future3.webp", alt: "the man presenting the statistics" },
     ],
   },
 ];
