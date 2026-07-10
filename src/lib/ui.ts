@@ -44,6 +44,9 @@ export const ui = {
       es: "Este sitio es open source — míralo en GitHub",
     },
   },
+  about: {
+    heading: { en: "About me", es: "Sobre mí" },
+  },
   contact: {
     title: { en: "Contact Me", es: "Contacto" },
     subtitle: { en: "Get in touch with me", es: "Escríbeme y hablamos" },

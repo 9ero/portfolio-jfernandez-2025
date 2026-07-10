@@ -19,6 +19,8 @@ export type Profile = {
   shortName: string;
   headline: Localized;
   summary: Localized;
+  /** About-section bio (positioning.md §7.2) — evidence-based, no marketing filler. */
+  about: Localized;
   location: Localized;
   email: string;
   phone: string;
