@@ -18,6 +18,10 @@ export const ui = {
     iAm: { en: "I'm", es: "soy" },
     contactMe: { en: "Contact me", es: "Contáctame" },
     downloadCV: { en: "Download CV", es: "Descargar CV" },
+    openSource: {
+      en: "This site is open source — view it on GitHub",
+      es: "Este sitio es open source — míralo en GitHub",
+    },
   },
   skills: {
     proficient: { en: "Proficient Tech Stack", es: "Stack principal" },
@@ -39,10 +43,6 @@ export const ui = {
     problem: { en: "Problem", es: "Problema" },
     decision: { en: "Decision", es: "Decisión" },
     result: { en: "Result", es: "Resultado" },
-    openSource: {
-      en: "This site is open source — view it on GitHub",
-      es: "Este sitio es open source — míralo en GitHub",
-    },
   },
   about: {
     heading: { en: "About me", es: "Sobre mí" },

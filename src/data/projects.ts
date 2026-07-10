@@ -252,8 +252,8 @@ export const projects: Project[] = [
     slug: "karahero-ai",
     title: "KaraHero AI",
     shortDescription: {
-      en: "AI karaoke generator",
-      es: "Generador de karaoke con IA",
+      en: "Karaoke studio, powered by local AI models",
+      es: "Estudio de karaoke, potenciado por modelos de IA locales",
     },
     icons: ["python"],
     status: {
@@ -273,8 +273,8 @@ export const projects: Project[] = [
       { icon: "subtitles", label: ".lrc / .srt" },
     ],
     summary: {
-      en: "KaraHero AI generates word-by-word synced karaoke from any audio or video file using local AI models — Whisper for transcription and BS-RoFormer for vocal separation — with an interactive web editor and MP4 rendering with custom typography and visual effects.",
-      es: "KaraHero AI genera karaoke sincronizado palabra por palabra a partir de cualquier audio o video usando modelos de IA locales — Whisper para transcripción y BS-RoFormer para separación vocal — con un editor web interactivo y render MP4 con tipografía propia y efectos visuales.",
+      en: "KaraHero AI is karaoke studio software: it turns any audio or video into word-by-word synced karaoke and puts human editing at the center — word-level correction, typography, visual effects and MP4 rendering. Local AI models (Whisper for transcription, BS-RoFormer for vocal separation) are the studio's most valuable resource, accelerating what could also be done by hand.",
+      es: "KaraHero AI es un software de estudio de karaoke: convierte cualquier audio o video en karaoke sincronizado palabra por palabra y pone la edición humana en el centro — corrección por palabra, tipografía, efectos visuales y render MP4. Los modelos de IA locales (Whisper para transcripción, BS-RoFormer para separación vocal) son el recurso más valioso del estudio: aceleran lo que también podría hacerse a mano.",
     },
     features: [
       {
@@ -304,22 +304,22 @@ export const projects: Project[] = [
     ],
     caseStudy: {
       problem: {
-        en: "Generating word-by-word synced karaoke from any song requires coordinating several AI models — transcription, vocal separation, alignment — and raw model output is never perfect: without correction there is no usable product.",
-        es: "Generar karaoke sincronizado palabra por palabra desde cualquier canción exige coordinar varios modelos de IA — transcripción, separación de voces, alineación — y el resultado crudo de los modelos nunca es perfecto: sin corrección no hay producto usable.",
+        en: "Producing word-by-word synced karaoke by hand is possible but slow, and raw AI output alone is never a finished product: the value lives in human correction and customization — timing, lyrics, typography, visual identity.",
+        es: "Producir karaoke sincronizado palabra por palabra a mano es posible pero lento, y la salida cruda de la IA por sí sola nunca es un producto terminado: el valor está en la corrección y personalización humana — timing, letra, tipografía, identidad visual.",
       },
       decision: {
-        en: "Build a pipeline where AI is just another application feature, and keep re-evaluating models with A/B tests instead of marrying the first choice: local Whisper (faster-whisper / mlx-whisper) replaced AssemblyAI as the primary transcriber, and BS-RoFormer beat Demucs for vocal separation. A web editor (FastAPI + React + wavesurfer.js) covers the remaining correction. Local vs. cloud inference is decided with explicit cost and hardware-viability criteria.",
-        es: "Construir un pipeline donde la IA es una función más de la aplicación, y seguir reevaluando modelos con pruebas A/B en lugar de casarse con la primera elección: Whisper local (faster-whisper / mlx-whisper) reemplazó a AssemblyAI como transcriptor principal y BS-RoFormer superó a Demucs en separación vocal. Un editor web (FastAPI + React + wavesurfer.js) cubre la corrección restante. Lo local vs. la nube se decide con criterios explícitos de costo y viabilidad de hardware.",
+        en: "Build a karaoke studio, not a one-shot generator: local AI produces the base (word-synced transcription and clean stems) and the human refines it in a web editor (FastAPI + React + wavesurfer.js). Models are re-evaluated with A/B tests instead of marrying the first choice: local Whisper (faster-whisper / mlx-whisper) replaced AssemblyAI, and BS-RoFormer beat Demucs. Local vs. cloud inference is decided with explicit cost and hardware-viability criteria.",
+        es: "Construir un estudio de karaoke, no un generador de un solo paso: la IA local produce la base (transcripción sincronizada por palabra y stems limpios) y el humano la refina en un editor web (FastAPI + React + wavesurfer.js). Los modelos se reevalúan con pruebas A/B en lugar de casarse con la primera elección: Whisper local (faster-whisper / mlx-whisper) reemplazó a AssemblyAI y BS-RoFormer superó a Demucs. Lo local vs. la nube se decide con criterios explícitos de costo y viabilidad de hardware.",
       },
       result: {
-        en: "Output quality improved to the point that forced alignment became practically unnecessary; the pipeline renders MP4s with custom typography (Google Fonts) and visual effects, backed by a 98-test suite. Development at ~80%.",
-        es: "La calidad de salida mejoró al punto de volver prácticamente innecesaria la alineación forzada; el pipeline renderiza MP4 con tipografía propia (Google Fonts) y efectos visuales, respaldado por una suite de 98 tests. Desarrollo al ~80%.",
+        en: "The AI base got so good that forced alignment became practically unnecessary, leaving the editor for what matters: human polish. The studio renders MP4s with custom typography (Google Fonts) and visual effects, backed by a 98-test suite. Development at ~80%.",
+        es: "La base de IA mejoró tanto que la alineación forzada quedó prácticamente innecesaria, dejando el editor para lo que importa: el pulido humano. El estudio renderiza MP4 con tipografía propia (Google Fonts) y efectos visuales, respaldado por una suite de 98 tests. Desarrollo al ~80%.",
       },
     },
     highlights: [
       {
-        en: "Built an AI pipeline (local Whisper, BS-RoFormer, chosen via A/B testing) that turns any song into word-synced karaoke with a FastAPI + React editor and a 98-test suite",
-        es: "Construcción de un pipeline de IA (Whisper local, BS-RoFormer, elegidos con pruebas A/B) que convierte cualquier canción en karaoke sincronizado por palabra, con editor FastAPI + React y suite de 98 tests",
+        en: "Built karaoke studio software where local AI (Whisper, BS-RoFormer — chosen via A/B testing) produces the word-synced base and a FastAPI + React editor centers human correction; 98-test suite",
+        es: "Construcción de un software de estudio de karaoke donde la IA local (Whisper, BS-RoFormer — elegidos con pruebas A/B) produce la base sincronizada por palabra y un editor FastAPI + React centra la corrección humana; suite de 98 tests",
       },
     ],
   },

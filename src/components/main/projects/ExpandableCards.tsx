@@ -258,7 +258,7 @@ export function ExpandableCards({ locale = "en" }: { locale?: Locale }) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-neutral-600 text-sm lg:text-base h-full max-h-md pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-300  [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
+                    className="text-neutral-600 text-sm lg:text-base md:max-h-[45vh] pb-10 flex flex-col items-start gap-4 overflow-y-auto dark:text-neutral-300  [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
                   >
                     {active.techStack && typeof active.techStack === "function"
                       ? active.techStack()
