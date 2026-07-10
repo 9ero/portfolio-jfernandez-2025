@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+// Shared single-page body, rendered once per locale route (/ and /es/).
+import Layout from '@/layouts/main.astro';
+import Welcome from '@/components/main/welcome.astro';
+import Skills from '@/components/main/skills';
+import ProjectList from '@/components/main/projects/projectList.astro';
+import { AboutTimeline } from '@/components/main/about/timeline';
+import Contact from '@/components/main/contact/contact.astro';
+import type { Locale } from '@/data/types';
+
+const { locale } = Astro.props as { locale: Locale };
+
+const meta = {
+	en: {
+		title: 'Juan Miguel Fernández — Infrastructure & Full Stack Engineer · AI Integration',
+		description:
+			'Systems and infrastructure generalist with full stack development and production AI integration: AWS, Docker, Python and TypeScript/React. Technical Lead. Complete solutions that run, stay up and protect your data.',
+	},
+	es: {
+		title: 'Juan Miguel Fernández — Ingeniero de Infraestructura y Full Stack · Integración de IA',
+		description:
+			'Generalista de sistemas e infraestructura con desarrollo full stack e integración de IA en producción: AWS, Docker, Python y TypeScript/React. Líder Técnico. Soluciones completas que funcionan, se mantienen en pie y protegen tus datos.',
+	},
+}[locale];
+---
+	<Layout content={{ ...meta, locale }}>
+		<section id="welcome" class="h-screen snap-start">
+			<Welcome locale={locale} />
+		</section>
+		<section id="skills" class="h-screen snap-start flex flex-col items-center justify-center">
+			<Skills client:visible locale={locale} />
+		</section>
+		<section id="projects" class="h-screen snap-start">
+			<ProjectList locale={locale} />
+		</section>
+		<section id="about" class="h-screen snap-start">
+			<AboutTimeline client:visible locale={locale} />
+		</section>
+		<section id="contact" class="h-screen snap-start">
+			<Contact locale={locale} />
+		</section>
+	</Layout>
