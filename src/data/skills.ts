@@ -47,11 +47,11 @@ export const proficientSkills: Skill[] = [
       es: "Funciones de IA para producción, no demos",
     },
     blurb: {
-      en: "AI models used as application features: speech transcription (AssemblyAI, Whisper), vocal separation (Demucs), CPU forced alignment, and custom MCP servers in TypeScript. Local inference (Ollama) and cloud inference (RunPod, Replicate) evaluated with explicit cost and hardware-viability criteria.",
-      es: "Modelos de IA usados como funciones de la aplicación: transcripción de voz (AssemblyAI, Whisper), separación vocal (Demucs), alineación forzada en CPU y servidores MCP propios en TypeScript. Inferencia local (Ollama) y en la nube (RunPod, Replicate) evaluada con criterios explícitos de costo y viabilidad de hardware.",
+      en: "AI models used as application features, re-evaluated with A/B tests: local Whisper transcription (faster-whisper / mlx-whisper) and BS-RoFormer vocal separation — chosen over AssemblyAI and Demucs. I also build custom MCP servers in TypeScript so AI agents can use purpose-built tools. Local inference (Ollama) and cloud inference (RunPod, Replicate) evaluated with explicit cost and hardware-viability criteria.",
+      es: "Modelos de IA usados como funciones de la aplicación, reevaluados con pruebas A/B: transcripción con Whisper local (faster-whisper / mlx-whisper) y separación vocal con BS-RoFormer — elegidos sobre AssemblyAI y Demucs. También construyo servidores MCP propios en TypeScript para que agentes de IA usen herramientas a medida. Inferencia local (Ollama) y en la nube (RunPod, Replicate) evaluada con criterios explícitos de costo y viabilidad de hardware.",
     },
     image: "/ai-wpp.webp",
-    keywords: ["AI integration", "AssemblyAI", "Whisper", "Demucs", "forced alignment", "Ollama", "RunPod", "MCP", "inference costs"],
+    keywords: ["AI integration", "Whisper", "faster-whisper", "BS-RoFormer", "Ollama", "RunPod", "MCP", "inference costs", "A/B testing"],
   },
   {
     name: "React",
