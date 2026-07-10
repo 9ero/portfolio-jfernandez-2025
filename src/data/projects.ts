@@ -55,6 +55,20 @@ export const projects: Project[] = [
         es: "Plan de reestructuración documentado y en ejecución: CI/CD, GitFlow, MD5 → Argon2, integridad referencial",
       },
     ],
+    caseStudy: {
+      problem: {
+        en: "A company's main system depended on a database dating back to 2001, transitioned — not rewritten — to Flask, carrying its structural debt. It ran on a development server, with a single docker-compose for everything (a source of orphaned containers and production downtime) and unpinned dependencies: every deployment was a gamble.",
+        es: "El sistema principal de una empresa dependía de una base de datos originada en 2001 y transicionada — no reescrita — a Flask, arrastrando su deuda estructural. Corría sobre un servidor de desarrollo, con un solo docker-compose para todo (causa de contenedores huérfanos y caídas de producción) y dependencias sin fijar: cada despliegue era una apuesta.",
+      },
+      decision: {
+        en: "Stabilize before beautifying. Instead of proposing a rewrite (expensive, risky, uncertain value), the priority was making the system stop falling over: development server → Gunicorn/Nginx; one compose → separate dev/prod environments; unpinned dependencies → frozen requirements.txt; JavaScript embedded in templates → static files; self-managed database → AWS RDS.",
+        es: "Estabilizar antes de embellecer. En lugar de proponer una reescritura (cara, riesgosa y de valor incierto), la prioridad fue que el sistema dejara de caerse: servidor de desarrollo → Gunicorn/Nginx; un solo compose → entornos dev/prod separados; dependencias sin fijar → requirements.txt congelado; JavaScript incrustado en plantillas → archivos estáticos; base de datos autogestionada → AWS RDS.",
+      },
+      result: {
+        en: "Zero docker-compose-type incidents since the change, and a stable base for the documented restructuring plan still in execution: CI/CD, GitFlow, MD5 → Argon2 hash migration and referential integrity.",
+        es: "Cero incidentes del tipo docker-compose desde el cambio y una base estable para el plan de reestructuración documentado que sigue en curso: CI/CD, GitFlow, migración de hashes MD5 → Argon2 e integridad referencial.",
+      },
+    },
     highlights: [
       {
         en: "Stabilized a business-critical legacy system (database from 2001): production WSGI server, separate dev/prod Docker environments, frozen dependencies and a managed RDS database",
@@ -63,6 +77,115 @@ export const projects: Project[] = [
       {
         en: "Authored and is executing a documented restructuring plan: CI/CD, GitFlow, MD5 → Argon2 migration and consolidation of business logic",
         es: "Autoría y ejecución de un plan de reestructuración documentado: CI/CD, GitFlow, migración MD5 → Argon2 y consolidación de la lógica de negocio",
+      },
+    ],
+  },
+  {
+    slug: "aws-infrastructure",
+    title: "AWS & Self-hosted Infrastructure",
+    shortDescription: {
+      en: "A one-person platform team, as a case study",
+      es: "Un equipo de plataforma de una persona, como caso de estudio",
+    },
+    icons: ["aws", "docker"],
+    images: ["/aws-infra/placeholder-1.webp"],
+    links: {},
+    isPrivate: true,
+    year: 2026,
+    tech: [
+      { icon: "aws", label: "RDS Aurora / SES / SSM" },
+      { icon: "docker", label: "Docker Compose" },
+      { icon: "cloud", label: "Nginx + Cloudflare" },
+      { icon: "world", label: "Entra ID SSO" },
+      { icon: "database", label: "MySQL 8" },
+    ],
+    summary: {
+      en: "The infrastructure a non-software company runs on — production database, email at scale, internal tools, server access — designed, migrated and operated by one person, treated as a product.",
+      es: "La infraestructura sobre la que corre una empresa que no es de software — base de datos de producción, correo a escala, herramientas internas, acceso a servidores — diseñada, migrada y operada por una persona, tratada como un producto.",
+    },
+    features: [
+      {
+        en: "Production MySQL 8 migrated to AWS RDS Aurora, resolving utf8mb4 encoding in the process",
+        es: "MySQL 8 de producción migrado a AWS RDS Aurora, resolviendo la codificación utf8mb4 en el proceso",
+      },
+      {
+        en: "Email architecture for ~100k messages/month: Amazon SES (custom MAIL FROM, DMARC, SPF) + HubSpot + N8n/Airflow",
+        es: "Arquitectura de correo de ~100k mensajes/mes: Amazon SES (MAIL FROM propio, DMARC, SPF) + HubSpot + N8n/Airflow",
+      },
+      {
+        en: "Server access through AWS SSM Session Manager — no exposed SSH",
+        es: "Acceso a servidores por AWS SSM Session Manager — sin SSH expuesto",
+      },
+      {
+        en: "Self-hosted tool stack (Plane, Outline, Twenty CRM, Airflow, N8n) behind Nginx with Cloudflare origin certificates",
+        es: "Stack de herramientas self-hosted (Plane, Outline, Twenty CRM, Airflow, N8n) tras Nginx con certificados de origen de Cloudflare",
+      },
+      {
+        en: "Single sign-on with Microsoft Entra ID (multi-tenant OAuth) across the internal ecosystem",
+        es: "Single sign-on con Microsoft Entra ID (OAuth multi-tenant) en todo el ecosistema interno",
+      },
+    ],
+    caseStudy: {
+      problem: {
+        en: "A non-software company needed what every company needs from its systems: they must run, be backed up, not go down and not leak data — without an infrastructure team. That role fell to one person.",
+        es: "Una empresa que no es de software necesitaba lo que toda empresa necesita de sus sistemas: que funcionen, se respalden, no se caigan y no filtren datos — sin un equipo de infraestructura. Ese rol recayó en una sola persona.",
+      },
+      decision: {
+        en: "Treat infrastructure as a product: production database migrated to RDS Aurora (solving utf8mb4 encoding along the way); server access through SSM Session Manager instead of exposed SSH; a ~100k emails/month architecture on Amazon SES orchestrated with HubSpot and N8n/Airflow; and a self-hosted tool stack unified under Microsoft Entra ID single sign-on.",
+        es: "Tratar la infraestructura como producto: base de datos de producción migrada a RDS Aurora (resolviendo la codificación utf8mb4 en el proceso); acceso a servidores por SSM Session Manager en lugar de SSH expuesto; una arquitectura de ~100k correos/mes sobre Amazon SES orquestada con HubSpot y N8n/Airflow; y un stack de herramientas self-hosted unificado con single sign-on de Microsoft Entra ID.",
+      },
+      result: {
+        en: "Backed-up, managed production systems, at-scale email with proper domain authentication, and an internal tool ecosystem behind one login — operated by one person.",
+        es: "Sistemas de producción respaldados y gestionados, correo a escala con autenticación de dominio correcta y un ecosistema interno de herramientas con un solo inicio de sesión — operado por una persona.",
+      },
+    },
+    highlights: [
+      {
+        en: "Designed and operates the AWS + self-hosted infrastructure of a non-software company as its sole technical owner",
+        es: "Diseño y operación de la infraestructura AWS + self-hosted de una empresa no técnica como único responsable",
+      },
+    ],
+  },
+  {
+    slug: "security-incident-response",
+    title: "Security Incident Response",
+    shortDescription: {
+      en: "A real incident, contained and turned into hardening",
+      es: "Un incidente real, contenido y convertido en endurecimiento",
+    },
+    icons: ["cloud"],
+    images: ["/security/placeholder-1.webp"],
+    links: {},
+    isPrivate: true,
+    year: 2026,
+    tech: [
+      { icon: "typescript", label: "GitHub Actions" },
+      { icon: "aws", label: "AWS SSM" },
+      { icon: "world", label: "Token scoping" },
+    ],
+    summary: {
+      en: "Investigation and remediation of a real security incident — written up without sensitive company details, because how you respond matters more than pretending it never happens.",
+      es: "Investigación y remediación de un incidente de seguridad real — documentado sin detalles sensibles de la empresa, porque cómo se responde importa más que fingir que nunca ocurre.",
+    },
+    features: [],
+    caseStudy: {
+      problem: {
+        en: "A malicious GitHub Actions workflow was detected, injected into an organization's repositories. The vector: a compromised classic personal access token with broad-scope permissions.",
+        es: "Se detectó un workflow malicioso de GitHub Actions inyectado en repositorios de una organización. El vector: un personal access token clásico comprometido, con permisos de alcance amplio.",
+      },
+      decision: {
+        en: "Contain first, harden after. The workflow's origin was investigated, all broad-scope tokens were revoked, and access was permanently hardened — in the same effort, server access moved from exposed SSH to AWS SSM Session Manager. Cosmetic patches were not an option: discomfort with half-measures was part of the decision.",
+        es: "Contener primero, endurecer después. Se investigó el origen del workflow, se revocaron todos los tokens de alcance amplio y se endureció el acceso de forma permanente — en la misma línea, el acceso a los servidores pasó de SSH expuesto a AWS SSM Session Manager. No se optó por parches cosméticos: la incomodidad con las soluciones a medias fue parte de la decisión.",
+      },
+      result: {
+        en: "The incident was contained without major damage, and the attack surface was reduced structurally, not just patched.",
+        es: "Incidente contenido sin daño mayor y una superficie de ataque reducida de forma estructural, no puntual.",
+      },
+    },
+    highlights: [
+      {
+        en: "Investigated and remediated a real GitHub Actions security incident; revoked broad-scope tokens and hardened access permanently",
+        es: "Investigación y remediación de un incidente de seguridad real en GitHub Actions; revocación de tokens de alcance amplio y endurecimiento permanente del acceso",
       },
     ],
   },
@@ -173,6 +296,20 @@ export const projects: Project[] = [
         es: "Render de video: salida MP4 con colores, gradientes y visualizador de audio vía ffmpeg",
       },
     ],
+    caseStudy: {
+      problem: {
+        en: "Generating word-by-word synced karaoke from any song requires coordinating several AI models — transcription, vocal separation, alignment — and raw model output is never perfect: without manual correction there is no usable product.",
+        es: "Generar karaoke sincronizado palabra por palabra desde cualquier canción exige coordinar varios modelos de IA — transcripción, separación de voces, alineación — y el resultado crudo de los modelos nunca es perfecto: sin corrección manual no hay producto usable.",
+      },
+      decision: {
+        en: "Build a pipeline where AI is just another application feature: transcription with AssemblyAI or local Whisper, stem separation with Demucs, forced alignment that runs on CPU (no GPU required), and a web editor (FastAPI + React + wavesurfer.js) for word-level correction. Local inference (Ollama) and cloud inference (RunPod, Replicate) were evaluated with explicit cost and hardware-viability criteria.",
+        es: "Construir un pipeline donde la IA es una función más de la aplicación: transcripción con AssemblyAI o Whisper local, separación de stems con Demucs, alineación forzada ejecutable en CPU (sin exigir GPU) y un editor web (FastAPI + React + wavesurfer.js) para corregir palabra por palabra. La inferencia local (Ollama) y en la nube (RunPod, Replicate) se evaluó con criterio explícito de costos y viabilidad de hardware.",
+      },
+      result: {
+        en: "A generator that turns any audio or video into word-synced karaoke with a final MP4 render — with the failure handling and cost control that separate a usable system from a demo.",
+        es: "Un generador que convierte cualquier audio o video en karaoke sincronizado por palabra con render final en MP4 — con el manejo de fallos y el control de costos que separan un sistema usable de una demo.",
+      },
+    },
     highlights: [
       {
         en: "Built an AI pipeline (Whisper/AssemblyAI, Demucs, CTC forced alignment) that turns any song into word-synced karaoke with a FastAPI + React editor",
@@ -210,6 +347,20 @@ export const projects: Project[] = [
         es: "Vectorización de imágenes integrada con Gravit Designer",
       },
     ],
+    caseStudy: {
+      problem: {
+        en: "AI agents are only as useful as the tools they can reach. For specific personal workflows — job searching with custom criteria, vectorizing images for a design tool — no adequate tools existed.",
+        es: "Los agentes de IA son tan útiles como las herramientas a las que tienen acceso. Para flujos personales concretos — buscar empleo con criterio propio, vectorizar imágenes para una herramienta de diseño — no existían herramientas adecuadas.",
+      },
+      decision: {
+        en: "Build Model Context Protocol (MCP) servers in TypeScript: a job-search server that analyzes opportunities against a real profile, scores fit and exports a CV; and an image-vectorization server integrated with Gravit Designer.",
+        es: "Construir servidores del Model Context Protocol (MCP) en TypeScript: uno de búsqueda de empleo que analiza oportunidades contra un perfil real, puntúa el fit y exporta el CV; y uno de vectorización de imágenes integrado con Gravit Designer.",
+      },
+      result: {
+        en: "Purpose-built tools that turn a generic AI agent into a specialized assistant — and practical evidence of AI integration beyond chat usage.",
+        es: "Herramientas propias que convierten a un agente de IA genérico en un asistente especializado — y evidencia práctica de integración de IA más allá del uso de un chat.",
+      },
+    },
     highlights: [
       {
         en: "Built custom MCP servers in TypeScript: job search with fit analysis and CV export, and image vectorization for Gravit Designer",
