@@ -1,6 +1,9 @@
 ---
-import ContactForm from "./contact-form"
+import ContactForm from "./contact-form";
+import type { Locale } from "@/data/types";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
 ---
 <div class="w-full h-full flex flex-col items-center justify-center">
-    <ContactForm client:only="react" />
+    <ContactForm client:only="react" locale={locale} />
 </div>

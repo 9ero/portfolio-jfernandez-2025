@@ -1,5 +1,7 @@
 ---
 import {SidebarHeader} from '@/components/Header/SidebarHeader';
+import type { Locale } from '@/data/types';
+const { locale = 'en' } = Astro.props as { locale?: Locale };
 ---
 <script is:inline>
 	const getThemePreference = () => {
@@ -20,4 +22,4 @@ import {SidebarHeader} from '@/components/Header/SidebarHeader';
 	}
 </script>
 
-<SidebarHeader client:load/>
+<SidebarHeader client:load locale={locale}/>

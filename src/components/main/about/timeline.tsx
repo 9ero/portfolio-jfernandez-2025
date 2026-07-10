@@ -3,14 +3,15 @@ import { Timeline } from "@/components/ui/timeline";
 import { ImgZoomHelper } from "@/components/ui/img-zoom-helper";
 import { timeline } from "@/data";
 import { t } from "@/lib/t";
+import type { Locale } from "@/data/types";
 
-export function AboutTimeline() {
+export function AboutTimeline({ locale = "en" }: { locale?: Locale }) {
   const data = timeline.map((phase) => ({
-    title: t(phase.title),
+    title: t(phase.title, locale),
     content: (
       <div>
         <p className="mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
-          {t(phase.body)}
+          {t(phase.body, locale)}
         </p>
         <div
           className={

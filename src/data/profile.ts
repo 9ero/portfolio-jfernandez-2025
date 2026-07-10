@@ -4,19 +4,17 @@ export const profile: Profile = {
   name: "Juan Miguel Fernández Araya",
   shortName: "Juan Miguel",
   headline: {
-    en: "Full Stack Software Engineer",
-    es: "Ingeniero de Software Full Stack",
+    en: "Infrastructure & Full Stack Engineer · AI Integration",
+    es: "Ingeniero de Infraestructura y Full Stack · Integración de IA",
   },
   summary: {
-    en: "Full stack developer with 3+ years of experience designing, building and deploying scalable web applications.\nSpecialized in Python backends (Django, Flask), modern frontends (React, Next.js) and cloud-native deployments on AWS.",
-    es: "Desarrollador full stack con más de 3 años de experiencia diseñando, construyendo y desplegando aplicaciones web escalables.\nEspecializado en backends con Python (Django, Flask), frontends modernos (React, Next.js) y despliegues cloud-native en AWS.",
+    en: "Complete solutions that run, stay up and protect your data.\nSystems and infrastructure generalist with full stack development and production AI integration: AWS, Docker, Python and TypeScript/React.\nTechnical Lead — over two years as the primary technical owner of a company's systems.",
+    es: "Soluciones completas que funcionan, se mantienen en pie y protegen tus datos.\nGeneralista de sistemas e infraestructura con desarrollo full stack e integración de IA en producción: AWS, Docker, Python y TypeScript/React.\nLíder Técnico — más de dos años como principal responsable técnico de los sistemas de una empresa.",
   },
   location: {
     en: "Alajuela, Costa Rica",
     es: "Alajuela, Costa Rica",
   },
-  // TODO(Juan): confirm canonical email — the CV uses this one, the old 3D
-  // panel used juan.fernadez.araya@gmail.com.
   email: "fernandezarayajuanmiguel@gmail.com",
   phone: "+506 8655 3812",
   website: "https://www.jfernandezdev.com",
