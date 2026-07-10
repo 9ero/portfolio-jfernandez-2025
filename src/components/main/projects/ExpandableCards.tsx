@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+import { ParallaxScroll } from "@/components/ui/parallax-scroll";
 import { IconBrandGithub, IconChevronLeft, IconChevronRight, IconExternalLink } from "@tabler/icons-react";
 import { projects } from "@/data";
 import { t } from "@/lib/t";
@@ -273,8 +274,8 @@ export function ExpandableCards({ locale = "en" }: { locale?: Locale }) {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="max-w-6xl mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-max gap-4 overflow-auto max-h-full p-4 md:p-6 lg:rounded-xl lg:border-2 lg:border-sky-300">
-        {cards.map((card) => (
+      <ParallaxScroll
+        items={cards.map((card) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
             key={`card-${card.title}-${id}`}
@@ -349,7 +350,7 @@ export function ExpandableCards({ locale = "en" }: { locale?: Locale }) {
             </div>
           </motion.div>
         ))}
-      </ul>
+      />
     </>
   );
 }
