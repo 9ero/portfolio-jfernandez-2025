@@ -36,6 +36,40 @@ regeneration pipeline is documented and reproducible.
 
 ---
 
+### F5 — Full portfolio adaptation to the professional profile
+Complete the adaptation of the whole site to the profile's source of truth: the
+job-hunter repo's **`profile/positioning.md`** (§7 "Plan de actualización del
+portafolio"). The 2026-07 repositioning already covered headline/summary, Technical
+Lead, project reordering by value and the new Verde/MCP entries — this feature covers
+what remains:
+
+- **Case-studies section** (the core of §7.3): each flagship project presented as
+  *problem → decision → result*, not as a feature list. Bilingual drafts are already
+  written in job-hunter `portfolio-drafts/case-studies.md`: Verde (legacy rescue), AWS
+  infrastructure & self-hosted ops, KaraHero (production AI), custom MCP servers.
+  Decide placement: dedicated section/route vs. expanding the project cards' content.
+- **Security-incident case study** (§7.4): the PAT/GitHub Actions incident as an
+  incident-response story, already redacted without sensitive company details in the
+  same drafts file. Currently it only exists as a career.json experience bullet.
+- **Explicit AI differentiator section** (§7.5): "production-ready AI systems —
+  inference costs, failure handling, data privacy — not demos". Today it is implied by
+  the AI Integration skill; make it a visible statement (ties in with F4 narration as
+  a live demo of the claim).
+- **Stage honesty pass** (§7.6): review About/timeline so the ~2 years of formal
+  experience and the gap-closing plan are stated plainly (Present/Future updated in
+  2026-07; verify wording against §5/§6 of positioning.md).
+- **Sync check**: after content changes, re-verify `/career.json` still matches
+  job-hunter's `master-profile.json` (that repo consumes this endpoint for CVs).
+
+**Source files:** job-hunter `profile/positioning.md` (truth), `portfolio-drafts/audit.md`
+(gap list), `portfolio-drafts/case-studies.md` + `headline-bio.md` (ready-to-use copy).
+
+**Acceptance criteria:** every §7 task of positioning.md is either implemented on the
+site or explicitly discarded with a reason; content re-audited against positioning.md
+with no remaining discrepancies; both locales updated.
+
+---
+
 ## Critical
 
 ### Contact form: investigate `/api/contact` 500 error
