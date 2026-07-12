@@ -13,12 +13,4 @@ const { locale = "en" } = Astro.props as { locale?: Locale };
         {ui.projects.subtitle[locale]}
       </p>
       <ExpandableCards client:visible locale={locale} />
-      <a
-        href="https://github.com/9ero/portfolio-jfernandez-2025"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mt-3 text-xs text-neutral-500 dark:text-neutral-400 hover:text-sky-500 dark:hover:text-sky-300 transition-colors"
-      >
-        {ui.projects.openSource[locale]}
-      </a>
   </div>

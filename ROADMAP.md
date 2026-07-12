@@ -4,6 +4,28 @@ Pending improvements identified through code review and site analysis. Ordered b
 
 ---
 
+## Housekeeping
+
+### Rename the repo — "2025" reads outdated
+`portfolio-jfernandez-2025` dates itself; the portfolio is a living project. Rename the
+repo (suggested: `portfolio-jfernandez` or simply `portfolio`), then update every
+reference:
+
+- [ ] `gh repo rename <nuevo-nombre>` (GitHub redirects the old URL, but references
+      should not rely on the redirect).
+- [ ] GitHub repo **description** — align with the current positioning (infrastructure
+      + full stack + AI integration), not "personal portfolio" boilerplate.
+- [ ] In-site references: the "This site is open source" link in
+      `src/components/main/welcome.astro` and the footer link if reintroduced.
+- [ ] Repo docs: `README.md` title, `CLAUDE.md`, `package.json` `name`.
+- [ ] Local remotes: `git remote set-url origin ...` on every machine.
+- [ ] Vercel: re-link the project to the renamed repo (deploys keep working via the
+      GitHub redirect, but the link should be explicit).
+- [ ] Cross-repo references in **job-hunter**: `portfolio-drafts/*`, `CLAUDE.md` and
+      `positioning.md` mention the portfolio repo/URL where applicable.
+
+---
+
 ## Next feature
 
 ### F4 — Section narration with VibeVoice (AI voice)

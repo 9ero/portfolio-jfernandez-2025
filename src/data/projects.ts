@@ -191,14 +191,16 @@ export const projects: Project[] = [
   },
   {
     slug: "ecoquintas-hub",
-    title: "Ecoquintas Hub",
+    title: "Oficina Virtual",
     shortDescription: {
-      en: "Enterprise portal — Next.js & Python",
-      es: "Portal empresarial — Next.js y Python",
+      en: "Grupo Ecoquintas' client portal — Next.js & Python",
+      es: "Portal de clientes de Grupo Ecoquintas — Next.js y Python",
     },
     icons: ["javascript", "python"],
     images: ["/hub/placeholder-1.webp"],
-    links: {},
+    links: {
+      live: "https://oficinavirtual.grupoecoquintas.com",
+    },
     isPrivate: true,
     year: 2026,
     tech: [
@@ -210,8 +212,8 @@ export const projects: Project[] = [
       { icon: "python", label: "Python API" },
     ],
     summary: {
-      en: "Client portal for Grupo Ecoquintas where clients and partners consult account statements, financial projections and income. I built the whole system: the Next.js frontend and 100% of the Python backend.",
-      es: "Portal de clientes de Grupo Ecoquintas donde clientes y socios consultan estados de cuenta, proyecciones financieras e ingresos. Construí el sistema completo: el frontend en Next.js y el 100% del backend en Python.",
+      en: "Oficina Virtual is Grupo Ecoquintas' client portal, live at oficinavirtual.grupoecoquintas.com: clients and partners consult account statements, financial projections and income. I built the whole system: the Next.js frontend and 100% of the Python backend.",
+      es: "Oficina Virtual es el portal de clientes de Grupo Ecoquintas, en producción en oficinavirtual.grupoecoquintas.com: clientes y socios consultan estados de cuenta, proyecciones financieras e ingresos. Construí el sistema completo: el frontend en Next.js y el 100% del backend en Python.",
     },
     features: [
       {
@@ -250,12 +252,12 @@ export const projects: Project[] = [
     slug: "karahero-ai",
     title: "KaraHero AI",
     shortDescription: {
-      en: "AI karaoke generator",
-      es: "Generador de karaoke con IA",
+      en: "Karaoke studio, powered by local AI models",
+      es: "Estudio de karaoke, potenciado por modelos de IA locales",
     },
     icons: ["python"],
     status: {
-      label: { en: "In development · 60%", es: "En desarrollo · 60%" },
+      label: { en: "In development · 80%", es: "En desarrollo · 80%" },
       tone: "amber",
     },
     images: ["/karahero/placeholder-1.webp"],
@@ -264,107 +266,130 @@ export const projects: Project[] = [
     year: 2026,
     tech: [
       { icon: "python", label: "Python" },
-      { icon: "microphone", label: "AI Transcription" },
+      { icon: "microphone", label: "Whisper (local)" },
+      { icon: "music", label: "BS-RoFormer" },
       { icon: "react", label: "React Editor" },
-      { icon: "music", label: "Demucs" },
       { icon: "video", label: "ffmpeg" },
       { icon: "subtitles", label: ".lrc / .srt" },
     ],
     summary: {
-      en: "KaraHero AI generates word-by-word synced karaoke from any audio or video file using AI transcription and forced alignment, with an interactive web editor to refine the result.",
-      es: "KaraHero AI genera karaoke sincronizado palabra por palabra a partir de cualquier audio o video usando transcripción por IA y alineación forzada, con un editor web interactivo para refinar el resultado.",
+      en: "KaraHero AI is karaoke studio software: it turns any audio or video into word-by-word synced karaoke and puts human editing at the center — word-level correction, typography, visual effects and MP4 rendering. Local AI models (Whisper for transcription, BS-RoFormer for vocal separation) are the studio's most valuable resource, accelerating what could also be done by hand.",
+      es: "KaraHero AI es un software de estudio de karaoke: convierte cualquier audio o video en karaoke sincronizado palabra por palabra y pone la edición humana en el centro — corrección por palabra, tipografía, efectos visuales y render MP4. Los modelos de IA locales (Whisper para transcripción, BS-RoFormer para separación vocal) son el recurso más valioso del estudio: aceleran lo que también podría hacerse a mano.",
     },
     features: [
       {
-        en: "Word-level Sync: AssemblyAI or local Whisper transcription with per-word timestamps",
-        es: "Sincronización por palabra: transcripción con AssemblyAI o Whisper local con timestamps por palabra",
+        en: "Word-level Sync: local Whisper transcription (faster-whisper / mlx-whisper) with per-word timestamps; AssemblyAI kept as optional fallback",
+        es: "Sincronización por palabra: transcripción con Whisper local (faster-whisper / mlx-whisper) con timestamps por palabra; AssemblyAI queda como fallback opcional",
       },
       {
-        en: "Vocal Separation: optional Demucs stem splitting for clean instrumentals",
-        es: "Separación vocal: separación opcional de stems con Demucs para instrumentales limpios",
+        en: "Vocal Separation: BS-RoFormer stems — chosen over Demucs after A/B testing for cleaner output",
+        es: "Separación vocal: stems con BS-RoFormer — elegido sobre Demucs tras pruebas A/B por un resultado más limpio",
       },
       {
-        en: "Forced Alignment: paste the real lyrics and realign them with CTC alignment",
-        es: "Alineación forzada: pega la letra real y realinéala con alineación CTC",
+        en: "Forced alignment now practically unnecessary: Whisper + clean stems produce near-final sync (the CTC option remains available)",
+        es: "La alineación forzada quedó prácticamente innecesaria: Whisper + stems limpios producen una sincronización casi final (la opción CTC sigue disponible)",
       },
       {
-        en: "Web Editor: FastAPI + React + wavesurfer.js for manual fine-tuning",
-        es: "Editor web: FastAPI + React + wavesurfer.js para ajuste fino manual",
+        en: "Google Fonts integration: any typeface fetched and cached for the video render",
+        es: "Integración con Google Fonts: cualquier tipografía se descarga y cachea para el render de video",
       },
       {
-        en: "Video Render: MP4 output with colors, gradients and audio visualizer via ffmpeg",
-        es: "Render de video: salida MP4 con colores, gradientes y visualizador de audio vía ffmpeg",
+        en: "Video Render: MP4 with animated channel seal, audio visualizer and gradients via ffmpeg",
+        es: "Render de video: MP4 con sello de canal animado, visualizador de audio y gradientes vía ffmpeg",
+      },
+      {
+        en: "Web Editor: FastAPI + React + wavesurfer.js for manual fine-tuning; 98-test suite",
+        es: "Editor web: FastAPI + React + wavesurfer.js para ajuste fino manual; suite de 98 tests",
       },
     ],
     caseStudy: {
       problem: {
-        en: "Generating word-by-word synced karaoke from any song requires coordinating several AI models — transcription, vocal separation, alignment — and raw model output is never perfect: without manual correction there is no usable product.",
-        es: "Generar karaoke sincronizado palabra por palabra desde cualquier canción exige coordinar varios modelos de IA — transcripción, separación de voces, alineación — y el resultado crudo de los modelos nunca es perfecto: sin corrección manual no hay producto usable.",
+        en: "Producing word-by-word synced karaoke by hand is possible but slow, and raw AI output alone is never a finished product: the value lives in human correction and customization — timing, lyrics, typography, visual identity.",
+        es: "Producir karaoke sincronizado palabra por palabra a mano es posible pero lento, y la salida cruda de la IA por sí sola nunca es un producto terminado: el valor está en la corrección y personalización humana — timing, letra, tipografía, identidad visual.",
       },
       decision: {
-        en: "Build a pipeline where AI is just another application feature: transcription with AssemblyAI or local Whisper, stem separation with Demucs, forced alignment that runs on CPU (no GPU required), and a web editor (FastAPI + React + wavesurfer.js) for word-level correction. Local inference (Ollama) and cloud inference (RunPod, Replicate) were evaluated with explicit cost and hardware-viability criteria.",
-        es: "Construir un pipeline donde la IA es una función más de la aplicación: transcripción con AssemblyAI o Whisper local, separación de stems con Demucs, alineación forzada ejecutable en CPU (sin exigir GPU) y un editor web (FastAPI + React + wavesurfer.js) para corregir palabra por palabra. La inferencia local (Ollama) y en la nube (RunPod, Replicate) se evaluó con criterio explícito de costos y viabilidad de hardware.",
+        en: "Build a karaoke studio, not a one-shot generator: local AI produces the base (word-synced transcription and clean stems) and the human refines it in a web editor (FastAPI + React + wavesurfer.js). Models are re-evaluated with A/B tests instead of marrying the first choice: local Whisper (faster-whisper / mlx-whisper) replaced AssemblyAI, and BS-RoFormer beat Demucs. Local vs. cloud inference is decided with explicit cost and hardware-viability criteria.",
+        es: "Construir un estudio de karaoke, no un generador de un solo paso: la IA local produce la base (transcripción sincronizada por palabra y stems limpios) y el humano la refina en un editor web (FastAPI + React + wavesurfer.js). Los modelos se reevalúan con pruebas A/B en lugar de casarse con la primera elección: Whisper local (faster-whisper / mlx-whisper) reemplazó a AssemblyAI y BS-RoFormer superó a Demucs. Lo local vs. la nube se decide con criterios explícitos de costo y viabilidad de hardware.",
       },
       result: {
-        en: "A generator that turns any audio or video into word-synced karaoke with a final MP4 render — with the failure handling and cost control that separate a usable system from a demo.",
-        es: "Un generador que convierte cualquier audio o video en karaoke sincronizado por palabra con render final en MP4 — con el manejo de fallos y el control de costos que separan un sistema usable de una demo.",
+        en: "The AI base got so good that forced alignment became practically unnecessary, leaving the editor for what matters: human polish. The studio renders MP4s with custom typography (Google Fonts) and visual effects, backed by a 98-test suite. Development at ~80%.",
+        es: "La base de IA mejoró tanto que la alineación forzada quedó prácticamente innecesaria, dejando el editor para lo que importa: el pulido humano. El estudio renderiza MP4 con tipografía propia (Google Fonts) y efectos visuales, respaldado por una suite de 98 tests. Desarrollo al ~80%.",
       },
     },
     highlights: [
       {
-        en: "Built an AI pipeline (Whisper/AssemblyAI, Demucs, CTC forced alignment) that turns any song into word-synced karaoke with a FastAPI + React editor",
-        es: "Construcción de un pipeline de IA (Whisper/AssemblyAI, Demucs, alineación forzada CTC) que convierte cualquier canción en karaoke sincronizado por palabra, con editor FastAPI + React",
+        en: "Built karaoke studio software where local AI (Whisper, BS-RoFormer — chosen via A/B testing) produces the word-synced base and a FastAPI + React editor centers human correction; 98-test suite",
+        es: "Construcción de un software de estudio de karaoke donde la IA local (Whisper, BS-RoFormer — elegidos con pruebas A/B) produce la base sincronizada por palabra y un editor FastAPI + React centra la corrección humana; suite de 98 tests",
       },
     ],
   },
   {
-    slug: "mcp-servers",
-    title: "Custom MCP Servers",
+    slug: "habla-bien",
+    title: "Habla Bien",
     shortDescription: {
-      en: "Tools for AI agents, in TypeScript",
-      es: "Herramientas para agentes de IA, en TypeScript",
+      en: "Real-time speech-to-big-text for deaf & low-vision users",
+      es: "Voz a texto grande en tiempo real para personas sordas y con baja visión",
     },
-    icons: ["typescript"],
-    images: ["/mcp/placeholder-1.webp"],
+    icons: ["kotlin", "android"],
+    status: {
+      label: { en: "In development", es: "En desarrollo" },
+      tone: "amber",
+    },
+    images: ["/habla-bien/placeholder-1.webp"],
     links: {},
     isPrivate: true,
     year: 2026,
     tech: [
-      { icon: "typescript", label: "TypeScript" },
-      { icon: "world", label: "Model Context Protocol" },
+      { icon: "kotlin", label: "Kotlin + Compose" },
+      { icon: "android", label: "Android (sideload)" },
+      { icon: "cloud", label: "Azure AI Speech" },
+      { icon: "microphone", label: "Whisper local (sherpa-onnx)" },
+      { icon: "world", label: "Atkinson Hyperlegible" },
     ],
     summary: {
-      en: "Model Context Protocol (MCP) servers built in TypeScript so AI agents can use purpose-built tools: a job-search server with fit analysis and CV export, and an image-vectorization server for Gravit Designer.",
-      es: "Servidores del Model Context Protocol (MCP) construidos en TypeScript para que agentes de IA usen herramientas hechas a medida: un servidor de búsqueda de empleo con análisis de fit y exportación de CV, y uno de vectorización de imágenes para Gravit Designer.",
+      en: "A micro app to talk with people with severe hearing loss and low vision: someone speaks to the phone or tablet and the app transcribes the voice into large on-screen text in real time. Free and meant to be open source, installed by sideload — no Google Play required.",
+      es: "Una micro app para hablar con personas con pérdida auditiva severa y baja visión: alguien le habla al teléfono o tablet y la app transcribe la voz a texto grande en pantalla, en tiempo real. Gratuita y pensada como código abierto, instalable por sideload — sin pasar por Google Play.",
     },
     features: [
       {
-        en: "Job search: opportunity analysis against a real profile, fit scoring and CV export",
-        es: "Búsqueda de empleo: análisis de oportunidades contra un perfil real, puntuación de fit y exportación de CV",
+        en: "Dual transcription engine behind one interface: Azure AI Speech in the cloud (low-end phones/tablets) or 100% offline Whisper via sherpa-onnx (for NPU-capable devices)",
+        es: "Motor de transcripción dual tras una sola interfaz: Azure AI Speech en la nube (teléfonos/tablets de gama baja) o Whisper 100% offline vía sherpa-onnx (para equipos con NPU)",
       },
       {
-        en: "Image vectorization integrated with Gravit Designer",
-        es: "Vectorización de imágenes integrada con Gravit Designer",
+        en: "Offline models (tiny/base/small) downloaded on demand with per-file SHA-256 verification and Silero VAD silence segmentation",
+        es: "Modelos offline (tiny/base/small) descargados bajo demanda con verificación SHA-256 por archivo y segmentación por silencio con VAD (Silero)",
+      },
+      {
+        en: "Low-vision typography: adjustable large text and font picker with Atkinson Hyperlegible, plus Google Fonts on demand",
+        es: "Tipografía para baja visión: texto grande ajustable y selector de fuentes con Atkinson Hyperlegible, más Google Fonts bajo demanda",
+      },
+      {
+        en: "Tap-to-edit transcript with exact cursor placement, native-Android behavior",
+        es: "Edición del texto al tocarlo con cursor exacto en el punto tocado, comportamiento nativo de Android",
+      },
+      {
+        en: "Verified end-to-end on a real low-end phone (Blackview BV6200 Pro): real-time Spanish transcription, with worst-case metrics documented (~90 s model load on a chip without usable NPU)",
+        es: "Verificada de punta a punta en un teléfono real de gama baja (Blackview BV6200 Pro): transcripción en español en tiempo real, con métricas de peor caso documentadas (~90 s de carga del modelo en un chip sin NPU aprovechable)",
       },
     ],
     caseStudy: {
       problem: {
-        en: "AI agents are only as useful as the tools they can reach. For specific personal workflows — job searching with custom criteria, vectorizing images for a design tool — no adequate tools existed.",
-        es: "Los agentes de IA son tan útiles como las herramientas a las que tienen acceso. Para flujos personales concretos — buscar empleo con criterio propio, vectorizar imágenes para una herramienta de diseño — no existían herramientas adecuadas.",
+        en: "Talking with a person who has severe hearing loss and low vision requires turning speech into large, readable text instantly — on the hardware families actually have: low-end phones and tablets, sometimes without reliable internet.",
+        es: "Hablar con una persona con pérdida auditiva severa y baja visión exige convertir la voz en texto grande y legible al instante — en el hardware que las familias realmente tienen: teléfonos y tablets de gama baja, a veces sin internet confiable.",
       },
       decision: {
-        en: "Build Model Context Protocol (MCP) servers in TypeScript: a job-search server that analyzes opportunities against a real profile, scores fit and exports a CV; and an image-vectorization server integrated with Gravit Designer.",
-        es: "Construir servidores del Model Context Protocol (MCP) en TypeScript: uno de búsqueda de empleo que analiza oportunidades contra un perfil real, puntúa el fit y exporta el CV; y uno de vectorización de imágenes integrado con Gravit Designer.",
+        en: "One common TranscriptionEngine interface with two interchangeable engines: Azure AI Speech in the cloud for low-end devices, and fully offline Whisper (sherpa-onnx, int8) for NPU-capable terminals. The worst case was measured on a real budget phone before trusting the local path, and the typography was chosen for low vision (Atkinson Hyperlegible).",
+        es: "Una interfaz común TranscriptionEngine con dos motores intercambiables: Azure AI Speech en la nube para equipos de gama baja, y Whisper totalmente offline (sherpa-onnx, int8) para terminales con NPU. El peor caso se midió en un teléfono económico real antes de confiar en la vía local, y la tipografía se eligió para baja visión (Atkinson Hyperlegible).",
       },
       result: {
-        en: "Purpose-built tools that turn a generic AI agent into a specialized assistant — and practical evidence of AI integration beyond chat usage.",
-        es: "Herramientas propias que convierten a un agente de IA genérico en un asistente especializado — y evidencia práctica de integración de IA más allá del uso de un chat.",
+        en: "Real-time Spanish transcription working end-to-end on a real low-end phone, documented worst-case data guiding the hardware recommendation, and an engine architecture where cloud vs. local is a setting — not a rewrite.",
+        es: "Transcripción en español en tiempo real funcionando de punta a punta en un teléfono real de gama baja, datos de peor caso documentados que guían la recomendación de hardware, y una arquitectura de motores donde nube vs. local es una configuración — no una reescritura.",
       },
     },
     highlights: [
       {
-        en: "Built custom MCP servers in TypeScript: job search with fit analysis and CV export, and image vectorization for Gravit Designer",
-        es: "Construcción de servidores MCP propios en TypeScript: búsqueda de empleo con análisis de fit y exportación de CV, y vectorización de imágenes para Gravit Designer",
+        en: "Built an Android accessibility app (Kotlin/Compose) with interchangeable speech engines: Azure AI Speech (cloud) and fully offline Whisper via sherpa-onnx, with worst-case metrics measured on real low-end hardware",
+        es: "Construcción de una app Android de accesibilidad (Kotlin/Compose) con motores de voz intercambiables: Azure AI Speech (nube) y Whisper totalmente offline vía sherpa-onnx, con métricas de peor caso medidas en hardware real de gama baja",
       },
     ],
   },
@@ -466,8 +491,8 @@ export const projects: Project[] = [
       { icon: "aws", label: "AWS" },
     ],
     summary: {
-      en: "EQ Tickets is a comprehensive application consisting of two main components: a Django backend with Django REST Framework and a Next.js frontend with Tailwind CSS, Shadcn, and Aceternity UI components.",
-      es: "EQ Tickets es una aplicación integral compuesta por dos componentes principales: un backend Django con Django REST Framework y un frontend Next.js con Tailwind CSS, Shadcn y componentes de Aceternity UI.",
+      en: "EQ Tickets is Grupo Ecoquintas' official platform for tickets, requests and purchase-list administration for the procurement department — built entirely by me (Django REST backend + Next.js frontend). In production since 2025 with zero system failures; a second company joined the platform in 2026, and media storage on S3 lets it grow without intervention.",
+      es: "EQ Tickets es la plataforma oficial de Grupo Ecoquintas para tickets, solicitudes y administración de listas de compras del departamento de proveeduría — creada enteramente por mí (backend Django REST + frontend Next.js). En producción desde 2025 sin fallos del sistema; en 2026 se sumó una segunda empresa a la plataforma, y el almacenamiento de archivos en S3 le permite crecer sin intervención.",
     },
     features: [
       {
@@ -494,11 +519,19 @@ export const projects: Project[] = [
         en: "Modern UI: Clean interface built with Shadcn and Aceternity UI components",
         es: "UI moderna: interfaz limpia construida con componentes Shadcn y Aceternity UI",
       },
+      {
+        en: "Multi-company: a second company onboarded in 2026 with data integrity intact",
+        es: "Multi-empresa: una segunda compañía se incorporó en 2026 con la integridad de datos intacta",
+      },
+      {
+        en: "S3 media storage: file uploads scale without server intervention",
+        es: "Archivos en S3: las cargas de archivos escalan sin intervención en el servidor",
+      },
     ],
     highlights: [
       {
-        en: "Designed, developed and deployed a full ticketing platform (Django REST + Next.js, Docker on AWS) used by affiliated companies in production",
-        es: "Diseño, desarrollo y despliegue de una plataforma completa de tickets (Django REST + Next.js, Docker en AWS) usada en producción por empresas afiliadas",
+        en: "Designed, built and operates — solo — Grupo Ecoquintas' official ticketing and procurement platform (Django REST + Next.js, Docker on AWS): zero system failures in production, second company onboarded in 2026, S3 storage",
+        es: "Diseño, construcción y operación — en solitario — de la plataforma oficial de tickets y proveeduría de Grupo Ecoquintas (Django REST + Next.js, Docker en AWS): cero fallos del sistema en producción, segunda empresa incorporada en 2026, almacenamiento en S3",
       },
     ],
   },
