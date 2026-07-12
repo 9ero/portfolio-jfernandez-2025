@@ -13,7 +13,7 @@ reference:
 
 - [ ] `gh repo rename <nuevo-nombre>` (GitHub redirects the old URL, but references
       should not rely on the redirect).
-- [ ] GitHub repo **description** — align with the current positioning (infrastructure
+- [x] GitHub repo **description** — align with the current positioning (infrastructure
       + full stack + AI integration), not "personal portfolio" boilerplate.
 - [ ] In-site references: the "This site is open source" link in
       `src/components/main/welcome.astro` and the footer link if reintroduced.
