@@ -4,6 +4,28 @@ Pending improvements identified through code review and site analysis. Ordered b
 
 ---
 
+## Housekeeping
+
+### Rename the repo — "2025" reads outdated
+`portfolio-jfernandez-2025` dates itself; the portfolio is a living project. Rename the
+repo (suggested: `portfolio-jfernandez` or simply `portfolio`), then update every
+reference:
+
+- [ ] `gh repo rename <nuevo-nombre>` (GitHub redirects the old URL, but references
+      should not rely on the redirect).
+- [x] GitHub repo **description** — align with the current positioning (infrastructure
+      + full stack + AI integration), not "personal portfolio" boilerplate.
+- [ ] In-site references: the "This site is open source" link in
+      `src/components/main/welcome.astro` and the footer link if reintroduced.
+- [ ] Repo docs: `README.md` title, `CLAUDE.md`, `package.json` `name`.
+- [ ] Local remotes: `git remote set-url origin ...` on every machine.
+- [ ] Vercel: re-link the project to the renamed repo (deploys keep working via the
+      GitHub redirect, but the link should be explicit).
+- [ ] Cross-repo references in **job-hunter**: `portfolio-drafts/*`, `CLAUDE.md` and
+      `positioning.md` mention the portfolio repo/URL where applicable.
+
+---
+
 ## Next feature
 
 ### F4 — Section narration with VibeVoice (AI voice)
@@ -36,7 +58,21 @@ regeneration pipeline is documented and reproducible.
 
 ---
 
-### F5 — Full portfolio adaptation to the professional profile
+### ~~F5 — Full portfolio adaptation to the professional profile~~ ✅ Done (2026-07-10)
+Implemented on the expandable cards (no dedicated section): `caseStudy` field rendered
+as problem → decision → result inside the expanded card; new `aws-infrastructure` and
+`security-incident-response` entries; AI differentiator as the projects-section
+subtitle; soft skills rewritten from positioning.md §4 strengths-with-evidence
+(including Technical Leadership); projects list refactored into a responsive grid with
+visible GitHub/Live buttons. Stage-honesty pass: About timeline already compliant
+(2026-07 rewrite). **Discarded with reason:** porting the two new case-study entries to
+job-hunter's `master-profile.json` — the CV already covers that evidence via experience
+bullets; duplicating them as CV projects would repeat content. `/career.json` remains a
+superset of the CV data, which is acceptable for the contract.
+
+Original scope, kept for reference:
+
+#### F5 (original) — Full portfolio adaptation to the professional profile
 Complete the adaptation of the whole site to the profile's source of truth: the
 job-hunter repo's **`profile/positioning.md`** (§7 "Plan de actualización del
 portafolio"). The 2026-07 repositioning already covered headline/summary, Technical

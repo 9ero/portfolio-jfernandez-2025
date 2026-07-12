@@ -19,6 +19,8 @@ export type Profile = {
   shortName: string;
   headline: Localized;
   summary: Localized;
+  /** About-section bio (positioning.md §7.2) — evidence-based, no marketing filler. */
+  about: Localized;
   location: Localized;
   email: string;
   phone: string;
@@ -82,6 +84,12 @@ export type ProjectStatus = {
   tone: "green" | "amber";
 };
 
+export type CaseStudy = {
+  problem: Localized;
+  decision: Localized;
+  result: Localized;
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -99,6 +107,8 @@ export type Project = {
   tech: ProjectTech[];
   summary: Localized;
   features: Localized[];
+  /** Problem → decision → result narrative (positioning.md §7.3); rendered in the expanded card. */
+  caseStudy?: CaseStudy;
   /** CV-ready achievement bullets — not rendered on the site. */
   highlights: Localized[];
 };

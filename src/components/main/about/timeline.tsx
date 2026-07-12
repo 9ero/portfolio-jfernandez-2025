@@ -1,8 +1,9 @@
 "use client";
 import { Timeline } from "@/components/ui/timeline";
 import { ImgZoomHelper } from "@/components/ui/img-zoom-helper";
-import { timeline } from "@/data";
+import { timeline, profile } from "@/data";
 import { t } from "@/lib/t";
+import { ui } from "@/lib/ui";
 import type { Locale } from "@/data/types";
 
 export function AboutTimeline({ locale = "en" }: { locale?: Locale }) {
@@ -29,7 +30,11 @@ export function AboutTimeline({ locale = "en" }: { locale?: Locale }) {
   }));
   return (
     <div className="relative w-full h-screen overflow-auto">
-      <Timeline data={data} />
+      <Timeline
+        data={data}
+        heading={ui.about.heading[locale]}
+        intro={profile.about[locale]}
+      />
     </div>
   );
 }
