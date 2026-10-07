@@ -1,7 +1,7 @@
 import type { Project } from "./types";
 
 /** Ordered by value (positioning §7.2): legacy rescue → infra/full stack → AI → rest. */
-export const projects: Project[] = [
+const allProjects: Project[] = [
   {
     slug: "verde-legacy-rescue",
     title: "Verde — Legacy Rescue",
@@ -771,3 +771,11 @@ export const projects: Project[] = [
     highlights: [],
   },
 ];
+
+/**
+ * Projects currently published (site and /career.json). The rest stay in
+ * `allProjects` until they are complete; add their slug here to show them again.
+ */
+const visibleSlugs = ["eq-tickets", "mabaagroexport", "old-portfolio"];
+
+export const projects = allProjects.filter((p) => visibleSlugs.includes(p.slug));
